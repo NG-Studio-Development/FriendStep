@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:paddingLeft="@dimen/margin_widget_default_medium"
+    android:paddingRight="@dimen/margin_widget_default_medium"
+    android:paddingTop="@dimen/margin_widget_default_medium" >
+
+    <!-- android:layout_marginLeft="@dimen/margin_widget_default_large" -->
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etUserName"
+        android:singleLine="true"
+        android:hint="@string/hint_name"
+        android:paddingLeft="@dimen/left_padding_et"
+        android:background="@drawable/drawable_bg_edit_chat"
+        style="@style/orange_style_ed_light"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:hint="@string/hint_email"
+        android:id="@+id/etEmail"
+        android:paddingLeft="@dimen/left_padding_et"
+        android:background="@drawable/drawable_bg_edit_chat"
+        style="@style/orange_style_ed_light" />
+
+    <!-- android:layout_marginLeft="35dp" -->
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edPass"
+        android:paddingLeft="@dimen/left_padding_et"
+        android:background="@drawable/drawable_bg_edit_chat"
+        android:hint="@string/hint_pass"
+        android:singleLine="true"
+        style="@style/orange_style_ed_light" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edRepass"
+        android:paddingLeft="@dimen/left_padding_et"
+        android:background="@drawable/drawable_bg_edit_chat"
+        android:hint="@string/hint_repass"
+        android:singleLine="true"
+        style="@style/orange_style_ed_light" />
+
+    <!-- android:layout_weight="1" -->
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_widget_default_tiny">
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/inscription_clear_info"
+            android:textSize="@dimen/text_size_default"
+            android:textStyle="bold"
+            android:textColor="@color/gray_hard"
+            android:id="@+id/tvClearInfo"
+            android:layout_toLeftOf="@+id/buttonRegister"
+            style="@style/orange_style_tv_light"
+            android:layout_centerVertical="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_widget_default_small"
+            android:id="@+id/buttonRegister"
+            android:minWidth="@dimen/width_button"
+            android:text="@string/inscription_register"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            style="@style/orange_style_button" />
+    </RelativeLayout>
+</LinearLayout>
+
+
+<!--
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:paddingLeft="@dimen/margin_widget_default_medium"
+    android:paddingRight="@dimen/margin_widget_default_medium"
+    android:paddingTop="@dimen/margin_widget_default_medium" >
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:id="@+id/imageView3"
+        android:background="@color/orange"
+        android:layout_weight="4" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/size_butt"
+        android:layout_weight="1"
+        android:layout_marginTop="@dimen/margin_widget_default_normal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView"
+            android:src="@drawable/ic_profile"
+            android:paddingTop="@dimen/padding_adapter_item_default" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etUserName"
+            android:singleLine="true"
+            android:hint="@string/hint_name"
+            android:layout_marginLeft="@dimen/margin_widget_default_large"
+            android:paddingLeft="@dimen/left_padding_et"
+            android:background="@drawable/drawable_bg_edit_chat"
+            style="@style/orange_style_ed_light"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView2"
+            android:src="@drawable/ic_phone"
+            android:paddingTop="@dimen/padding_adapter_item_default"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/indent_small"
+            android:layout_marginRight="@dimen/indent_small"
+            android:text="+"
+            android:id="@+id/textView3"
+            style = "@style/orange_style_tv_light" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:hint="@string/hint_phone"
+            android:id="@+id/etPhoneNumber"
+            android:paddingLeft="@dimen/left_padding_et"
+            android:background="@drawable/drawable_bg_edit_chat"
+            style="@style/orange_style_ed_light" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:id="@+id/llCode"
+
+        android:layout_weight="1">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_code"
+            android:paddingTop="@dimen/padding_adapter_item_default"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edPin"
+            android:layout_marginLeft="35dp"
+            android:paddingLeft="@dimen/left_padding_et"
+            android:background="@drawable/drawable_bg_edit_chat"
+            android:hint="@string/hint_code"
+            android:singleLine="true"
+            style="@style/orange_style_ed_light" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margin_widget_default_tiny"
+        android:layout_weight="1">
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/inscription_clear_info"
+            android:textSize="@dimen/text_size_default"
+            android:textStyle="bold"
+            android:textColor="@color/gray_hard"
+            android:id="@+id/tvClearInfo"
+            android:layout_toLeftOf="@+id/buttonRegister"
+            style="@style/orange_style_tv_light"
+            android:layout_centerVertical="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_widget_default_small"
+            android:id="@+id/buttonRegister"
+            android:minWidth="@dimen/width_button"
+            android:text="@string/inscription_register"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            style="@style/orange_style_button" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:id="@+id/rlChatTransactionT"
+        android:layout_marginTop="@dimen/margin_widget_default_tiny"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/inscription_chat_translation"
+            android:textStyle="bold"
+            android:textColor="@color/gray_hard"
+            android:layout_gravity="left|top"
+            android:textSize="@dimen/text_size_default"
+            android:id="@+id/textView" />
+
+        <ToggleButton
+            android:layout_width="@dimen/width_switch_settings"
+            android:layout_height="@dimen/height_switch_settings"
+            android:layout_gravity="right|top"
+            android:id="@+id/tbLanguageOption"
+            android:background="@drawable/toggle_selector"
+            android:textOff=""
+            android:textOn=""
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
+
+    <Spinner
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:id="@+id/spinnerDefaultLanguage"
+        android:layout_weight="1"/>
+</LinearLayout>
+-->

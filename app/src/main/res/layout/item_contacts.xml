@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginTop="@dimen/margin_widget_default_normal">
+
+    <ImageView
+        android:layout_width="@dimen/size_item_imageview_default"
+        android:layout_height="@dimen/size_item_imageview_default"
+        android:id="@+id/ivContactsPhoto"
+
+        android:src="@drawable/ic_launcher"
+
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/margin_widget_default_small"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/ivContactsPhoto"
+        android:layout_marginLeft="@dimen/margin_widget_default_small">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/tvContactsName"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_default_medium" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/tvContactsMobile"
+            android:textStyle="bold"
+            android:textColor="@color/gray_light" />
+
+        </LinearLayout>
+
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/height_line"
+        android:background="@color/gray_light"
+        android:id="@+id/contactsDivider"
+
+        android:layout_below="@id/ivContactsPhoto"
+        android:layout_toRightOf="@+id/ivContactsPhoto"
+        android:layout_marginLeft="@dimen/margin_widget_default_small"
+        android:layout_marginTop="@dimen/margin_widget_default_normal"/>
+</RelativeLayout>

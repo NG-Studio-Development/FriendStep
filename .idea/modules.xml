@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/WhereAreYou.iml" filepath="$PROJECT_DIR$/WhereAreYou.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/libs/alexutilities/alexutilities.iml" filepath="$PROJECT_DIR$/app/libs/alexutilities/alexutilities.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/libs/libs.iml" filepath="$PROJECT_DIR$/app/libs/libs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/libs/stickylistheaders/stickylistheaders.iml" filepath="$PROJECT_DIR$/app/libs/stickylistheaders/stickylistheaders.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/libs/uil/uil.iml" filepath="$PROJECT_DIR$/app/libs/uil/uil.iml" />
+    </modules>
+  </component>
+</project>
+

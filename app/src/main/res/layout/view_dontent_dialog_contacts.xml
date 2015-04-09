@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="@dimen/width_camera_field"
+        android:layout_height="@dimen/height_dialog"
+        android:background="@color/orange_bright"
+        android:id="@+id/relativeLayout">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ivPhotoIcon"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_camera"/>
+    </RelativeLayout>
+
+    <TextView
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_new_contact"
+        android:id="@+id/tvTitle"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/relativeLayout"
+        android:layout_toEndOf="@+id/relativeLayout"
+        android:layout_marginLeft="@dimen/margin_widget_default_medium"
+        style="@style/orange_style_title_tv" />
+
+    <EditText
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/etName"
+        android:layout_below="@+id/tvTitle"
+        android:layout_toRightOf="@+id/relativeLayout"
+        android:layout_toEndOf="@+id/relativeLayout"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/edit_text_design"
+        android:layout_marginLeft="@dimen/margin_widget_default_medium"
+        android:hint="@string/hint_name"
+        android:paddingLeft="@dimen/left_padding_et"
+        android:singleLine="true"
+        android:layout_marginRight="@dimen/margin_widget_default_medium"
+        style="@style/orange_style"/>
+
+    <EditText
+        android:layout_marginTop="@dimen/distance_row_edit_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/etPhone"
+        android:layout_below="@+id/etName"
+        android:layout_toRightOf="@+id/relativeLayout"
+        android:layout_toEndOf="@+id/relativeLayout"
+        android:layout_alignRight="@+id/etName"
+        android:layout_alignEnd="@+id/etName"
+        android:layout_marginLeft="@dimen/margin_widget_default_medium"
+        android:paddingLeft="@dimen/left_padding_et"
+        style="@style/orange_style"
+        android:background="@drawable/edit_text_design"
+        android:hint="@string/hint_email"
+        android:inputType="number"
+        android:singleLine="true"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etPhone"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/top_button_bar_dialog_location"
+        android:paddingBottom="@dimen/margin_widget_default_normal">
+
+        <Button
+            android:layout_width="@dimen/width_button_dialog"
+            android:layout_height="wrap_content"
+            android:text="@string/text_button_cancel"
+            android:id="@+id/buttonCancel"
+            style="@style/orange_style_button" />
+
+        <Button
+            android:layout_width="@dimen/width_button_dialog"
+            android:layout_height="wrap_content"
+            android:text="@string/text_button_add"
+            android:id="@+id/buttonAdd"
+            style="@style/orange_style_button" />
+    </LinearLayout>
+</RelativeLayout>

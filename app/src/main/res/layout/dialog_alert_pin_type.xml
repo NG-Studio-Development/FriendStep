@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:id="@+id/dialog_type_pin"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+
+        android:layout_centerInParent="true"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginLeft="@dimen/margin_activity_default_horizontal"
+        android:layout_marginTop="@dimen/margin_activity_default_vertical"
+        android:layout_marginRight="@dimen/margin_activity_default_horizontal"
+        android:layout_marginBottom="@dimen/margin_activity_default_vertical"
+
+        android:padding="1.5dp"
+
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:padding="15dp"
+            android:textSize="22sp"
+
+            android:maxLines="1"
+            android:scrollHorizontally="true"
+
+            android:text="@string/title_pin_type"
+            tools:ignore="HardcodedText"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/content_pin_type"
+            android:id="@+id/tvContent" />
+
+        <FrameLayout
+            android:id="@+id/content"
+
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            android:id="@+id/buttons_bar"
+
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buttonOk"
+
+                style="?attr/buttonBarButtonStyle"
+
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+
+                android:layout_marginLeft="-1dp"
+
+                android:text="@string/text_button_ok"
+                tools:ignore="HardcodedText"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

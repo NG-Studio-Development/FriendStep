@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"><![CDATA[
+
+    >
+    ]]>
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView3" >
+
+        <RelativeLayout
+            android:orientation="vertical" android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/inscription_account"
+            android:id="@+id/tvAccountLabel"
+            android:textColor="@color/gray_light"
+            android:textSize="@dimen/text_size_default"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/margin_widget_default_small"
+            android:layout_marginLeft="@dimen/margin_widget_default_small"/>
+
+        <LinearLayout
+            android:id="@+id/lnProfileSettings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/tvAccountLabel"
+            android:src="@drawable/ic_profile"
+            android:layout_marginTop="@dimen/margin_widget_default_medium"
+            android:layout_marginLeft="@dimen/margin_widget_default_small"
+            android:paddingBottom="@dimen/margin_widget_default_small"
+            android:paddingTop="@dimen/margin_widget_default_small">
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ivProfileIcon"
+                android:src="@drawable/ic_profile"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/inscription_profile"
+                android:id="@+id/tvProfileLabel"
+                android:layout_marginLeft="@dimen/margin_widget_default_normal"
+                android:textColor="@color/gray_hard"
+                android:textSize="@dimen/text_size_default"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/inscription_privacy"
+            android:id="@+id/ivPrivacyLabel"
+            android:layout_marginTop="@dimen/margin_widget_default_small"
+            android:textColor="@color/gray_light"
+            android:textSize="@dimen/text_size_default"
+            android:textStyle="bold"
+            android:layout_below="@+id/view2"
+            android:layout_marginLeft="@dimen/margin_widget_default_small"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/inscription_help"
+            android:id="@+id/tvHelpLabel"
+            android:layout_below="@+id/view4"
+            android:textColor="@color/gray_light"
+            android:textSize="@dimen/text_size_default"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/margin_widget_default_small"
+            android:layout_marginLeft="@dimen/margin_widget_default_small"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ivHelpIcon"
+            android:layout_below="@+id/tvHelpLabel"
+            android:src="@drawable/ic_help"
+            android:layout_marginTop="@dimen/margin_widget_default_large"
+            android:layout_marginLeft="@dimen/margin_widget_default_small"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/inscription_how_to"
+            android:id="@+id/tvHowToLabel"
+            android:layout_alignTop="@+id/ivHelpIcon"
+            android:layout_alignBottom="@+id/ivHelpIcon"
+            android:layout_toRightOf="@+id/ivHelpIcon"
+            android:textColor="@color/gray_hard"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_size_default"
+            android:layout_marginLeft="@dimen/margin_widget_default_normal"/>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/height_line"
+            android:background="@color/gray_light"
+            android:layout_below="@+id/lnProfileSettings"
+            android:id="@+id/view2"
+            android:layout_marginTop="@dimen/margin_widget_default_small" />
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/height_line"
+            android:background="@color/gray_light"
+            android:id="@+id/view3"
+            android:layout_below="@+id/ivHelpIcon"
+            android:layout_marginTop="@dimen/margin_widget_default_medium" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/height_line"
+            android:background="@color/gray_light"
+            android:id="@+id/view4"
+            android:layout_below="@+id/spinnerChatTransaction"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="@dimen/margin_widget_default_medium"/>
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/flSwitchSendLocation"
+            android:layout_below="@+id/ivPrivacyLabel"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="@dimen/margin_widget_default_small"
+            android:layout_marginRight="@dimen/margin_widget_default_small">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/inscription_send_location"
+                android:textStyle="bold"
+                android:textColor="@color/gray_hard"
+                android:layout_gravity="left|top"
+                android:textSize="@dimen/text_size_default"/>
+
+            <ToggleButton
+                android:id="@+id/tbSwitchSendLocation"
+                android:layout_width="@dimen/width_switch_settings"
+                android:layout_height="@dimen/height_switch_settings"
+                android:layout_gravity="right|top"
+                android:background="@drawable/toggle_selector"
+                android:textOff=""
+                android:textOn=""/>
+        </FrameLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rlChatTransaction"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/rlAlertDistancePanel"
+            android:layout_marginTop="@dimen/margin_widget_default_medium"
+            android:layout_marginLeft="@dimen/margin_widget_default_small"
+            android:layout_marginRight="@dimen/margin_widget_default_small">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/inscription_chat_translation"
+                android:textStyle="bold"
+                android:textColor="@color/gray_hard"
+                android:layout_gravity="left|top"
+                android:textSize="@dimen/text_size_default"/>
+
+            <ToggleButton
+                android:layout_width="@dimen/width_switch_settings"
+                android:layout_height="@dimen/height_switch_settings"
+                android:layout_gravity="right|top"
+                android:id="@+id/tbChatTransaction"
+                android:background="@drawable/toggle_selector"
+                android:textOff=""
+                android:textOn=""
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/flSwitchSendLocation"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/flSwitchAlertFriend"
+            android:layout_marginTop="18dp"
+            android:layout_marginLeft="@dimen/margin_widget_default_small"
+            android:layout_marginRight="@dimen/margin_widget_default_small">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/inscription_alert_friends_close"
+                android:textStyle="bold"
+                android:textColor="@color/gray_hard"
+                android:layout_gravity="left|top"
+                android:textSize="@dimen/text_size_default"
+                />
+
+            <ToggleButton
+                android:id="@+id/tbSwitchAlertFriend"
+                android:layout_width="57dp"
+                android:layout_height="30dp"
+                android:layout_gravity="right|top"
+                android:background="@drawable/toggle_selector"
+                android:textOff=""
+                android:textOn=""/>
+        </FrameLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/flSwitchAlertFriend"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+
+
+            android:layout_marginLeft="@dimen/margin_widget_default_small"
+            android:layout_marginRight="@dimen/margin_widget_default_small"
+            android:layout_marginTop="@dimen/margin_widget_default_medium"
+            android:id="@+id/rlAlertDistancePanel"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/inscription_alert_distance"
+                android:id="@+id/tvAlertDistance"
+                android:layout_alignTop="@+id/tvCounter"
+
+                android:textStyle="bold"
+                android:textColor="@color/gray_hard"
+                android:textSize="@dimen/text_size_default"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/tvCounter"
+
+                android:textStyle="bold"
+                android:textColor="@color/gray_hard"
+                android:textSize="@dimen/text_size_default"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <SeekBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/sbAlertDistance"
+                android:layout_below="@+id/tvAlertDistance"
+                android:layout_alignLeft="@+id/tvAlertDistance"
+                android:layout_alignStart="@+id/tvAlertDistance"
+                android:layout_alignRight="@+id/tvCounter"
+                android:layout_alignEnd="@+id/tvCounter"
+                android:layout_marginTop="@dimen/margin_widget_default_small"
+                android:max="3"
+                android:progress="3"/>
+        </RelativeLayout>
+
+        <Spinner
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinnerChatTransaction"
+            android:layout_below="@+id/rlChatTransaction"
+            android:layout_alignParentLeft="true"
+            android:layout_marginRight="@dimen/margin_widget_default_small"
+            android:layout_alignParentStart="true" />
+    </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:padding="@dimen/margin_widget_default_small">
+
+    <RelativeLayout
+        android:id="@+id/lnAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginLeft="@dimen/left_icon_dialog_location"
+        android:layout_marginTop="@dimen/top_icon_dialog_location">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ivIconLocation"
+
+            android:layout_marginTop="2dp"
+
+            android:src="@drawable/ic_place"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_address_is_determined"
+            android:id="@+id/tvTextLocation"
+            style="@style/orange_style_tv"
+            android:layout_toRightOf="@+id/ivIconLocation"
+            android:layout_marginLeft="@dimen/margin_left_from_icon_send_location"/>
+
+        </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/lnPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@+id/lnAddress"
+        android:layout_alignLeft="@+id/lnAddress"
+        android:layout_marginTop = "@dimen/distance_row_edit_dialog">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ivIconPhone"
+            android:src="@drawable/ic_phone_white"
+            android:layout_centerVertical="true"
+            android:layout_alignBottom="@+id/etMobile"
+            android:layout_marginBottom="2dp"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etMobile"
+            android:layout_toEndOf="@+id/ivIconPhone"
+            android:hint="@string/hint_email"
+            style="@style/orange_style"
+            android:layout_toRightOf="@+id/ivIconPhone"
+            android:layout_marginLeft="@dimen/margin_left_from_icon_send_location"
+            android:drawableBottom="@color/gray_light"
+            android:background="@drawable/edit_text_design"
+            android:inputType="phone"
+            android:singleLine="true"/>
+
+
+        </RelativeLayout>
+
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lnPhone"
+        android:layout_alignParentRight="true"
+
+        android:layout_marginTop="@dimen/top_button_bar_dialog_location">
+
+        <Button
+            android:layout_width="@dimen/width_button_dialog"
+            android:layout_height="wrap_content"
+            android:text="@string/text_button_cancel"
+            android:id="@+id/buttonCancel"
+            style="@style/orange_style_button" />
+
+        <Button
+            android:layout_width="@dimen/width_button_dialog"
+            android:layout_height="wrap_content"
+            android:text="@string/text_button_send"
+            android:id="@+id/buttonSend"
+            style="@style/orange_style_button" />
+    </LinearLayout>
+</RelativeLayout>

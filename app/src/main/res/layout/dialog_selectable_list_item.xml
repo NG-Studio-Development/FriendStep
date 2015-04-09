@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+
+    android:gravity="center_vertical"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:textAppearance="?android:attr/textAppearanceLarge"
+    android:minHeight="?attr/listPreferredItemHeightSmall"
+
+    android:paddingLeft="@dimen/margin_widget_default_small"
+    android:paddingTop="@dimen/margin_widget_default_medium"
+    android:paddingRight="@dimen/margin_widget_default_small"
+    android:paddingBottom="@dimen/margin_widget_default_medium"
+
+    android:text="Selectable dialog item"
+    tools:ignore="HardcodedText"/>

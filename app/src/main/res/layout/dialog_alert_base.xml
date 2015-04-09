@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:id="@+id/dialog_root"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="400dp"
+
+    style="@style/orange_style">
+
+    <LinearLayout
+
+        android:layout_centerInParent="true"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:baselineAligned="true">
+
+        <TextView
+            android:id="@+id/title"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:textSize="@dimen/text_size_title_dialog"
+
+            android:maxLines="1"
+            android:scrollHorizontally="true"
+
+            android:text="Dialog Title"
+            tools:ignore="HardcodedText"
+            style="@style/orange_style_tv" />
+
+        <FrameLayout
+            android:id="@+id/content"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            android:id="@+id/buttons_bar"
+
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_button_send_dialog"
+
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@android:id/button1"
+
+
+                style="@style/orange_style_button"
+
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+
+                android:layout_marginRight="-1dp"
+
+                android:text="negative"
+                tools:ignore="HardcodedText"
+                android:background="@color/gray_hard" />
+
+            <Button
+                android:id="@android:id/button2"
+
+                style="@style/orange_style_button"
+
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+
+                android:layout_marginLeft="-1dp"
+                android:layout_marginRight="-1dp"
+
+                android:text="neutral"
+                tools:ignore="HardcodedText"
+                android:background="@color/gray_hard" />
+
+            <Button
+                android:id="@android:id/button3"
+
+                style="@style/orange_style_button"
+
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+
+                android:layout_marginLeft="-1dp"
+
+                android:text="positive"
+                tools:ignore="HardcodedText"
+                android:background="@color/gray_hard" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>

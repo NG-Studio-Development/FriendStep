@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragments.ContactsFragmentFragment">
+
+    <ListView
+        android:id="@+id/listContacts"
+        android:layout_width="match_parent"
+        android:layout_height="620dp"
+        android:clickable="true"
+        android:divider="@color/background_app_default"
+        android:layout_above="@+id/rlPanel" />
+
+    <TextView
+        android:id="@android:id/empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonPlus"
+        android:background="@drawable/ic_btn_round"
+        android:src="@drawable/drawable_ic_add"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/margin_angle_button"
+        android:layout_marginBottom="@dimen/margin_angle_button"/>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/height_contact_panel"
+        android:background="@color/orange"
+        android:id="@+id/rlPanel"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ibPhoneDial"
+            android:src="@drawable/drawable_ic_phone_dial"
+            android:background="@null"
+            android:layout_alignTop="@+id/ibPhoneBook"
+            android:layout_toRightOf="@+id/ibPhoneBook"
+            android:layout_marginLeft="@dimen/margin_left_contact_panel" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ibPhoneBook"
+            android:src="@drawable/drawable_ic_phone_book"
+            android:background="@null"
+            android:layout_marginLeft="@dimen/margin_left_contact_panel"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="@dimen/margin_bottom_contact_panel" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ibClosePanel"
+            android:src="@drawable/drawable_ic_cancel"
+            android:background="@null"
+            android:layout_alignTop="@+id/ibPhoneDial"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/margin_right_contact_panel"/>
+    </RelativeLayout>
+
+</RelativeLayout>

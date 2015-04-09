@@ -1,0 +1,157 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragments.ProfileFragment">
+
+    <RelativeLayout
+        android:id="@+id/rlAvatarBackground"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/photo_profile_height"
+        android:background="@color/orange_bright">
+
+        <ImageView
+            android:id="@+id/ivAvatar"
+            android:layout_width="@dimen/size_avatar_imageview"
+            android:layout_height="@dimen/size_avatar_imageview"
+
+            android:layout_centerInParent="true"
+            />
+
+        <TextView
+            android:id="@+id/tvProfileName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/margin_widget_default_large"
+
+            android:textColor="@android:color/white"
+            android:textSize="25sp"
+            android:text="text"/>
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@id/rlAvatarBackground"
+        android:layout_marginTop="@dimen/margin_widget_default_large"/>
+    
+    <RelativeLayout
+        android:id="@+id/rlContactData"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+
+        android:layout_below="@id/rlAvatarBackground">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+
+            android:layout_marginLeft="@dimen/margin_widget_default_extra_large"
+            android:layout_centerVertical="true">
+
+            <TextView
+                android:id="@+id/tvContactMobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:textSize="20sp"
+                android:textColor="@color/gray_hard"
+                android:text="+380955841708"/>
+
+            <TextView
+                android:id="@+id/tvContactStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:textSize="16sp"
+                android:textColor="@color/orange_dark"
+                android:text="contact status"/>
+
+
+            </LinearLayout>
+
+        
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_light"
+            android:layout_alignParentBottom="true"/>
+
+
+        </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/lnProfileButtons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+        android:layout_above="@+id/ibAvatarMenu"
+        android:layout_alignLeft="@+id/ibAvatarMenu"
+        android:layout_alignRight="@+id/ibAvatarMenu"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/margin_widget_default_small"
+
+        android:visibility="gone">
+
+        <ImageButton
+            android:id="@+id/ibDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:background="@drawable/drawable_circle_small_red"
+            android:src="@drawable/drawable_ic_delete_red"/>
+
+        <ImageButton
+            android:id="@+id/ibCapture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="@dimen/margin_widget_default_small"
+
+            android:background="@drawable/drawable_circle_small"
+            android:src="@drawable/drawable_ic_capture"/>
+
+        <ImageButton
+            android:id="@+id/ibGallery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="@dimen/margin_widget_default_small"
+
+            android:background="@drawable/drawable_circle_small"
+            android:src="@drawable/drawable_ic_gallery"/>
+
+
+        </LinearLayout>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ibAvatarMenu"
+
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@id/view"
+        android:layout_marginRight="@dimen/margin_widget_default_normal"
+
+        android:background="@drawable/drawable_round_button"
+        android:src="@drawable/drawable_ic_camera"/>
+    
+    <com.ngstudio.friendstep.ui.widgets.AdapterLinearLayout
+        android:id="@+id/lnOptions"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/rlContactData"
+
+        android:orientation="vertical">
+
+        </com.ngstudio.friendstep.ui.widgets.AdapterLinearLayout>
+
+
+</RelativeLayout>

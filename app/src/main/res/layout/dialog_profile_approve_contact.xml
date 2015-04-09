@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dialog_text_approve_contact"
+        android:id="@+id/tvQuestionDialog"
+        android:layout_marginLeft="@dimen/margin_widget_default_medium"
+        style="@style/orange_style_tv"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/orange_style"
+        android:id="@+id/etWriteMessage"
+        android:layout_below="@+id/tvQuestionDialog"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/edit_text_design"
+        android:layout_marginLeft="@dimen/margin_widget_default_medium"
+        android:layout_marginRight="@dimen/margin_widget_default_medium"
+        android:paddingLeft="@dimen/left_padding_et"
+        android:hint="@string/hint_message"/>
+</RelativeLayout>

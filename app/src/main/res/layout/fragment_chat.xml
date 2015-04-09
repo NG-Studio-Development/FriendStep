@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:focusableInTouchMode="true">
+    <!--android:focusableInTouchMode="true"-->
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/listMessages"
+        android:layout_marginLeft="@dimen/margin_widget_default_medium"
+        android:layout_marginRight="@dimen/margin_widget_default_small"
+        android:divider="@color/background_app_default"
+        android:layout_above="@+id/frameLayout"
+        android:layout_alignParentTop="true" />
+
+    <se.emilsjolander.stickylistheaders.StickyListHeadersListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/frameLayout"
+        android:divider="@color/background_app_default"
+        android:stackFromBottom="true"
+        android:transcriptMode="alwaysScroll"
+        android:focusable="true" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/frameLayout"
+        android:background="@drawable/drawable_top_border_gray"
+        android:paddingTop="@dimen/margin_widget_default_medium"
+        android:paddingBottom="@dimen/margin_widget_default_small">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_widget_default_medium"
+            android:id="@+id/etWriteMessage"
+            android:hint="@string/hint_message_chat"
+            android:background="@drawable/drawable_bg_edit_chat"
+            style="@style/orange_style_ed_message"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/ibSendMessage"
+            android:layout_marginRight="@dimen/margin_widget_default_normal"
+            android:maxLines="4" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ibSendMessage"
+            android:src="@drawable/drawable_ic_send"
+            android:background="@null"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/margin_widget_default_medium"/>
+    </RelativeLayout>
+</RelativeLayout>

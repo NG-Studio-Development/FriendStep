@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="@dimen/size_item_imageview"
+        android:layout_height="@dimen/size_item_imageview"
+        android:id="@+id/ivContactsPhoto"
+        android:src="@drawable/ic_launcher"
+
+        android:layout_marginLeft="@dimen/margin_widget_default_small"/>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/height_line"
+        android:background="@color/gray_light"
+        android:id="@+id/chatDivider"
+        android:layout_below="@+id/tvMessage"
+        android:layout_alignLeft="@+id/tvMessage"
+        android:layout_marginTop="25dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/tvMessage"
+            android:layout_toRightOf="@+id/ivContactsPhoto"
+            android:layout_toLeftOf="@+id/tvTime"
+            android:maxWidth="@dimen/max_width_main_tv"
+            style="@style/orange_style_list_main_tv"
+            android:layout_marginLeft="@dimen/margin_widget_default_small"
+            android:layout_marginRight="@dimen/margin_widget_default_small"
+            android:layout_marginTop="@dimen/margin_widget_default_normal"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/tvTime"
+            android:layout_alignTop="@+id/tvMessage"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/margin_widget_default_small"
+            android:paddingTop="2dp"
+            style="@style/orange_style_list_additional_tv" />
+
+
+</RelativeLayout>

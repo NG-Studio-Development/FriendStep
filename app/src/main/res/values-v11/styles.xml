@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by _ThemeAppBase convertFrom res/values-vXX/styles.xml on newer devices.
+    -->
+    <style name="_ThemeAppBase" parent="Theme.AppCompat.Light">
+        <item name="android:actionBarStyle">@style/ActionBarGeneric</item>
+    </style>
+
+    <!-- Application theme. -->
+    <style name="ThemeAppGeneric.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+    </style>
+
+    <style name="ThemeAppGeneric.ActionBarOverlay">
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+
+        <item name="android:background">@drawable/drawable_actionbar_bg</item>
+        <item name="background">@drawable/drawable_actionbar_bg</item>
+    </style>
+
+    <!-- Application theme styles. -->
+    <style name="_ActionBarBase" parent="Widget.AppCompat.ActionBar">
+        <item name="android:displayOptions">showCustom|useLogo|homeAsUp</item>
+    </style>
+
+</resources>

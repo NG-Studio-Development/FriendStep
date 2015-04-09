@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="_ThemeAppBase" parent="Theme.AppCompat.Light">
+        <item name="actionBarStyle">@style/ActionBarGeneric</item>
+    </style>
+
+    <!-- Application theme. -->
+    <style name="ThemeAppGeneric" parent="_ThemeAppBase">
+        <item name="android:windowBackground">@color/background_app_default</item>
+
+        <item name="android:buttonStyle">@style/ButtonGeneric</item>
+        <item name="android:listViewStyle">@style/ListViewGeneric</item>
+
+        <item name="android:editTextStyle">@style/EditTextGeneric</item>
+
+        <item name="android:textAppearance">@style/TextAppearanceGeneric</item>
+        <item name="android:textAppearanceMedium">@style/TextAppearanceMedium</item>
+
+    </style>
+
+    <style name="ThemeAppGeneric.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
+
+    <style name="ThemeAppGeneric.ActionBarOverlay">
+        <item name="windowActionBarOverlay">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+
+        <!-- <item name="android:background">@drawable/drawable_actionbar_bg</item>
+        <item name="background">@drawable/drawable_actionbar_bg</item> -->
+    </style>
+
+    <style name="ThemeAppGeneric.AlertDialog">
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowSoftInputMode">adjustPan</item>
+    </style>
+
+
+    <!-- Application theme styles. -->
+    <style name="_ActionBarBase" parent="Widget.AppCompat.ActionBar">
+        <item name="displayOptions">showCustom|useLogo|homeAsUp</item>
+    </style>
+
+
+    <style name="ImageButtonGeneric" parent="android:Widget.ImageButton">
+        <item name="android:background">@null</item>
+        <item name="aspectRatio">1:1</item>
+    </style>
+
+    <style name="ActionBarGeneric" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@color/background_action_bar_default</item>
+    </style>
+
+    <style name="ButtonGeneric" parent="android:Widget.Button">
+        <!--<item name="android:background">@drawable/button_generic</item>-->
+        <!--<item name="android:textColor">@color/blue_a</item>-->
+        <item name="android:textSize">@dimen/text_size_button_default</item>
+        <item name="android:minWidth">@dimen/width_min_button_default</item>
+        <item name="android:minHeight">@dimen/height_min_button_default</item>
+    </style>
+
+
+    <style name="ListViewGeneric" parent="android:Widget.ListView">
+        <item name="android:footerDividersEnabled">false</item>
+        <item name="android:headerDividersEnabled">false</item>
+        <!--<item name="android:divider">@color/divider_color_section</item>-->
+        <item name="android:dividerHeight">1dp</item>
+    </style>
+
+
+    <style name="TextAppearanceGeneric">
+        <!--<item name="android:textColor">@color/text_color_default</item>-->
+        <!--<item name="android:textColorHint">@color/text_color_hint_default</item>-->
+        <item name="android:textSize">@dimen/text_size_default</item>
+    </style>
+
+    <style name="TextAppearanceMedium" parent="TextAppearanceGeneric">
+        <item name="android:textSize">@dimen/text_size_default_medium</item>
+    </style>
+
+
+    <style name="TextViewTitle" parent="android:Widget.TextView">
+        <item name="android:gravity">center</item>
+        <!--<item name="android:textColor">@color/text_color_action_bar_title</item>-->
+        <item name="android:textSize">@dimen/text_size_action_bar_title</item>
+    </style>
+
+    <style name="TextViewSubtitle" parent="android:Widget.TextView">
+        <item name="android:gravity">center</item>
+        <!--<item name="android:textColor">@color/text_color_action_bar_subtitle</item>-->
+        <item name="android:textSize">@dimen/text_size_action_bar_subtitle</item>
+    </style>
+
+
+
+    <style name="EditTextGeneric" parent="android:Widget.EditText">
+        <!--<item name="android:background">@drawable/bg_text_field</item>-->
+        <item name="android:paddingLeft">@dimen/padding_edit_text_default_sides</item>
+        <item name="android:paddingTop">@dimen/padding_edit_text_default</item>
+        <item name="android:paddingRight">@dimen/padding_edit_text_default_sides</item>
+        <item name="android:paddingBottom">@dimen/padding_edit_text_default</item>
+        <!--<item name="android:textColor">@color/text_color_default</item>-->
+        <item name="android:textSize">@dimen/text_size_default_normal</item>
+    </style>
+
+    <!-- ORANGE STYLE -->
+    <style name="orange_style" parent="android:Widget.EditText">
+        <!--<item name="android:background">@drawable/bg_text_field</item>-->
+        <item name="android:background">@color/orange</item>
+        <item name="android:textColor">@color/background_app_default</item>
+        <item name="android:textColorHint">@color/orange_dark</item>
+        <item name="android:textSize">@dimen/text_size_dialog</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="orange_style_ed_message" parent="android:Widget.EditText">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textColorHint">@color/gray_light</item>
+        <item name="android:textSize">@dimen/text_size_dialog</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="orange_style_ed_light" parent="android:Widget.EditText">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textColorHint">@color/gray_light</item>
+        <item name="android:textSize">22dp</item>
+    </style>
+
+    <style name="orange_style_tv_light" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/gray_light</item>
+        <item name="android:textSize">25dp</item>
+        <item name="android:textStyle">normal</item>
+
+    </style>
+
+    <style name="orange_style_button" parent="android:Widget.Button">
+        <item name="android:textColor">@drawable/color_text_button_action</item>
+        <item name="android:buttonStyle">@android:color/white</item>
+        <item name="android:background">@color/orange</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/text_size_button</item>
+    </style>
+
+    <style name="orange_style_title_tv" parent="android:Widget.TextView">
+        <!--<item name="android:background">@drawable/bg_text_field</item>-->
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/text_size_title_dialog</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="orange_style_tv" parent="android:Widget.TextView">
+        <!--<item name="android:background">@drawable/bg_text_field</item>-->
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/text_size_dialog</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="orange_style_list_main_tv" parent="android:Widget.TextView">
+
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">@dimen/text_size_default_medium</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="orange_style_list_additional_tv" parent="android:Widget.TextView">
+        <!--<item name="android:background">@drawable/bg_text_field</item>-->
+        <item name="android:textColor">@color/gray_light</item>
+        <item name="android:textSize">@dimen/text_size_additional_lv</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+</resources>

@@ -1,0 +1,34 @@
+<com.ngstudio.friendstep.testc.MapWrapperLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/map_relative_layout"
+    tools:context=".ui.fragments.MapFragment">
+
+
+
+    <com.google.android.gms.maps.MapView
+        android:layout_width = "fill_parent"
+        android:layout_height = "fill_parent"
+        android:id="@+id/map"
+        android:clickable="true"
+        android:apiKey="@string/google_key"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+
+        android:background="@drawable/ic_btn_round"
+        android:src="@drawable/drawable_ic_share"
+        android:id="@+id/ibButtonSendLocation"
+        android:layout_marginRight="@dimen/margin_angle_button"
+        android:layout_marginBottom="@dimen/margin_angle_button" />
+
+</com.ngstudio.friendstep.testc.MapWrapperLayout>

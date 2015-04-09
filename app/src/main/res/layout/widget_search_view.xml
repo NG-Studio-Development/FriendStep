@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:addStatesFromChildren="true"
+
+    android:gravity="center"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="horizontal">
+
+    <com.ngstudio.friendstep.ui.widgets.IconView
+        android:id="@+id/icIcon"
+        android:background="@drawable/drawable_ic_edit"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <com.ngstudio.friendstep.ui.widgets.EditTextFontView
+        android:id="@+id/searchQueryText"
+
+        android:background="@null"
+
+        android:gravity="center_vertical|left"
+
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+
+        android:singleLine="true"
+
+        android:textColor="@android:color/white"
+
+        android:imeOptions="actionDone"
+        android:inputType="textAutoComplete"/>
+
+</LinearLayout>

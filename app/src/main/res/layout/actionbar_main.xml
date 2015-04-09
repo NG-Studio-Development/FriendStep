@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+
+    android:id="@+id/rlActionbarHolder"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/orange_bright">
+
+    <com.ngstudio.friendstep.ui.widgets.AspectImageButton
+        android:id="@+id/ivActionbarIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+
+        android:layout_centerVertical="true"
+
+        android:src="@drawable/drawable_ic_sidemenu"
+        android:background="@android:color/transparent"
+
+        local:aspectRatio = "1:1"/>
+
+    <TextView
+        android:id="@+id/tvActionbarTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_toRightOf="@id/ivActionbarIcon"
+        android:layout_marginLeft="@dimen/margin_widget_default_small"
+        android:layout_centerVertical="true"
+
+        android:textSize="@dimen/text_size_action_bar_title"
+        android:textColor="@android:color/white"
+        android:text="Map"/>
+
+
+
+    <LinearLayout
+        android:id="@+id/lnMenuButtons"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+
+        android:layout_alignParentRight="true"
+        android:gravity="right|center_vertical"
+        android:orientation="horizontal">
+
+        <com.ngstudio.friendstep.ui.widgets.AspectImageButton
+            android:id="@+id/ivNearby"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+
+            android:src="@drawable/drawable_ic_near"
+            android:background="@android:color/transparent"
+
+            local:aspectRatio = "1:1"/>
+
+        <com.ngstudio.friendstep.ui.widgets.AspectImageButton
+            android:id="@+id/ivSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+
+            android:src="@drawable/drawable_ic_search"
+            android:background="@android:color/transparent"
+
+            local:aspectRatio = "1:1"/>
+
+        <com.ngstudio.friendstep.ui.widgets.AspectImageButton
+            android:id="@+id/ivEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+
+            android:src="@drawable/drawable_ic_edit"
+            android:background="@android:color/transparent"
+
+            local:aspectRatio = "1:1"/>
+
+        <com.ngstudio.friendstep.ui.widgets.AspectImageButton
+            android:id="@+id/ivDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+
+            android:src="@drawable/drawable_ic_trash"
+            android:background="@android:color/transparent"
+
+            local:aspectRatio = "1:1"/>
+
+        <com.ngstudio.friendstep.ui.widgets.AspectImageButton
+            android:id="@+id/ivRefresh"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+
+            android:src="@drawable/drawable_refresh"
+            android:background="@android:color/transparent"
+
+            local:aspectRatio = "1:1"/>
+
+
+        </LinearLayout>
+
+    <com.ngstudio.friendstep.ui.widgets.SearchView
+        android:id="@+id/etEnterText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+
+        android:layout_toRightOf="@id/tvActionbarTitle"
+        android:layout_toLeftOf="@id/lnMenuButtons">
+
+
+    </com.ngstudio.friendstep.ui.widgets.SearchView>
+
+
+</RelativeLayout>

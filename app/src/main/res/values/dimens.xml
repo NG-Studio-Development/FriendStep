@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="padding_action_bar_logo_sides">6dp</dimen>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="margin_activity_default_horizontal">16dp</dimen>
+    <dimen name="margin_activity_default_vertical">16dp</dimen>
+    <dimen name="margin_widget_default_tiny">5dp</dimen>
+    <dimen name="margin_widget_default_min">2dp</dimen>
+    <dimen name="margin_widget_default_small">10dp</dimen>
+    <dimen name="margin_widget_default_medium">15dp</dimen>
+    <dimen name="margin_widget_default_normal">20dp</dimen>
+    <dimen name="margin_widget_default_large">30dp</dimen>
+    <dimen name="margin_widget_default_extra_large">60dp</dimen>
+    <dimen name="padding_adapter_item_default">10dp</dimen>
+    <dimen name="padding_item_chat">4dp</dimen>
+    <dimen name="padding_top_panel_fragment_chat">15dp</dimen>
+    <dimen name="padding_dialog_textview">6dp</dimen>
+    <dimen name="tab_highlight_size_default">10dp</dimen>
+
+    <!-- TEXT DIMENS -->
+    <dimen name="padding_edit_text_default">@dimen/margin_widget_default_tiny</dimen>
+    <dimen name="padding_edit_text_default_sides">@dimen/margin_widget_default_small</dimen>
+    <dimen name="min_height_edit_text">20dp</dimen>
+
+    <dimen name="text_size_action_bar_title">22sp</dimen>
+    <dimen name="text_size_action_bar_subtitle">13sp</dimen>
+    <dimen name="text_size_tab_label">12sp</dimen>
+    <dimen name="text_size_default_tiny">12sp</dimen>
+    <dimen name="text_size_default_small">14sp</dimen>
+    <dimen name="text_size_default">15sp</dimen>
+    <dimen name="text_size_default_normal">16sp</dimen>
+    <dimen name="text_size_default_medium">18sp</dimen>
+    <dimen name="text_size_default_large">30sp</dimen>
+    <dimen name="text_size_button_default">18sp</dimen>
+
+
+    <!-- BUTTON DIMENS -->
+    <dimen name="width_min_button_default">200dp</dimen>
+    <dimen name="height_min_button_default">42dp</dimen>
+    <dimen name="height_button_default">48dp</dimen>
+    <dimen name="size_butt">0dp</dimen>
+
+    <!-- IMAGEVIEW DIMENS -->
+    <dimen name="size_imageview_default">80dp</dimen>
+    <dimen name="size_item_imageview_default">60dp</dimen>
+    <dimen name="size_mood_imageview_default">16dp</dimen>
+    <dimen name="divider_horizontal_height_small">1dp</dimen>
+    <dimen name="divider_horizontal_height_default">2.8dp</dimen>
+    <dimen name="divider_horizontal_height_scaled">3.2dp</dimen>
+
+    <!-- SPINNER DIMENS -->
+    <dimen name="height_spinner_default">30dp</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- TEMPORARY DIMENS -->
+    <dimen name="photo_profile_height">240dp</dimen>
+    <dimen name="imageview_menu_height">160dp</dimen>
+    <dimen name="size_avatar_imageview">80dp</dimen>
+    <dimen name="size_item_imageview">60dp</dimen>
+    <dimen name="text_size">14dp</dimen>
+    <dimen name="text_size_button">19sp</dimen>
+    <dimen name="text_size_title_dialog">26sp</dimen>
+    <dimen name="text_size_dialog">18sp</dimen>
+
+    <dimen name="height_line">1dp</dimen>
+    <dimen name="little_indent">14dp</dimen>
+    <dimen name="indent">24dp</dimen>
+    <dimen name="indent_small">8dp</dimen>
+    <dimen name="width_switch_settings">57dp</dimen>
+    <dimen name="width_button_dialog">85dp</dimen>
+    <dimen name="height_switch_settings">30dp</dimen>
+    <dimen name="height_button_send_dialog">50dp</dimen>
+
+    <dimen name="margin_top_send_location">24dp</dimen>
+    <dimen name="margin_left_from_icon_send_location">24dp</dimen>
+    <dimen name="margin_left_send_location">24dp</dimen>
+    <dimen name="distance_row_edit_dialog">32dp</dimen>
+    <dimen name="margin_bottom_contact_panel">34dp</dimen>
+    <dimen name="margin_left_contact_panel">40dp</dimen>
+    <dimen name="margin_right_contact_panel">38dp</dimen>
+    <dimen name="height_contact_panel">90dp</dimen>
+    <dimen name="margin_angle_button">16dp</dimen>
+
+    <!-- DIALOG DIMENS -->
+    <dimen name="top_button_bar_dialog_location">28dp</dimen>
+    <dimen name="height_button_bar_dialog_location">66dp</dimen>
+    <dimen name="top_icon_dialog_location">28dp</dimen>
+    <dimen name="left_icon_dialog_location">14dp</dimen>
+    <dimen name="left_padding_et">0dp</dimen>
+    <dimen name="height_dialog">257dp</dimen>
+    <dimen name="width_camera_field">98dp</dimen>
+    <dimen name="width_button">100dp</dimen>
+
+    <!-- LISTVIEW DIMENS -->
+    <dimen name="distance_to_icon_lv">10dp</dimen>
+    <dimen name="text_size_additional_lv">16sp</dimen>
+    <dimen name="max_width_main_tv">175dp</dimen>
+
+
+    <!-- ACTIONBAR DIMENS -->
+    <dimen name="height_actionbar_default">48dp</dimen>
+    
+
+
+</resources>
