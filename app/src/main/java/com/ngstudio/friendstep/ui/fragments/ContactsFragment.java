@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.alexutils.helpers.BitmapUtils;
@@ -51,8 +50,8 @@ public class ContactsFragment extends BaseFragment<MainActivity> implements Noti
     ContactsAdapter adapter;
 
     private ImageButton buttonPlus;
-    private RelativeLayout rlPanel;
-    private ImageButton ibClosePanel;
+    //private RelativeLayout rlPanel;
+    //private ImageButton ibClosePanel;
     private FragmentPool fragmentPool = FragmentPool.getInstance();
     //private ActionBarHolder actionBarHolder;
 
@@ -88,7 +87,7 @@ public class ContactsFragment extends BaseFragment<MainActivity> implements Noti
         NotificationManager.registerClient(this, new NotificationManager
                 .MessageFilter(WhereAreYouAppConstants.NOTIFICATION_CONTACTS_LOADED));
 
-        rlPanel = (RelativeLayout) view.findViewById(R.id.rlPanel);
+        /*rlPanel = (RelativeLayout) view.findViewById(R.id.rlPanel);
         rlPanel.setVisibility(View.INVISIBLE);
         ibClosePanel = (ImageButton) view.findViewById(R.id.ibClosePanel);
         ibClosePanel.setOnClickListener(new View.OnClickListener() {
@@ -96,7 +95,7 @@ public class ContactsFragment extends BaseFragment<MainActivity> implements Noti
             public void onClick(View v) {
                 rlPanel.setVisibility(View.INVISIBLE);
             }
-        });
+        }); */
 
         buttonPlus = (ImageButton) view.findViewById(R.id.buttonPlus);
         buttonPlus.setOnClickListener(new View.OnClickListener() {
