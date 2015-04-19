@@ -12,7 +12,6 @@ import com.ngstudio.friendstep.R;
 import com.ngstudio.friendstep.ui.activities.MainActivity;
 import com.ngstudio.friendstep.utils.WhereAreYouAppConstants;
 
-
 public class GCMIntentService extends IntentService {
 
     public static final String TYPE_SEND_MESSAGE = "sendmessage";
@@ -23,31 +22,8 @@ public class GCMIntentService extends IntentService {
         super("GCMIntentService");
     }
 
-
-
-
-    /*@Override
-    protected void onHandleIntent(Intent intent) {
-        Intent initIntent = intent;
-        if(TYPE_SEND_MESSAGE.equals(intent.getStringExtra("type"))) {
-            NotificationManager.notifyClients(WhereAreYouAppConstants.NOTIFICATION_MESSAGE_INCOMING,intent);
-         } else {
-            Bundle extras = intent.getExtras();
-
-            Intent aIntent = new Intent(getApplicationContext(), MapForPushActivity.class);
-            intent.putExtras(extras);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            getApplicationContext().startActivity(aIntent);
-        }
-
-    } */
-
-    /* ------------------------- */
     public static final int NOTIFICATION_ID = 1;
     private android.app.NotificationManager mNotificationManager;
-    //NotificationCompat.Builder builder;
-    /* ------------------------ */
-
 
     @Override
     protected void onHandleIntent(Intent intent) {
@@ -59,7 +35,7 @@ public class GCMIntentService extends IntentService {
         String mess = extras.getString("price");
 
         if (GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE.equals(messageType)) {
-            NotificationManager.notifyClients(WhereAreYouAppConstants.NOTIFICATION_MESSAGE_INCOMING,intent);
+            NotificationManager.notifyClients(WhereAreYouAppConstants.NOTIFICATION_MESSAGE_INCOMING, intent);
             sendNotification("Received: "+mess);
         }
     }

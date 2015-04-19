@@ -7,6 +7,7 @@
         android:protectionLevel="signature" />
 
     <uses-permission android:name="com.ngstudio.friendstep.permission.MAPS_RECEIVE" />
+    <uses-permission android:name="app.cloudstringers.permission.C2D_MESSAGE" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />

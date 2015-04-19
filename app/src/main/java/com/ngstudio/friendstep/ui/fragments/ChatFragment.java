@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -16,6 +17,7 @@ import com.ngstudio.friendstep.R;
 import com.ngstudio.friendstep.WhereAreYouApplication;
 import com.ngstudio.friendstep.components.NotificationManager;
 import com.ngstudio.friendstep.model.connectivity.BaseResponseCallback;
+import com.ngstudio.friendstep.model.connectivity.requests.BaseMessageRequest;
 import com.ngstudio.friendstep.model.entity.Message;
 import com.ngstudio.friendstep.model.entity.step.ContactStep;
 import com.ngstudio.friendstep.ui.activities.ChatActivity;
@@ -120,7 +122,7 @@ public class ChatFragment extends BaseFragment<ChatActivity> implements Notifica
         messageText.setText(null);
     }
 
-    public void queryGetMessages(long idUser,long idFriend /*String mobile*/) {
+    public void queryGetMessages(long idUser, long idFriend /*String mobile*/) {
 
         MessagesHelpers.getInstance().queryMessagesFromServer(idUser, idFriend, new BaseResponseCallback<String>() {
             @Override
@@ -142,16 +144,17 @@ public class ChatFragment extends BaseFragment<ChatActivity> implements Notifica
 
         if (what == WhereAreYouAppConstants.NOTIFICATION_MESSAGES) {
             String result = (String) obj;
-            Gson gson = new Gson();
+            //Gson gson = new Gson();
             try {
-                List<Message> messageList = gson.fromJson(result, new TypeToken<List<Message>>() {
+                fillList(result);
+                /*List<Message> messageList = gson.fromJson(result, new TypeToken<List<Message>>() {
                 }.getType());
 
                 MessagesHelpers.getInstance().saveMessages(messageList);
                 MessagesHelpers.getInstance().putMessages(messageList);
 
                 adapter.notifyDataSetChanged();
-                postList(adapter.getCount() - 1);
+                postList(adapter.getCount() - 1);*/
             } catch (Exception e) {
                 e.printStackTrace();
                 result = result.contains(ERROR_NO_MESSAGE) ? ERROR_NO_MESSAGE : getString(R.string.toast_unknown_error);
@@ -163,11 +166,26 @@ public class ChatFragment extends BaseFragment<ChatActivity> implements Notifica
 
             //BaseMessageRequest getMessageRequest = getMessageRequestFromIntent(msgIntent);
 
-            /*if(getMessageRequest.getSendermobilenumber().equals(currentContact.getMobilenumber())) {
-                HttpServer.submitToServer(getMessageRequest,new BaseResponseCallback<String>() {
+
+            long senderId = Long.valueOf(message.getSenderId());
+            MessagesHelpers.getInstance().queryMessagesFromServer(WhereAreYouApplication.getInstance().getUserId(), senderId, new BaseResponseCallback<String>() {
+                @Override
+                public void onSuccess(String result) {
+                    NotificationManager.notifyClients(WhereAreYouAppConstants.NOTIFICATION_MESSAGES, result);
+                }
+
+                @Override
+                public void onError(Exception error) {
+                    Toast.makeText(getActivity(), R.string.toast_unknown_error, Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            /*if(message.getSendername().equals(currentContact.getName())) {
+                HttpServer.submitToServer(getMessageRequest, new BaseResponseCallback<String>() {
                     @Override
                     public void onSuccess(String result) {
-                        NotificationManager.notifyClients(WhereAreYouAppConstants.NOTIFICATION_MESSAGES, result);
+                        fillList(result);
+                        //NotificationManager.notifyClients(WhereAreYouAppConstants.NOTIFICATION_MESSAGES, result);
                     }
 
                     @Override
@@ -177,6 +195,21 @@ public class ChatFragment extends BaseFragment<ChatActivity> implements Notifica
                 });
             } */
         }
+    }
+
+
+    private void fillList(String jsonString) {
+
+        Gson gson = new Gson();
+        List<Message> messageList = gson.fromJson(jsonString, new TypeToken<List<Message>>() {
+        }.getType());
+
+        MessagesHelpers.getInstance().saveMessages(messageList);
+        MessagesHelpers.getInstance().putMessages(messageList);
+
+        adapter.notifyDataSetChanged();
+        postList(adapter.getCount() - 1);
+
     }
 
     public void postList(final int selectPosition) {
@@ -191,23 +224,24 @@ public class ChatFragment extends BaseFragment<ChatActivity> implements Notifica
     }
 
     private Message getMessageFromIntent(Intent intent) {
+        //Bundle bundle = intent.getExtras();
         String messageText = intent.getStringExtra(WhereAreYouAppConstants.SERVER_KEY_MESSAGE);
         String fromId = intent.getStringExtra(WhereAreYouAppConstants.SERVER_KEY_FROM_ID);
-        String messTime = intent.getStringExtra(WhereAreYouAppConstants.SERVER_KEY_MESS_TIME);
+        //String messTime = intent.getStringExtra(WhereAreYouAppConstants.SERVER_KEY_MESS_TIME);
 
-        if(messageText == null || fromId == null || messTime == null)
+        if(messageText == null || fromId == null /*|| messTime == null*/)
             return null;
 
-        return new Message(null, messageText, null, fromId, null, Long.getLong(messTime));
+        return new Message(null, messageText, null, fromId, null, -1/*, Long.getLong(messTime)*/);
     }
 
-    /*private BaseMessageRequest getMessageRequestFromIntent(Intent msgIntent) {
+    private BaseMessageRequest getMessageRequestFromIntent(Intent msgIntent) {
         String senderName = msgIntent.getStringExtra("name");
         String senderMobileNumber = msgIntent.getStringExtra("sendermobilenumber");
         long messageTime = Long.parseLong(msgIntent.getStringExtra("messagetime"));
-        Log.d("MESSAGE_TIME","Long = "+messageTime);
+        Log.d("MESSAGE_TIME", "Long = " + messageTime);
         return BaseMessageRequest.createGetMessageRequest(WhereAreYouApplication.getInstance().getUuid(),senderMobileNumber,messageTime);
-    } */
+    }
 
     @Override
     public void onDestroy() {
