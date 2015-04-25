@@ -1,7 +1,6 @@
 package com.ngstudio.friendstep.ui.activities;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -12,7 +11,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
@@ -33,15 +31,10 @@ import com.ngstudio.friendstep.utils.WhereAreYouAppLog;
 
 public class MainActivity extends BaseActivity implements NotificationManager.Client {
 
-    //private ImageView avatar;
-    //ActionBarHolder actionBarHolder;
-
-
     private ListView lvLeftDrawer;
     private DrawerLayout mDrawerLayout;
 
     private ItemsAdapterOLD adapter;
-    private InputMethodManager inputMethodManager;
     private ActionBarDrawerToggle mDrawerToggle;
 
     public static final int REQUEST_CODE_ENABLE_GPS = 1;
@@ -69,7 +62,6 @@ public class MainActivity extends BaseActivity implements NotificationManager.Cl
             }
         });
 
-
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
                 toolbar, R.string.drawer_open, R.string.drawer_close) {
@@ -87,50 +79,12 @@ public class MainActivity extends BaseActivity implements NotificationManager.Cl
 
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
-        //selectItem(0);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
 
         Log.d("MAIN_ACTIVITY", "LOG");
-        /*new Thread(new Runnable() {
-            @Override
-            public void run() {
-                GoogleCloudMessagingClient.getInstance().register();
-            }
-        }).start();*/
-
-        //mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        //sliderMenu = (AdapterLinearLayout) findViewById(R.id.lnSliderMenu);
-        //leftDrawer = (RelativeLayout) findViewById(R.id.leftDrawer);
-        //avatar = (ImageView) findViewById(R.id.ivAvatar);
         adapter = ItemsAdapterOLD.getSideMenuAdapter(this);
-        // sliderMenu.setAdapter(adapter = ItemsAdapter.getSideMenuAdapter(this));
-        // sliderMenu.setOnItemClickListener(new AdapterLinearLayout.OnItemClickListener() {
-        //    @Override
-        //    public void onItemClick(Adapter adapter, int pos, View v) {
-        //        selectItem(pos);
-        //    }
-        //});
-
-        inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        /*mDrawerToggle = new ActionBarDrawerToggle(
-                this,
-                mDrawerLayout,
-                R.drawable.ic_sidemenu,
-                R.string.content_pin_type,
-                R.string.content_pin_type
-        ) {
-            public void onDrawerClosed(View view) {
-                ActivityCompat.invalidateOptionsMenu(MainActivity.this);
-            }
-
-            public void onDrawerOpened(View drawerView) {
-                ActivityCompat.invalidateOptionsMenu(MainActivity.this);
-            }
-        }; */
-        //mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         WhereAreYouApplication.getInstance().checkForLocationServices(this,new Runnable() {
             @Override
@@ -144,26 +98,6 @@ public class MainActivity extends BaseActivity implements NotificationManager.Cl
             selectItem(0);
         }
     }
-
-    /* private void initActionBar() {
-        final ActionBar actionBar = getSupportActionBar();
-        actionBar.setIcon(null);
-        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-
-        actionBarHolder = new ActionBarHolder();
-        actionBar.setCustomView(actionBarHolder.initHolder(this));
-        actionBarHolder.setActionBarIconClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                inputMethodManager.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
-                 if (!mDrawerLayout.isDrawerOpen(leftDrawer))
-                    mDrawerLayout.openDrawer(leftDrawer);
-                else
-                    mDrawerLayout.closeDrawer(leftDrawer);
-            }
-        });
-    } */
-
 
     public ActionBarHolder getActionBarHolder() {
         return null;
@@ -200,7 +134,6 @@ public class MainActivity extends BaseActivity implements NotificationManager.Cl
         switch(item.getIconId()) {
             case R.drawable.drawable_item_menu_map:
                 fragment = FragmentPool.getInstance().newObject(MapFragment.class);
-                //fragment = FragmentPool.getInstance().newObject(SettingsFragment.class);
                 break;
 
             case R.drawable.drawable_item_menu_contacts:

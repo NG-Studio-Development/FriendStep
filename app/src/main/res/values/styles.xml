@@ -2,6 +2,8 @@
 <resources>
 
     <style name="_ThemeAppBase" parent="Theme.AppCompat.Light">
+        <item name="android:actionBarStyle">@style/ActionBarGeneric</item>
+        <!-- Support library compatibility -->
         <item name="actionBarStyle">@style/ActionBarGeneric</item>
     </style>
 
@@ -26,6 +28,9 @@
         <item name="android:windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
     </style>
+
+
+    <!-- <style name="ThemeAppGeneric.ActionBar" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse"> -->
 
     <style name="ThemeAppGeneric.ActionBarOverlay">
         <item name="windowActionBarOverlay">true</item>
@@ -60,7 +65,13 @@
     </style>
 
     <style name="ActionBarGeneric" parent="Widget.AppCompat.ActionBar">
-        <item name="android:background">@color/background_action_bar_default</item>
+        <!-- <item name="android:background">@color/background_action_bar_default</item> -->
+        <item name="android:background">@color/background_action_bar</item>
+        <item name="android:textColorPrimary">#fff</item>
+        <item name="android:textColorPrimaryInverse">#fff</item>
+        <item name="android:textColorSecondary">#fff</item>
+        <item name="actionMenuTextColor">#fff</item>
+
     </style>
 
     <style name="ButtonGeneric" parent="android:Widget.Button">

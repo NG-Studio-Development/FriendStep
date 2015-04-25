@@ -2,6 +2,7 @@
 <resources>
     <color name="background_app_default">@android:color/white</color>
     <color name="background_action_bar_default">@android:color/transparent</color>
+    <color name="background_action_bar">@color/orange_bright</color>
     <color name="background_widget_default">@android:color/background_dark</color>
 
     <color name="dialog_shadow_color_top">#5f707070</color>
