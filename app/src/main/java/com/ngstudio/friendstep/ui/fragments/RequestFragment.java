@@ -50,7 +50,7 @@ public class RequestFragment extends BaseFragment<MainActivity> implements Notif
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        getHostActivity().getActionBarHolder().setTitle(R.string.title_request);
+        //getHostActivity().getActionBarHolder().setTitle(R.string.title_request);
     }
 
     @Override
@@ -77,7 +77,7 @@ public class RequestFragment extends BaseFragment<MainActivity> implements Notif
     public void findChildViews(@NotNull View view) {
         super.findChildViews(view);
 
-      /*  NotificationManager.registerClient(this);
+        /* NotificationManager.registerClient(this);
         view.findViewById(R.id.rlPanel).setVisibility(View.GONE);
         view.findViewById(R.id.buttonPlus).setVisibility(View.GONE);
         listView = (ListView) view.findViewById(R.id.listContacts);

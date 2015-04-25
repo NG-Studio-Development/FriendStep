@@ -58,8 +58,8 @@ public class ChatFragment extends BaseFragment<ChatActivity> implements Notifica
             senderName = currentContact.getName();
         } else { throw new Error("EMPTY CONTACT!"); }
 
-        getHostActivity().initActionBar();
-        getHostActivity().getActionBarHolder().setTitle(this.senderName);
+        //getHostActivity().initActionBar();
+        //getHostActivity().getActionBarHolder().setTitle(this.senderName);
     }
 
     @Override

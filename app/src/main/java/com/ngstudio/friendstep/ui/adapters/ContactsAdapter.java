@@ -27,7 +27,6 @@ public class ContactsAdapter extends BaseArrayAdapter<ContactStep> implements Fi
     public ContactsAdapter(Context context, int style, List<ContactStep> list) {
         super(context, style, list);
         this.originalList = new ArrayList<>(list);
-        //this.originalList = list;
         filter = new ContactsFilter();
     }
 

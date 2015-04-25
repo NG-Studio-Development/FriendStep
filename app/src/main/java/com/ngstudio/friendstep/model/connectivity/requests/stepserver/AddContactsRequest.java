@@ -1,10 +1,6 @@
 package com.ngstudio.friendstep.model.connectivity.requests.stepserver;
 
-import com.ngstudio.friendstep.model.connectivity.requests.BaseRequest;
-import com.ngstudio.friendstep.model.connectivity.requests.RequestType;
-import com.ngstudio.friendstep.utils.WhereAreYouAppConstants;
-
-public class AddContactsRequest extends BaseRequest {
+/*public class AddContactsRequest extends BaseRequest {
 
     long id;
     String name;
@@ -19,4 +15,4 @@ public class AddContactsRequest extends BaseRequest {
         //return new AddContactsRequest("add_contact.php", userId, friendName);
         return new AddContactsRequest("add_contact.php?id="+userId+"&name="+friendName+"&tempValue=x", userId, friendName);
     }
-}
+} */

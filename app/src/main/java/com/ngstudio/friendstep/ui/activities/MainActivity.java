@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,7 +19,6 @@ import com.ngstudio.friendstep.WhereAreYouApplication;
 import com.ngstudio.friendstep.components.GeoService;
 import com.ngstudio.friendstep.components.NotificationManager;
 import com.ngstudio.friendstep.ui.adapters.ItemsAdapter;
-//import com.ngstudio.friendstep.ui.adapters.ItemsAdapterOLD;
 import com.ngstudio.friendstep.ui.fragments.ContactsFragment;
 import com.ngstudio.friendstep.ui.fragments.MapFragment;
 import com.ngstudio.friendstep.ui.fragments.RequestFragment;
@@ -28,6 +26,8 @@ import com.ngstudio.friendstep.ui.fragments.SettingsFragment;
 import com.ngstudio.friendstep.ui.widgets.ActionBarHolder;
 import com.ngstudio.friendstep.utils.WhereAreYouAppConstants;
 import com.ngstudio.friendstep.utils.WhereAreYouAppLog;
+
+//import com.ngstudio.friendstep.ui.adapters.ItemsAdapterOLD;
 
 public class MainActivity extends BaseActivity implements NotificationManager.Client {
 
@@ -82,8 +82,6 @@ public class MainActivity extends BaseActivity implements NotificationManager.Cl
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-
-        Log.d("MAIN_ACTIVITY", "LOG");
         adapter = ItemsAdapter.getSideMenuAdapter(this);
 
         WhereAreYouApplication.getInstance().checkForLocationServices(this,new Runnable() {

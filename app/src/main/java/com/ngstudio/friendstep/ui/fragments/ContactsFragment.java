@@ -24,7 +24,7 @@ import com.ngstudio.friendstep.components.NotificationManager;
 import com.ngstudio.friendstep.model.connectivity.BaseResponseCallback;
 import com.ngstudio.friendstep.model.connectivity.HttpServer;
 import com.ngstudio.friendstep.model.connectivity.requests.BaseContactRequest;
-import com.ngstudio.friendstep.model.connectivity.requests.stepserver.AddContactsRequest;
+import com.ngstudio.friendstep.model.connectivity.requests.stepserver.ContactRequestStepServer;
 import com.ngstudio.friendstep.model.entity.NearbyContact;
 import com.ngstudio.friendstep.model.entity.step.ContactStep;
 import com.ngstudio.friendstep.ui.activities.ChatActivity;
@@ -249,7 +249,7 @@ public class ContactsFragment extends BaseFragment<MainActivity> implements Noti
     private void sendContactRequest(long id, String contactName) {
 
         try {
-            AddContactsRequest request = AddContactsRequest.newInstance(id, contactName);
+            ContactRequestStepServer request = ContactRequestStepServer.RequestAddContacts(id, contactName);
 
             getHostActivity().showProgressDialog();
             HttpServer.submitToServer(request, new BaseResponseCallback<String>() {
