@@ -1,5 +1,6 @@
 package com.ngstudio.friendstep.ui.adapters;
 
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +21,12 @@ public class ItemsAdapter extends BaseArrayAdapter<ItemsAdapter.MenuItem> {
             new MenuItem(R.drawable.drawable_item_menu_contacts, R.string.text_item_menu_contacts),
             new MenuItem(R.drawable.drawable_item_requests, R.string.text_item_menu_requests),
             new MenuItem(R.drawable.drawable_item_menu_settings, R.string.text_item_menu_settings),
+            //new MenuItem(ID_GAP,ID_GAP),
             new MenuItem(R.drawable.drawable_item_menu_about, R.string.text_item_menu_about) };
+
+    private static final MenuItem[] profileItems = {new MenuItem(R.drawable.drawable_item_phone, R.string.text_item_profile_call),
+            new MenuItem(R.drawable.drawable_item_message, R.string.text_item_profile_sms),
+            new MenuItem(R.drawable.drawable_item_requests, R.string.text_item_profile_location)};
 
     private LayoutInflater inflater;
     private int item;
@@ -33,6 +39,16 @@ public class ItemsAdapter extends BaseArrayAdapter<ItemsAdapter.MenuItem> {
 
     public static ItemsAdapter getSideMenuAdapter(Context context) {
         return new ItemsAdapter(context,sideMenuItems, R.layout.item_menu);
+    }
+
+    public static ItemsAdapter getProfileItemsAdapter(Context context) {
+        return new ItemsAdapter(context,profileItems, R.layout.item_menu);
+    }
+
+    public ItemsAdapter(Context context, int item) {
+        super(context);
+        this.item = item;
+        inflater = LayoutInflater.from(context);
     }
 
     @Override
@@ -60,7 +76,7 @@ public class ItemsAdapter extends BaseArrayAdapter<ItemsAdapter.MenuItem> {
                 holder.text.setText(item.text);
 
         } else {
-           holder.icon.setImageBitmap(null);
+            holder.icon.setImageBitmap(null);
             holder.text.setText(null);
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0,0,1);

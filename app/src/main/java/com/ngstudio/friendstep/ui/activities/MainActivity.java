@@ -20,7 +20,7 @@ import com.ngstudio.friendstep.WhereAreYouApplication;
 import com.ngstudio.friendstep.components.GeoService;
 import com.ngstudio.friendstep.components.NotificationManager;
 import com.ngstudio.friendstep.ui.adapters.ItemsAdapter;
-import com.ngstudio.friendstep.ui.adapters.ItemsAdapterOLD;
+//import com.ngstudio.friendstep.ui.adapters.ItemsAdapterOLD;
 import com.ngstudio.friendstep.ui.fragments.ContactsFragment;
 import com.ngstudio.friendstep.ui.fragments.MapFragment;
 import com.ngstudio.friendstep.ui.fragments.RequestFragment;
@@ -34,7 +34,7 @@ public class MainActivity extends BaseActivity implements NotificationManager.Cl
     private ListView lvLeftDrawer;
     private DrawerLayout mDrawerLayout;
 
-    private ItemsAdapterOLD adapter;
+    private ItemsAdapter adapter;
     private ActionBarDrawerToggle mDrawerToggle;
 
     public static final int REQUEST_CODE_ENABLE_GPS = 1;
@@ -84,7 +84,7 @@ public class MainActivity extends BaseActivity implements NotificationManager.Cl
 
 
         Log.d("MAIN_ACTIVITY", "LOG");
-        adapter = ItemsAdapterOLD.getSideMenuAdapter(this);
+        adapter = ItemsAdapter.getSideMenuAdapter(this);
 
         WhereAreYouApplication.getInstance().checkForLocationServices(this,new Runnable() {
             @Override
@@ -128,7 +128,7 @@ public class MainActivity extends BaseActivity implements NotificationManager.Cl
     private void selectItem(int position) {
         //if(!sliderMenu.setSelected(position)) return;
 
-        ItemsAdapterOLD.MenuItem item = adapter.getItem(position);
+        ItemsAdapter.MenuItem item = adapter.getItem(position);
         Fragment fragment;
 
         switch(item.getIconId()) {
