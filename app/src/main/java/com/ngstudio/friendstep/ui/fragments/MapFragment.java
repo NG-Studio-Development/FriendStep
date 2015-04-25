@@ -65,7 +65,7 @@ public class MapFragment extends BaseMapFragment<MainActivity> implements Locati
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        getHostActivity().getActionBarHolder().setMenuItemClickListener(R.id.ivRefresh, new View.OnClickListener() {
+        /* getHostActivity().getActionBarHolder().setMenuItemClickListener(R.id.ivRefresh, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if ( !hasConnection(getActivity()) )
@@ -73,7 +73,7 @@ public class MapFragment extends BaseMapFragment<MainActivity> implements Locati
                 else
                     queryNearbyContacts();
             }
-        });
+        }); */
     }
 
     @Override

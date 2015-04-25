@@ -1,60 +1,38 @@
-<android.support.v4.widget.DrawerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/drawer_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:launchMode="singleTop"
-    tools:context="com.ngstudio.friendstep.ui.activities.MainActivity">
+    android:orientation="vertical">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+    <!-- android:minHeight="?attr/actionBarSize" -->
+    <!-- app:theme="@style/MyToolbarStyle" -->
 
-    <FrameLayout
-        android:id="@+id/container"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"/>
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-
-
-</RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="240dp"
-        android:layout_height="match_parent"
-        android:id="@+id/leftDrawer"
-        android:layout_gravity="start">
-
-        <RelativeLayout
-            android:id="@+id/rlAvatarBackground"
+        <FrameLayout
+            android:id="@+id/container"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/imageview_menu_height"
-            android:background="@color/orange_bright">
+            android:layout_height="match_parent" />
 
-            <ImageView
-                android:id="@+id/ivAvatar"
-                android:layout_width="@dimen/size_avatar_imageview"
-                android:layout_height="@dimen/size_avatar_imageview"
-
-                android:layout_centerInParent="true"
-                />
-
-            </RelativeLayout>
-
-
-
-        <com.ngstudio.friendstep.ui.widgets.AdapterLinearLayout
-            android:id="@+id/lnSliderMenu"
-            android:layout_width="match_parent"
+        <ListView
+            android:id="@+id/left_drawer"
+            android:layout_width="240dp"
             android:layout_height="match_parent"
-            android:orientation="vertical"
+            android:layout_gravity="start"
+            android:background="@color/background_app_default"
+            android:choiceMode="singleChoice"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="0dp" />
 
-            android:background="@android:color/white"
-            android:layout_below="@+id/rlAvatarBackground"/>
-
-        </RelativeLayout>
+    </android.support.v4.widget.DrawerLayout>
+</LinearLayout>
 
 
-</android.support.v4.widget.DrawerLayout>

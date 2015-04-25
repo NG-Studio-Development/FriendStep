@@ -94,4 +94,8 @@
     <string name="toast_impossible_to_obtain_location">Impossible to obtain location.</string>
     <string name="toast_no_contacts">No contacts have been added for this user!</string>
 
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
 </resources>

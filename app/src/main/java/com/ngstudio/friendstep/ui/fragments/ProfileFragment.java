@@ -35,7 +35,7 @@ import com.ngstudio.friendstep.model.entity.ContactLocation;
 import com.ngstudio.friendstep.model.entity.step.ContactStep;
 import com.ngstudio.friendstep.ui.activities.MapForPushActivity;
 import com.ngstudio.friendstep.ui.activities.ProfileActivity;
-import com.ngstudio.friendstep.ui.adapters.ItemsAdapter;
+import com.ngstudio.friendstep.ui.adapters.ItemsAdapterOLD;
 import com.ngstudio.friendstep.ui.dialogs.AlertDialogBase;
 import com.ngstudio.friendstep.ui.widgets.AdapterLinearLayout;
 import com.ngstudio.friendstep.ui.widgets.SearchView;
@@ -72,7 +72,7 @@ public class ProfileFragment extends BaseFragment<ProfileActivity> implements No
     TextView contactStatus;
     AlertDialogBase dialogSendLocation;
     ContactStep currentContact;
-    ItemsAdapter adapter;
+    ItemsAdapterOLD adapter;
     File file;
 
     // ---- TEMP VARIABLES ---- //
@@ -122,7 +122,7 @@ public class ProfileFragment extends BaseFragment<ProfileActivity> implements No
         contactStatus = (TextView) view.findViewById(R.id.tvContactStatus);
 
         if(currentContact != null) {
-            photoControls.setAdapter(adapter = ItemsAdapter.getProfileItemsAdapter(getActivity()));
+            photoControls.setAdapter(adapter = ItemsAdapterOLD.getProfileItemsAdapter(getActivity()));
             photoControls.setOnItemClickListener(new AdapterLinearLayout.OnItemClickListener() {
                 @Override
                 public void onItemClick(Adapter adapter, int pos, View v) {
@@ -226,9 +226,9 @@ public class ProfileFragment extends BaseFragment<ProfileActivity> implements No
             getHostActivity().getActionBarHolder().setSearchField(R.drawable.drawable_ic_edit, null);
 
         } else {
-            adapter = new ItemsAdapter(getActivity(),R.layout.item_menu);
-            ItemsAdapter.MenuItem[] items = {new ItemsAdapter.MenuItem(R.drawable.drawable_item_profile, WhereAreYouApplication.getPrefString(WhereAreYouAppConstants.PREF_KEY_NAME,"")),
-                    new ItemsAdapter.MenuItem(R.drawable.drawable_item_phone, "+" + WhereAreYouApplication.getInstance().getCurrentMobile())};
+            adapter = new ItemsAdapterOLD(getActivity(),R.layout.item_menu);
+            ItemsAdapterOLD.MenuItem[] items = {new ItemsAdapterOLD.MenuItem(R.drawable.drawable_item_profile, WhereAreYouApplication.getPrefString(WhereAreYouAppConstants.PREF_KEY_NAME,"")),
+                    new ItemsAdapterOLD.MenuItem(R.drawable.drawable_item_phone, "+" + WhereAreYouApplication.getInstance().getCurrentMobile())};
             adapter.addAll(Arrays.asList(items));
             photoControls.setAdapter(adapter);
 

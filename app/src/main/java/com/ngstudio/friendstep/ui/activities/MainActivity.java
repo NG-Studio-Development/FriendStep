@@ -5,45 +5,44 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Adapter;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import com.ngstudio.friendstep.FragmentPool;
 import com.ngstudio.friendstep.R;
 import com.ngstudio.friendstep.WhereAreYouApplication;
 import com.ngstudio.friendstep.components.GeoService;
 import com.ngstudio.friendstep.components.NotificationManager;
-import com.ngstudio.friendstep.components.cache.AvatarBase64ImageDownloader;
 import com.ngstudio.friendstep.ui.adapters.ItemsAdapter;
+import com.ngstudio.friendstep.ui.adapters.ItemsAdapterOLD;
 import com.ngstudio.friendstep.ui.fragments.ContactsFragment;
 import com.ngstudio.friendstep.ui.fragments.MapFragment;
 import com.ngstudio.friendstep.ui.fragments.RequestFragment;
 import com.ngstudio.friendstep.ui.fragments.SettingsFragment;
 import com.ngstudio.friendstep.ui.widgets.ActionBarHolder;
-import com.ngstudio.friendstep.ui.widgets.AdapterLinearLayout;
 import com.ngstudio.friendstep.utils.WhereAreYouAppConstants;
 import com.ngstudio.friendstep.utils.WhereAreYouAppLog;
 
 public class MainActivity extends BaseActivity implements NotificationManager.Client {
 
-    private DrawerLayout mDrawerLayout;
-    private AdapterLinearLayout sliderMenu;
-    private RelativeLayout leftDrawer;
-    private ActionBarDrawerToggle mDrawerToggle;
-    private ImageView avatar;
-    ActionBarHolder actionBarHolder;
+    //private ImageView avatar;
+    //ActionBarHolder actionBarHolder;
 
-    private ItemsAdapter adapter;
+
+    private ListView lvLeftDrawer;
+    private DrawerLayout mDrawerLayout;
+
+    private ItemsAdapterOLD adapter;
     private InputMethodManager inputMethodManager;
+    private ActionBarDrawerToggle mDrawerToggle;
 
     public static final int REQUEST_CODE_ENABLE_GPS = 1;
 
@@ -56,6 +55,44 @@ public class MainActivity extends BaseActivity implements NotificationManager.Cl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        lvLeftDrawer = (ListView) findViewById(R.id.left_drawer);
+        lvLeftDrawer.setAdapter(ItemsAdapter.getSideMenuAdapter(this));
+
+        lvLeftDrawer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                selectItem(i);
+            }
+        });
+
+
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
+                toolbar, R.string.drawer_open, R.string.drawer_close) {
+
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                invalidateOptionsMenu();
+            }
+
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                invalidateOptionsMenu();
+            }
+        };
+
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+        //selectItem(0);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
+
         Log.d("MAIN_ACTIVITY", "LOG");
         /*new Thread(new Runnable() {
             @Override
@@ -64,21 +101,21 @@ public class MainActivity extends BaseActivity implements NotificationManager.Cl
             }
         }).start();*/
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        sliderMenu = (AdapterLinearLayout) findViewById(R.id.lnSliderMenu);
-        leftDrawer = (RelativeLayout) findViewById(R.id.leftDrawer);
-        avatar = (ImageView) findViewById(R.id.ivAvatar);
-
-        sliderMenu.setAdapter(adapter = ItemsAdapter.getSideMenuAdapter(this));
-        sliderMenu.setOnItemClickListener(new AdapterLinearLayout.OnItemClickListener() {
-            @Override
-            public void onItemClick(Adapter adapter, int pos, View v) {
-                selectItem(pos);
-            }
-        });
+        //mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        //sliderMenu = (AdapterLinearLayout) findViewById(R.id.lnSliderMenu);
+        //leftDrawer = (RelativeLayout) findViewById(R.id.leftDrawer);
+        //avatar = (ImageView) findViewById(R.id.ivAvatar);
+        adapter = ItemsAdapterOLD.getSideMenuAdapter(this);
+        // sliderMenu.setAdapter(adapter = ItemsAdapter.getSideMenuAdapter(this));
+        // sliderMenu.setOnItemClickListener(new AdapterLinearLayout.OnItemClickListener() {
+        //    @Override
+        //    public void onItemClick(Adapter adapter, int pos, View v) {
+        //        selectItem(pos);
+        //    }
+        //});
 
         inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        mDrawerToggle = new ActionBarDrawerToggle(
+        /*mDrawerToggle = new ActionBarDrawerToggle(
                 this,
                 mDrawerLayout,
                 R.drawable.ic_sidemenu,
@@ -92,8 +129,8 @@ public class MainActivity extends BaseActivity implements NotificationManager.Cl
             public void onDrawerOpened(View drawerView) {
                 ActivityCompat.invalidateOptionsMenu(MainActivity.this);
             }
-        };
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        }; */
+        //mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         WhereAreYouApplication.getInstance().checkForLocationServices(this,new Runnable() {
             @Override
@@ -102,13 +139,13 @@ public class MainActivity extends BaseActivity implements NotificationManager.Cl
             }
         });
 
-        initActionBar();
+        //initActionBar();
         if (savedInstanceState == null) {
             selectItem(0);
         }
     }
 
-    private void initActionBar() {
+    /* private void initActionBar() {
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setIcon(null);
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
@@ -119,17 +156,17 @@ public class MainActivity extends BaseActivity implements NotificationManager.Cl
             @Override
             public void onClick(View v) {
                 inputMethodManager.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
-                if (!mDrawerLayout.isDrawerOpen(leftDrawer))
+                 if (!mDrawerLayout.isDrawerOpen(leftDrawer))
                     mDrawerLayout.openDrawer(leftDrawer);
                 else
                     mDrawerLayout.closeDrawer(leftDrawer);
             }
         });
-    }
+    } */
 
 
     public ActionBarHolder getActionBarHolder() {
-        return actionBarHolder;
+        return null;
     }
 
     @Override
@@ -142,7 +179,7 @@ public class MainActivity extends BaseActivity implements NotificationManager.Cl
     protected void onResume() {
         super.onResume();
         //String str = AvatarBase64ImageDownloader.getImageUriFor(WhereAreYouApplication.getInstance().getCurrentMobile());
-        WhereAreYouApplication.getInstance().getAvatarCache().displayImage(AvatarBase64ImageDownloader.getImageUriFor(WhereAreYouApplication.getInstance().getCurrentMobile()),avatar);
+        //WhereAreYouApplication.getInstance().getAvatarCache().displayImage(AvatarBase64ImageDownloader.getImageUriFor(WhereAreYouApplication.getInstance().getCurrentMobile()),avatar);
     }
 
     @Override
@@ -155,10 +192,9 @@ public class MainActivity extends BaseActivity implements NotificationManager.Cl
     }
 
     private void selectItem(int position) {
-        if(!sliderMenu.setSelected(position))
-            return;
+        //if(!sliderMenu.setSelected(position)) return;
 
-        ItemsAdapter.MenuItem item = adapter.getItem(position);
+        ItemsAdapterOLD.MenuItem item = adapter.getItem(position);
         Fragment fragment;
 
         switch(item.getIconId()) {
@@ -183,8 +219,8 @@ public class MainActivity extends BaseActivity implements NotificationManager.Cl
         }
         switchFragment(fragment,false);
 
-        actionBarHolder.enterState(item.getIconId());
-        mDrawerLayout.closeDrawer(leftDrawer);
+        //actionBarHolder.enterState(item.getIconId());
+         mDrawerLayout.closeDrawer(lvLeftDrawer);
     }
 
     @Override
@@ -200,9 +236,17 @@ public class MainActivity extends BaseActivity implements NotificationManager.Cl
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void handleNotificationMessage(int what, int arg1, int arg2, Object obj) {
         if(what == WhereAreYouAppConstants.NOTIFICATION_USER_AVATAR_LOADED) {
-            WhereAreYouApplication.getInstance().getAvatarCache().displayImage(AvatarBase64ImageDownloader.getImageUriFor(WhereAreYouApplication.getInstance().getCurrentMobile()),avatar);
+            // WhereAreYouApplication.getInstance().getAvatarCache().displayImage(AvatarBase64ImageDownloader.getImageUriFor(WhereAreYouApplication.getInstance().getCurrentMobile()),avatar);
         }
     }
 }

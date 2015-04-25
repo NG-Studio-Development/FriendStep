@@ -7,6 +7,9 @@
 
     <!-- Application theme. -->
     <style name="ThemeAppGeneric" parent="_ThemeAppBase">
+
+        <item name="windowActionBar">false</item>
+
         <item name="android:windowBackground">@color/background_app_default</item>
 
         <item name="android:buttonStyle">@style/ButtonGeneric</item>
