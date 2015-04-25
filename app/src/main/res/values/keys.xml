@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--DEBUG-->
-    <string name="google_key">AIzaSyAC17Esu7oD4oKeTLuIQs1VH2Jy5habwRU</string>
+    <!-- <string name="google_key">AIzaSyAC17Esu7oD4oKeTLuIQs1VH2Jy5habwRU</string> -->
+    <string name="google_key">AIzaSyBDQchAssuE5AsX48W1HnOPF7BDX1R0T60</string>
 </resources>

@@ -10,8 +10,6 @@
         android:layout_height="?attr/actionBarSize"
         app:theme="@style/ActionBarGeneric"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-    <!-- android:minHeight="?attr/actionBarSize" -->
-    <!-- app:theme="@style/MyToolbarStyle" -->
 
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawer_layout"
