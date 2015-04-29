@@ -1,5 +1,6 @@
 package com.ngstudio.friendstep.utils;
 
+import android.util.Log;
 import android.util.Pair;
 
 import com.alexutils.dao.GenericDao;
@@ -9,10 +10,12 @@ import com.ngstudio.friendstep.model.connectivity.BaseResponseCallback;
 import com.ngstudio.friendstep.model.connectivity.HttpServer;
 import com.ngstudio.friendstep.model.connectivity.requests.BaseContactRequest;
 import com.ngstudio.friendstep.model.connectivity.requests.stepserver.GetContactStepServerRequest;
-import com.ngstudio.friendstep.model.entity.Contact;
 import com.ngstudio.friendstep.model.entity.step.ContactStep;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
@@ -47,25 +50,45 @@ public class ContactsHelper {
         }
     }
 
-    public List<Contact> getContactsByStatus(Pair<String,String>... statuses) {
-        /*if(contactsList.isEmpty())
+    @Deprecated
+    public List<ContactStep> getContactsByStatus(Pair<String,String>... statuses) {
+
+        if(contactsList.isEmpty())
             loadContacts();
 
         if(statuses.length == 0)
             return contactsList;
 
-        List<Contact> contactsStatusFilterList = new ArrayList<>();
+        List<ContactStep> contactsStatusFilterList = new ArrayList<>();
         List<Pair<String,String>> statusesList = Arrays.asList(statuses);
 
-        for (Contact contact : contactsList) {
+        for (ContactStep contact : contactsList) {
             if(statusesList.contains(new Pair<>(contact.getYourstatus(),contact.getContact_status()))) {
                 contactsStatusFilterList.add(contact);
             }
         }
 
-        return contactsStatusFilterList;*/
-        return null;
+        return contactsStatusFilterList;
+        // return null;
     }
+
+    public List<ContactStep> getContactsByStatus(@NotNull String status) {
+
+        if(contactsList.isEmpty()) {
+            loadContacts();
+            Log.d("CONTACTS_LIST","Contacts list is empty");
+        }
+
+
+        List<ContactStep> contactsStatusFilterList = new ArrayList<>();
+
+        for (ContactStep contact : contactsList)
+            if(contact.isStatus(status))
+                contactsStatusFilterList.add(contact);
+
+        return contactsStatusFilterList;
+    }
+
 
     public List<ContactStep> loadContacts() {
         return (contactsList = GenericDao.getGenericDaoInstance(ContactStep.class).getObjects()) == null ? contactsList = new ArrayList<>() : contactsList;

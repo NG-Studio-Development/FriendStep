@@ -46,14 +46,10 @@ import java.util.List;
 public class ContactsFragment extends BaseFragment<MainActivity> implements NotificationManager.Client {
 
     ListView listView;
-
     ContactsAdapter adapter;
 
     private ImageButton buttonPlus;
-    //private RelativeLayout rlPanel;
-    //private ImageButton ibClosePanel;
     private FragmentPool fragmentPool = FragmentPool.getInstance();
-    //private ActionBarHolder actionBarHolder;
 
     @Override
     public int getLayoutResID() {
@@ -69,7 +65,6 @@ public class ContactsFragment extends BaseFragment<MainActivity> implements Noti
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         fragmentPool.popFragment(ContactsFragment.class);
-        //actionBarHolder = getHostActivity().getActionBarHolder();
         return super.onCreateView(inflater,container,savedInstanceState);
     }
 
@@ -87,16 +82,6 @@ public class ContactsFragment extends BaseFragment<MainActivity> implements Noti
         NotificationManager.registerClient(this, new NotificationManager
                 .MessageFilter(WhereAreYouAppConstants.NOTIFICATION_CONTACTS_LOADED));
 
-        /*rlPanel = (RelativeLayout) view.findViewById(R.id.rlPanel);
-        rlPanel.setVisibility(View.INVISIBLE);
-        ibClosePanel = (ImageButton) view.findViewById(R.id.ibClosePanel);
-        ibClosePanel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                rlPanel.setVisibility(View.INVISIBLE);
-            }
-        }); */
-
         buttonPlus = (ImageButton) view.findViewById(R.id.buttonPlus);
         buttonPlus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,10 +93,8 @@ public class ContactsFragment extends BaseFragment<MainActivity> implements Noti
 
         listView = (ListView) view.findViewById(R.id.listContacts);
 
-        if(adapter == null)
-            queryContacts();
-
-        adapter = new ContactsAdapter(getActivity(), R.layout.item_contacts, ContactsHelper.getInstance().loadContacts());
+        //if (adapter == null)
+        queryContacts();
 
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -122,45 +105,12 @@ public class ContactsFragment extends BaseFragment<MainActivity> implements Noti
             }
         });
 
-        /*actionBarHolder.setMenuItemClickListener(R.id.ivSearch, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                adapter.selectFilter(ContactsAdapter.ContactsFilter.CONTAINS_FILTER);
-                actionBarHolder.expandSearchField(v);
-                actionBarHolder.setTitleVisibility(View.GONE);
-            }
-        });
-
-        actionBarHolder.setMenuItemClickListener(R.id.ivNearby, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                queryNearbyContacts();
-            }
-        });
-
-        actionBarHolder.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public void onQueryTextSubmit(String query) {  }
-
-            @Override
-            public void onQueryTextChange(String newText) {
-                adapter.getFilter().filter(newText);
-            }
-        });
-
-        actionBarHolder.setSearchField(R.drawable.drawable_ic_search, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                actionBarHolder.collapseSearchField(actionBarHolder.findViewById(R.id.ivSearch));
-                actionBarHolder.setTitleVisibility(View.VISIBLE);
-            }
-        }); */
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        adapter.notifyDataSetChanged();
+        //adapter.notifyDataSetChanged();
     }
 
     private void queryContacts() {
@@ -169,7 +119,7 @@ public class ContactsFragment extends BaseFragment<MainActivity> implements Noti
             public void onSuccess(String result) {
 
                 if ( result == null || result.contains("Error") )
-                    Toast.makeText(getActivity(), R.string.toast_unknown_error, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getHostActivity(), R.string.toast_unknown_error, Toast.LENGTH_SHORT).show();
                 else
                     NotificationManager.notifyClients(WhereAreYouAppConstants.NOTIFICATION_CONTACTS_LOADED, result);
             }
@@ -249,7 +199,7 @@ public class ContactsFragment extends BaseFragment<MainActivity> implements Noti
     private void sendContactRequest(long id, String contactName) {
 
         try {
-            ContactRequestStepServer request = ContactRequestStepServer.RequestAddContacts(id, contactName);
+            ContactRequestStepServer request = ContactRequestStepServer.requestSendCandidature(id, contactName);
 
             getHostActivity().showProgressDialog();
             HttpServer.submitToServer(request, new BaseResponseCallback<String>() {
@@ -282,6 +232,9 @@ public class ContactsFragment extends BaseFragment<MainActivity> implements Noti
             Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
+
+
+
 
     /*private String retrieveContactPhoto() {
 
@@ -328,7 +281,9 @@ public class ContactsFragment extends BaseFragment<MainActivity> implements Noti
                     ContactsHelper.getInstance().saveContacts(contactStepList);
                     ContactsHelper.getInstance().putContacts(contactStepList);
 
-                    adapter = new ContactsAdapter(getActivity(), R.layout.item_contacts, ContactsHelper.getInstance().loadContacts());
+                    adapter = new ContactsAdapter(getActivity(),
+                            R.layout.item_contacts,
+                            ContactsHelper.getInstance().getContactsByStatus(ContactStep.Status.approve.name()));
 
                     listView.setAdapter(adapter);
                 } else {

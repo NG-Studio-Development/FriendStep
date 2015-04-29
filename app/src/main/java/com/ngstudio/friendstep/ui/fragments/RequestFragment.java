@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -17,7 +18,9 @@ import com.ngstudio.friendstep.components.NotificationManager;
 import com.ngstudio.friendstep.model.connectivity.BaseResponseCallback;
 import com.ngstudio.friendstep.model.connectivity.HttpServer;
 import com.ngstudio.friendstep.model.connectivity.requests.BaseContactRequest;
+import com.ngstudio.friendstep.model.entity.Contact;
 import com.ngstudio.friendstep.model.entity.ContactLocation;
+import com.ngstudio.friendstep.model.entity.step.ContactStep;
 import com.ngstudio.friendstep.ui.activities.MainActivity;
 import com.ngstudio.friendstep.ui.activities.MapForPushActivity;
 import com.ngstudio.friendstep.ui.adapters.ContactsAdapter;
@@ -77,15 +80,16 @@ public class RequestFragment extends BaseFragment<MainActivity> implements Notif
     public void findChildViews(@NotNull View view) {
         super.findChildViews(view);
 
-        /* NotificationManager.registerClient(this);
-        view.findViewById(R.id.rlPanel).setVisibility(View.GONE);
-        view.findViewById(R.id.buttonPlus).setVisibility(View.GONE);
+        NotificationManager.registerClient(this);
+        //view.findViewById(R.id.rlPanel).setVisibility(View.GONE);
+        //view.findViewById(R.id.buttonPlus).setVisibility(View.GONE);
         listView = (ListView) view.findViewById(R.id.listContacts);
 
         if(adapter == null)
             queryContacts();
 
-        adapter = new ContactsAdapter(getActivity(), R.layout.item_contacts, ContactsHelper.getInstance().getContactsByStatus(new Pair<>(Contact.Status.pending.name(), Contact.Status.approve.name())));
+        //adapter = new ContactsAdapter(getActivity(), R.layout.item_contacts, ContactsHelper.getInstance().getContactsByStatus(new Pair<>(Contact.Status.pending.name(), Contact.Status.approve.name())));
+        adapter = new ContactsAdapter(getActivity(), R.layout.item_contacts, ContactsHelper.getInstance().getContactsByStatus(Contact.Status.pending.name()));
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -95,7 +99,7 @@ public class RequestFragment extends BaseFragment<MainActivity> implements Notif
                         0.0,0.0,contact.getMobilenumber(),"hi","approve");
                 HttpServer.submitToServer(replyRequest,null);
             }
-        }); */
+        });
 
     }
 
@@ -130,7 +134,8 @@ public class RequestFragment extends BaseFragment<MainActivity> implements Notif
         ContactsHelper.getInstance().queryContactsFromServer(new BaseResponseCallback<String>() {
             @Override
             public void onSuccess(String result) {
-                if (result.contains(TEMPLATE_RESULT_REQUEST)) {
+                //if (result.contains(TEMPLATE_RESULT_REQUEST)) {
+                if (!result.contains("Error")) {
                     NotificationManager.notifyClients(WhereAreYouAppConstants.NOTIFICATION_CONTACTS_LOADED, result);
                 } else {
                     Toast.makeText(getActivity(), R.string.toast_unknown_error, Toast.LENGTH_SHORT).show();
@@ -153,18 +158,18 @@ public class RequestFragment extends BaseFragment<MainActivity> implements Notif
         ContactLocation contactLocation;
         if (what == WhereAreYouAppConstants.NOTIFICATION_CONTACTS_LOADED) {
             // ******** Comment for refactor ******* //
-            /*Gson gson = new Gson();
+            Gson gson = new Gson();
             try {
                 String result = (String) obj;
 
                 if(!result.contains("No contacts have been added for this user")) {
-                    List<Contact> contactList = gson.fromJson(result, new TypeToken<List<Contact>>() {
+                    List<ContactStep> contactList = gson.fromJson(result, new TypeToken<List<ContactStep>>() {
                     }.getType());
 
                     ContactsHelper.getInstance().saveContacts(contactList);
                     ContactsHelper.getInstance().putContacts(contactList);
 
-                    adapter = new ContactsAdapter(getActivity(), R.layout.item_contacts, ContactsHelper.getInstance().getContactsByStatus(new Pair<>(Contact.Status.pending.name(), Contact.Status.approve.name())));
+                    adapter = new ContactsAdapter(getActivity(), R.layout.item_contacts, ContactsHelper.getInstance().getContactsByStatus(ContactStep.Status.pending.name()));
                     listView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
                 } else {
@@ -173,7 +178,7 @@ public class RequestFragment extends BaseFragment<MainActivity> implements Notif
 
             } catch (Exception e) {
                 Toast.makeText(getActivity(), R.string.toast_unknown_error, Toast.LENGTH_SHORT).show();
-            }*/
+            }
         } else if (what == WhereAreYouAppConstants.NOTIFICATION_CONTACTS_LOCATION) {
             List<ContactLocation> loaded = (List<ContactLocation>) obj;
             contactLocation = loaded.get(0);
