@@ -135,6 +135,7 @@ public class MainActivity extends BaseActivity implements NotificationManager.Cl
                 break;
 
             case R.drawable.drawable_item_menu_contacts:
+                //fragment = FragmentPool.getInstance().newObject(BaseContactsFragment.class);
                 fragment = FragmentPool.getInstance().newObject(ContactsFragment.class);
                 break;
 

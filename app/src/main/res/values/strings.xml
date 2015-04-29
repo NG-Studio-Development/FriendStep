@@ -84,6 +84,8 @@
     <string name="toast_location_is_not_available">Location is not available.</string>
     <string name="toast_passwords_mismatch">Passwords mismatch.</string>
     <string name="toast_unknown_error">Unknown error.</string>
+    <string name="toast_contact_was_approve">Contact was approve</string>
+
     <string name="title_activity_chat">ChatActivity</string>
     <string name="title_request">Request</string>
     <string name="title_activity_test_h">TestH</string>

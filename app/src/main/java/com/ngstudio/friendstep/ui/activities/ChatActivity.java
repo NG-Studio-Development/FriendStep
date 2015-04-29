@@ -61,12 +61,12 @@ public class ChatActivity extends BaseActivity {
         return actionBarHolder;
     }
 
-    @Override
+    /*@Override
     public void onBackPressed() {
         if(actionBarHolder.collapseSearchField(actionBarHolder.findViewById(R.id.ivEdit))) {
             return;
         }
 
         super.onBackPressed();
-    }
+    } */
 }
