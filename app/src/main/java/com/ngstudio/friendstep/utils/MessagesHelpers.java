@@ -31,9 +31,11 @@ public class MessagesHelpers {
     }
 
     public void putMessages(List<Message> messageList) {
+
         for (Message message : messageList) {
             putMessages(message);
         }
+
         sortMap();
     }
 
@@ -54,10 +56,11 @@ public class MessagesHelpers {
 
         if (!messageMap.containsKey(mobile))
             messageMap.put(mobile, new ArrayList<Message>());
+
         return messageMap.get(mobile);
     }
 
-    public List<Message> loadMessages() {
+    private List<Message> loadMessages() {
         messageList = (messageList = GenericDao.getGenericDaoInstance(Message.class).getObjects(null,null,null,null,"messagetime desc",null)) == null ? messageList = new ArrayList<>() : messageList;
         sortMap();
         return messageList;

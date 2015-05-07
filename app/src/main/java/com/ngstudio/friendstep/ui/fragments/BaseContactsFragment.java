@@ -89,16 +89,6 @@ public abstract class BaseContactsFragment extends BaseFragment<MainActivity> im
 
         //if (adapter == null)
         queryContacts();
-
-        //listView.setAdapter(adapter);
-        /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //ProfileActivity.startProfileActivity(getActivity(),(ContactStep) parent.getItemAtPosition(position));
-                ChatActivity.startChatActivity(getHostActivity(),adapter.getItem(position));
-            }
-        }); */
-
     }
 
     @Override

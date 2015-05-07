@@ -23,6 +23,9 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.gson.Gson;
 import com.ngstudio.friendstep.R;
 import com.ngstudio.friendstep.WhereAreYouApplication;
+import com.ngstudio.friendstep.model.connectivity.BaseResponseCallback;
+import com.ngstudio.friendstep.model.connectivity.HttpServer;
+import com.ngstudio.friendstep.model.connectivity.requests.stepserver.RegisterRequestStepServer;
 import com.ngstudio.friendstep.model.entity.step.User;
 import com.ngstudio.friendstep.ui.activities.LoginActivity;
 import com.ngstudio.friendstep.ui.activities.MainActivity;
@@ -52,6 +55,7 @@ public class RegisterFragment extends BaseFragment<LoginActivity> {
 
     private EditText etEmail, etUserName;
     private EditText etPass;
+    private EditText etRepass;
     private TextView tvClearInfo;
     private Button buttonRegister;
     private int startType;
@@ -108,11 +112,13 @@ public class RegisterFragment extends BaseFragment<LoginActivity> {
         });
 
         etPass = (EditText) view.findViewById(R.id.edPass);
+        etRepass = (EditText) view.findViewById(R.id.edRepass);
         etEmail = (EditText) view.findViewById(R.id.etEmail);
         etUserName = (EditText) view.findViewById(R.id.etUserName);
         buttonRegister = (Button) view.findViewById(R.id.buttonRegister);
 
-        String textLoginOrRegButton = startType == TYPE_REGISTER ? getString(R.string.text_button_sign_in):getString(R.string.text_button_register);
+        String textLoginOrRegButton = startType == TYPE_REGISTER ? getString(R.string.text_button_register):getString(R.string.text_button_sign_in);
+
         buttonRegister.setText(textLoginOrRegButton);
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,9 +126,15 @@ public class RegisterFragment extends BaseFragment<LoginActivity> {
                 if (startType == TYPE_REGISTER)
                     registerListener();
                 else if (startType == TYPE_SIGN_IN)
-                    signInListener();
+                    signInListener(etUserName.getText().toString(),etPass.getText().toString());
             }
         });
+
+        if(startType == TYPE_SIGN_IN) {
+            etEmail.setVisibility(View.GONE);
+            etRepass.setVisibility(View.GONE);
+        }
+
         loadEnterData();
         return view;
     }
@@ -151,10 +163,24 @@ public class RegisterFragment extends BaseFragment<LoginActivity> {
             return;
         }
 
-        registerInBackground(username, email,pass);
+        registerInBackground(username, email, pass);
     }
 
-    private void signInListener() { /* **** Realization sign in **** */ }
+    private void signInListener(String name, String pass) {
+        RegisterRequestStepServer request = RegisterRequestStepServer.requestSignIn(name, pass);
+
+        HttpServer.submitToServer(request, new BaseResponseCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                Log.d("RESULT","Result = "+result);
+                saveEnterDataFromJson(result);
+            }
+
+            @Override
+            public void onError(Exception error) {}
+        });
+
+    }
 
     GoogleCloudMessaging gcm;
     private void registerInBackground(final String name, final String email, final String pass) {
@@ -178,14 +204,18 @@ public class RegisterFragment extends BaseFragment<LoginActivity> {
             @Override
             protected void onPostExecute(String result) {
                 Toast.makeText(context,"Registration is successfull", Toast.LENGTH_LONG).show();
-                Gson gson = new Gson();
-                User user = gson.fromJson(result, User.class);
-                saveEnterData(user);
+                saveEnterDataFromJson(result);
             }
        }.execute(null, null, null);
     }
 
     String SENDER_ID = "197291868967";
+
+    private void saveEnterDataFromJson(String stringJson) {
+        Gson gson = new Gson();
+        User user = gson.fromJson(stringJson, User.class);
+        saveEnterData(user);
+    }
 
     private String getRegistrationId(Context context) {
         final SharedPreferences prefs = getGCMPreferences(context);

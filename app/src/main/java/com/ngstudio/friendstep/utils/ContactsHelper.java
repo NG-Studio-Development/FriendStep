@@ -16,14 +16,13 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
 
 
 public class ContactsHelper {
 
-    Calendar calendar;
+    //Calendar calendar;
     private ContactsHelper() {}
     private List<ContactStep> contactsList = new ArrayList<>();
     private static class ContactsHolder {

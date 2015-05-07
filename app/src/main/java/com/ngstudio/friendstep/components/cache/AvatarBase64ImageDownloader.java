@@ -81,7 +81,8 @@ public class AvatarBase64ImageDownloader extends BaseImageDownloader {
     }
 
     public static String  getImageUriFor(@NotNull String mobileContact) {
-        return String.format(GEOMOBILE_SCHEME_FORMAT, mobileContact);
+        //return String.format(GEOMOBILE_SCHEME_FORMAT, mobileContact);
+        return "http://akimovdev.temp.swtest.ru/server_v2/src/images/debug_ava.jpg";
     }
 
 }

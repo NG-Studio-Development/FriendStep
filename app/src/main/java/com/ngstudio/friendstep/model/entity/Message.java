@@ -1,15 +1,16 @@
 package com.ngstudio.friendstep.model.entity;
 
+import android.util.Log;
+
 import com.alexutils.annotations.DbAnnotation;
 import com.alexutils.annotations.DbMainAnnotation;
 import com.ngstudio.friendstep.WhereAreYouApplication;
-import com.ngstudio.friendstep.utils.WhereAreYouAppConstants;
 
 @DbMainAnnotation(tableName = "messages", keyFields = {"messagetime"})
 public class Message implements Comparable {
 
     @DbAnnotation
-    String sendername, message, receivername, sender_id, receivermobilenumber, receivemessage;
+    String sendername, message, receivername, sender_id, receiver_id,/*receivermobilenumber,*/ receivemessage;
 
     @DbAnnotation(dbType = "integer")
     long messagetime;
@@ -19,7 +20,7 @@ public class Message implements Comparable {
         this.message = message;
         this.receivername = receivername;
         this.sender_id = sender_id;
-        this.receivermobilenumber = receivermobilenumber;
+        //this.receivermobilenumber = receivermobilenumber;
         this.messagetime = messagetime;
     }
 
@@ -59,13 +60,22 @@ public class Message implements Comparable {
         this.sender_id = sender_id;
     }
 
-    public String getReceivermobilenumber() {
+    /*public String getReceivermobilenumber() {
         return receivermobilenumber;
     }
 
     public void setReceivermobilenumber(String receivermobilenumber) {
         this.receivermobilenumber = receivermobilenumber;
+    } */
+
+    public String getReceiverId() {
+        return this.receiver_id;
     }
+
+    public void setReceiverId(String receiverId) {
+        this.receiver_id = receiverId;
+    }
+
 
     public long getMessagetime() {
         return messagetime;
@@ -89,11 +99,16 @@ public class Message implements Comparable {
     }
 
     public boolean isMine() {
-        return WhereAreYouApplication.getPrefString(WhereAreYouAppConstants.PREF_KEY_EMAIL,"").equals(getSenderId());
+        //boolean isMine = WhereAreYouApplication.getPrefString(WhereAreYouAppConstants.PREF_KEY_EMAIL,"").equals(getSenderId());
+        boolean isMine = String.valueOf(WhereAreYouApplication.getInstance().getUserId()).equals(getSenderId());
+        Log.d("MESSAGE_IS_MINE","Is mine "+isMine);
+        return isMine;
     }
 
     public String getFriendId() {
-        return isMine() ? getReceivermobilenumber() : getSenderId();
+
+        return isMine() ? getReceiverId() : getSenderId();
+
     }
 
     @Override

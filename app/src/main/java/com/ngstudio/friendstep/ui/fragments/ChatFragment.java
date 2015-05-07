@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -53,13 +55,14 @@ public class ChatFragment extends BaseFragment<ChatActivity> implements Notifica
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         NotificationManager.registerClient(this);
+
         if(getArguments() != null) {
             currentContact = (ContactStep) getArguments().getSerializable(WhereAreYouAppConstants.KEY_CONTACT);
             senderName = currentContact.getName();
         } else { throw new Error("EMPTY CONTACT!"); }
 
-        //getHostActivity().initActionBar();
-        //getHostActivity().getActionBarHolder().setTitle(this.senderName);
+        setHasOptionsMenu(true);
+        getHostActivity().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -78,7 +81,8 @@ public class ChatFragment extends BaseFragment<ChatActivity> implements Notifica
 
         if(adapter != null)
             adapter.clear();
-        adapter = new ChatAdapter(getActivity(), R.layout.item_chat, MessagesHelpers.getInstance().loadMessages(/*currentContact.getMobilenumber()*/));
+        adapter = new ChatAdapter(getActivity(), R.layout.item_chat, MessagesHelpers.getInstance().loadMessages(String.valueOf(currentContact.getId())));
+
         if ( MessagesHelpers.getInstance().size(/*currentContact.getMobilenumber()*/) == 0 )
             queryGetMessages(WhereAreYouApplication.getInstance().getUserId(), currentContact.getId());
         else
@@ -213,4 +217,18 @@ public class ChatFragment extends BaseFragment<ChatActivity> implements Notifica
         super.onDestroy();
         NotificationManager.unregisterClient(this);
     }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Log.d("ACTION_BAR_CLICK", "Is clicked");
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                getHostActivity().onBackPressed();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

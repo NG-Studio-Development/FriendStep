@@ -24,6 +24,10 @@ public class ContactsFragment extends BaseContactsFragment implements Notificati
         });
     }
 
+
+
+
+
     @Override
     protected String getStatusContactFilter() {
         return ContactStep.Status.approve.name();

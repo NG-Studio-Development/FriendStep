@@ -1,17 +1,14 @@
 package com.ngstudio.friendstep.ui.activities;
 
-
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
 
 import com.ngstudio.friendstep.FragmentPool;
 import com.ngstudio.friendstep.R;
@@ -23,19 +20,19 @@ import com.ngstudio.friendstep.ui.fragments.ContactsFragment;
 import com.ngstudio.friendstep.ui.fragments.MapFragment;
 import com.ngstudio.friendstep.ui.fragments.RequestFragment;
 import com.ngstudio.friendstep.ui.fragments.SettingsFragment;
-import com.ngstudio.friendstep.ui.widgets.ActionBarHolder;
 import com.ngstudio.friendstep.utils.WhereAreYouAppConstants;
 import com.ngstudio.friendstep.utils.WhereAreYouAppLog;
 
-//import com.ngstudio.friendstep.ui.adapters.ItemsAdapterOLD;
-
 public class MainActivity extends BaseActivity implements NotificationManager.Client {
 
-    private ListView lvLeftDrawer;
-    private DrawerLayout mDrawerLayout;
+    RecyclerView rvDrawerContainer;
+    ItemsAdapter menuAdapter;
+    RecyclerView.LayoutManager mLayoutManager;
+    DrawerLayout drawerLayout;
+    ActionBarDrawerToggle mDrawerToggle;
 
-    private ItemsAdapter adapter;
-    private ActionBarDrawerToggle mDrawerToggle;
+    String name = "Akash Bangad";
+    String email = "akash.bangad@android4devs.com";
 
     public static final int REQUEST_CODE_ENABLE_GPS = 1;
 
@@ -52,37 +49,37 @@ public class MainActivity extends BaseActivity implements NotificationManager.Cl
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        lvLeftDrawer = (ListView) findViewById(R.id.left_drawer);
-        lvLeftDrawer.setAdapter(ItemsAdapter.getSideMenuAdapter(this));
-
-        lvLeftDrawer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        rvDrawerContainer = (RecyclerView) findViewById(R.id.rwDrawerContainer);
+        rvDrawerContainer.setHasFixedSize(true);
+        menuAdapter = new ItemsAdapter(name,email, new ItemsAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                selectItem(i);
+            public void onItemClick(int position) {
+                selectItem(position);
             }
         });
+        
+        rvDrawerContainer.setAdapter(menuAdapter);
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
-                toolbar, R.string.drawer_open, R.string.drawer_close) {
+        mLayoutManager = new LinearLayoutManager(this);
+        rvDrawerContainer.setLayoutManager(mLayoutManager);
 
-            public void onDrawerClosed(View view) {
-                super.onDrawerClosed(view);
-                invalidateOptionsMenu();
-            }
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
+        mDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,toolbar,R.string.drawer_open,R.string.drawer_close) {
+
+            @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-                invalidateOptionsMenu();
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
             }
         };
 
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-
-        adapter = ItemsAdapter.getSideMenuAdapter(this);
+        drawerLayout.setDrawerListener(mDrawerToggle);
+        mDrawerToggle.syncState();
 
         WhereAreYouApplication.getInstance().checkForLocationServices(this,new Runnable() {
             @Override
@@ -91,27 +88,15 @@ public class MainActivity extends BaseActivity implements NotificationManager.Cl
             }
         });
 
-        //initActionBar();
         if (savedInstanceState == null) {
             selectItem(0);
         }
-    }
-
-    public ActionBarHolder getActionBarHolder() {
-        return null;
     }
 
     @Override
     protected void onDestroy() {
         NotificationManager.unregisterClient(this);
         super.onDestroy();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        //String str = AvatarBase64ImageDownloader.getImageUriFor(WhereAreYouApplication.getInstance().getCurrentMobile());
-        //WhereAreYouApplication.getInstance().getAvatarCache().displayImage(AvatarBase64ImageDownloader.getImageUriFor(WhereAreYouApplication.getInstance().getCurrentMobile()),avatar);
     }
 
     @Override
@@ -126,7 +111,7 @@ public class MainActivity extends BaseActivity implements NotificationManager.Cl
     private void selectItem(int position) {
         //if(!sliderMenu.setSelected(position)) return;
 
-        ItemsAdapter.MenuItem item = adapter.getItem(position);
+        ItemsAdapter.MenuItem item = menuAdapter.getItem(position);
         Fragment fragment;
 
         switch(item.getIconId()) {
@@ -135,7 +120,6 @@ public class MainActivity extends BaseActivity implements NotificationManager.Cl
                 break;
 
             case R.drawable.drawable_item_menu_contacts:
-                //fragment = FragmentPool.getInstance().newObject(BaseContactsFragment.class);
                 fragment = FragmentPool.getInstance().newObject(ContactsFragment.class);
                 break;
 
@@ -149,30 +133,9 @@ public class MainActivity extends BaseActivity implements NotificationManager.Cl
             default:
                 return;
         }
+
         switchFragment(fragment,false);
-
-        //actionBarHolder.enterState(item.getIconId());
-         mDrawerLayout.closeDrawer(lvLeftDrawer);
-    }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        mDrawerToggle.syncState();
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        mDrawerToggle.onConfigurationChanged(newConfig);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+        drawerLayout.closeDrawers();
     }
 
     @Override

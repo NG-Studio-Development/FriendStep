@@ -2,15 +2,14 @@ package com.ngstudio.friendstep.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.ngstudio.friendstep.R;
 import com.ngstudio.friendstep.WhereAreYouApplication;
 import com.ngstudio.friendstep.ui.fragments.MenuLoginFragment;
 import com.ngstudio.friendstep.utils.WhereAreYouAppConstants;
 import com.ngstudio.friendstep.utils.WhereAreYouAppLog;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
 
 public class LoginActivity extends BaseActivity {
 
@@ -25,7 +24,6 @@ public class LoginActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
-        Log.d("LOGIN_ACTIVITY", "LOG");
         checkPlayServices();
 
         boolean isLoggedIn = WhereAreYouApplication.getInstance().getApplicationPreferences().getBoolean(WhereAreYouAppConstants.PREF_KEY_IS_LOGGED_IN,false);
