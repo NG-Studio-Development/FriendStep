@@ -1,23 +1,25 @@
     package com.ngstudio.friendstep.ui.adapters;
 
     import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
-import android.widget.ImageView;
-import android.widget.TextView;
+    import android.view.LayoutInflater;
+    import android.view.View;
+    import android.view.ViewGroup;
+    import android.widget.Filter;
+    import android.widget.Filterable;
+    import android.widget.ImageView;
+    import android.widget.TextView;
 
-import com.ngstudio.friendstep.R;
-import com.ngstudio.friendstep.model.entity.Contact;
-import com.ngstudio.friendstep.model.entity.NearbyContact;
-import com.ngstudio.friendstep.model.entity.step.ContactStep;
+    import com.ngstudio.friendstep.R;
+    import com.ngstudio.friendstep.WhereAreYouApplication;
+    import com.ngstudio.friendstep.components.cache.AvatarBase64ImageDownloader;
+    import com.ngstudio.friendstep.model.entity.Contact;
+    import com.ngstudio.friendstep.model.entity.NearbyContact;
+    import com.ngstudio.friendstep.model.entity.step.ContactStep;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
+    import java.util.ArrayList;
+    import java.util.Collection;
+    import java.util.Iterator;
+    import java.util.List;
 
 public class ContactsAdapter extends BaseArrayAdapter<ContactStep> implements Filterable{
 
@@ -53,7 +55,7 @@ public class ContactsAdapter extends BaseArrayAdapter<ContactStep> implements Fi
 
         ContactStep contact = getItem(position);
 
-        //WhereAreYouApplication.getInstance().getAvatarCache().displayImage(AvatarBase64ImageDownloader.getImageUriFor(contact.getMobilenumber()),holder.ivIcon);
+        WhereAreYouApplication.getInstance().getAvatarCache().displayImage(AvatarBase64ImageDownloader.getImageUriFor(contact.getName()),holder.ivIcon);
         holder.tvName.setText(contact.getName());
         //holder.tvMobile.setText(contact.getMobilenumber());
         return convertView;

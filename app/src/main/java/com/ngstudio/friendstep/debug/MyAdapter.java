@@ -116,7 +116,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         } else if(holder.Holderid == 0){
 
             //holder.ivAvatar.setImageResource(profile);           // Similarly we set the resources for header view
-            WhereAreYouApplication.getInstance().getAvatarCache().displayImage(AvatarBase64ImageDownloader.getImageUriFor(WhereAreYouApplication.getInstance().getCurrentMobile()),holder.ivAvatar);
+            //WhereAreYouApplication.getInstance().getAvatarCache().displayImage(AvatarBase64ImageDownloader.getImageUriFor(WhereAreYouApplication.getInstance().getCurrentMobile()),holder.ivAvatar);
+            WhereAreYouApplication.getInstance().getAvatarCache().displayImage(AvatarBase64ImageDownloader.getImageUriFor(WhereAreYouApplication.getInstance().getCurrentName()),holder.ivAvatar);
             holder.tvName.setText(name);
             holder.tvEmail.setText(email);
         }

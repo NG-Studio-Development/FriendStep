@@ -1,5 +1,6 @@
 package com.ngstudio.friendstep.ui.adapters;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import com.ngstudio.friendstep.R;
 import com.ngstudio.friendstep.WhereAreYouApplication;
 import com.ngstudio.friendstep.components.cache.AvatarBase64ImageDownloader;
+import com.ngstudio.friendstep.ui.activities.ProfileActivity;
 
 public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> {
 
@@ -22,17 +24,19 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
             new MenuItem(R.drawable.drawable_item_menu_settings, R.string.text_item_menu_settings),
             new MenuItem(R.drawable.drawable_item_menu_about, R.string.text_item_menu_about) };
 
+    private Context context;
     private String name;
     private String email;
 
     OnItemClickListener onItemClickListener;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        int Holderid;
+        int holderId;
 
         TextView textView;
         ImageView imageView;
         ImageView ivAvatar;
+        //CircleImageView ivAvatar;
         TextView tvName;
         TextView tvEmail;
 
@@ -42,22 +46,23 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
             if (ViewType == TYPE_ITEM) {
                 textView = (TextView) itemView.findViewById(R.id.tvItem);
                 imageView = (ImageView) itemView.findViewById(R.id.ivIcon);
-                Holderid = 1;
+                holderId = 1;
             } else {
                 tvName = (TextView) itemView.findViewById(R.id.name);
                 tvEmail = (TextView) itemView.findViewById(R.id.email);
                 ivAvatar = (ImageView) itemView.findViewById(R.id.ivAvatar);
-                Holderid = 0;
+                holderId = 0;
             }
         }
     }
 
-    public ItemsAdapter(String name, String email, OnItemClickListener onItemClickListener) {
-        this(name, email);
+    public ItemsAdapter(Context context, String name, String email, OnItemClickListener onItemClickListener) {
+        this(context, name, email);
         this.onItemClickListener = onItemClickListener;
     }
 
-    public ItemsAdapter(String name, String email) {
+    public ItemsAdapter(Context context, String name, String email) {
+        this.context = context;
         this.name = name;
         this.email = email;
     }
@@ -90,12 +95,18 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(ItemsAdapter.ViewHolder holder, int position) {
 
-        if (holder.Holderid == 1) {
+        if (holder.holderId == 1) {
             holder.textView.setText(sideMenuItems[position - 1].textResourceId);
             holder.imageView.setImageResource(sideMenuItems[position - 1].iconId);
-        } else if(holder.Holderid == 0){
+        } else if(holder.holderId == 0){
             WhereAreYouApplication.getInstance()
-                    .getAvatarCache().displayImage(AvatarBase64ImageDownloader.getImageUriFor(WhereAreYouApplication.getInstance().getCurrentMobile()),holder.ivAvatar);
+                    .getAvatarCache().displayImage(AvatarBase64ImageDownloader.getImageUriFor(WhereAreYouApplication.getInstance().getCurrentName()),holder.ivAvatar);
+            holder.ivAvatar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ProfileActivity.startProfileActivity(context, null);
+                }
+            });
             holder.tvName.setText(name);
             holder.tvEmail.setText(email);
         }

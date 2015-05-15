@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.maps.model.Marker;
 import com.ngstudio.friendstep.R;
 import com.ngstudio.friendstep.ui.activities.BaseActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -62,14 +63,14 @@ public abstract class BaseMapFragment<ActivityClass extends BaseActivity> extend
 
     public GoogleMap getMap() { return map; }
 
-    protected void updateLocations(LatLng latLng, String title, String text) {
+    protected Marker updateLocations(LatLng latLng, String title, String text) {
         minLat = countMarker>0?Math.min(latLng.latitude,minLat) : latLng.latitude;
         minLong = countMarker>0?Math.min(latLng.longitude,minLong) : latLng.longitude;
         maxLat = countMarker>0?Math.max(latLng.latitude, maxLat) : latLng.latitude;
         maxLong = countMarker>0?Math.max(latLng.longitude, maxLong) : latLng.longitude;
         countMarker++;
 
-        map.addMarker(new MarkerOptions()
+        return map.addMarker(new MarkerOptions()
                 .position(latLng)
                 .title(title)
                 .snippet(text));

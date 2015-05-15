@@ -59,3 +59,4 @@ public class NearbyContact {
         this.loc_time = loc_time;
     }
 }
+

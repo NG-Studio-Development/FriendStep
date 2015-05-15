@@ -184,7 +184,7 @@ public class WhereAreYouApplication extends Application {
         return userId;
     }
 
-    private String currentMobile = "380955841708";
+    /*private String currentMobile = "380955841708";
     //private String currentMobile = "987654321";
 
     public String getCurrentMobile() {
@@ -193,6 +193,16 @@ public class WhereAreYouApplication extends Application {
 
     public void setCurrentMobile(String currentMobile) {
         this.currentMobile = currentMobile;
+    } */
+
+    private String currentName;
+
+    public String getCurrentName() {
+        return this.currentName;
+    }
+
+    public void setCurrentName(String currentName) {
+        this.currentName = currentName;
     }
 
     private void initParams() {
@@ -398,11 +408,14 @@ public class WhereAreYouApplication extends Application {
     }
 
     public File getCurrentAvatarFile() {
-        return getAvatarFile(currentMobile);
+        //return getAvatarFile(currentMobile);
+        return getAvatarFile(currentName);
     }
 
     public Bitmap getCurrentUserAvatar() {
-        return getAvatar(currentMobile);
+
+        //return getAvatar(currentMobile);
+        return getAvatar(currentName);
     }
 
     public static String getPrefString(String key, String def) {

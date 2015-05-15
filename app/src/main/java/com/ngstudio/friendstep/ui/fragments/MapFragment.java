@@ -9,51 +9,66 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.alexutils.helpers.BitmapUtils;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.google.i18n.phonenumbers.NumberParseException;
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
+import com.google.i18n.phonenumbers.Phonenumber;
 import com.ngstudio.friendstep.FragmentPool;
 import com.ngstudio.friendstep.R;
 import com.ngstudio.friendstep.WhereAreYouApplication;
 import com.ngstudio.friendstep.components.CustomLocationManager;
 import com.ngstudio.friendstep.components.NotificationManager;
+import com.ngstudio.friendstep.components.cache.AvatarBase64ImageDownloader;
 import com.ngstudio.friendstep.model.Callback;
 import com.ngstudio.friendstep.model.connectivity.BaseResponseCallback;
 import com.ngstudio.friendstep.model.connectivity.HttpServer;
-import com.ngstudio.friendstep.model.connectivity.requests.BaseContactRequest;
-import com.ngstudio.friendstep.model.entity.NearbyContact;
+import com.ngstudio.friendstep.model.connectivity.requests.stepserver.ContactRequestStepServer;
+import com.ngstudio.friendstep.model.entity.step.ContactStep;
+import com.ngstudio.friendstep.ui.activities.ChatActivity;
 import com.ngstudio.friendstep.ui.activities.MainActivity;
 import com.ngstudio.friendstep.ui.dialogs.AlertDialogBase;
 import com.ngstudio.friendstep.utils.CommonUtils;
 import com.ngstudio.friendstep.utils.ContactsHelper;
 import com.ngstudio.friendstep.utils.ReverseGeoLocation;
 import com.ngstudio.friendstep.utils.WhereAreYouAppConstants;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.google.i18n.phonenumbers.NumberParseException;
-import com.google.i18n.phonenumbers.PhoneNumberUtil;
-import com.google.i18n.phonenumbers.Phonenumber;
 
 import org.jetbrains.annotations.NotNull;
+
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MapFragment extends BaseMapFragment<MainActivity> implements LocationListener,NotificationManager.Client {
 
+    //private final float START_ZOOM = 16.0f;
     private final float START_ZOOM = 16.0f;
     private final String SEND_LOCATION_RESULT_OK = "Location Sent";
     private final String TEMPLATE_RESULT_REQUEST = "[{\"name\":";
 
     private ImageButton ibButtonSendLocation;
     private FragmentPool fragmentPool = FragmentPool.getInstance();
+
+    private Map<Marker, ContactStep> markerContact;
 
 
     @Override
@@ -65,6 +80,7 @@ public class MapFragment extends BaseMapFragment<MainActivity> implements Locati
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        markerContact = new HashMap<>();
         /* getHostActivity().getActionBarHolder().setMenuItemClickListener(R.id.ivRefresh, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,11 +95,14 @@ public class MapFragment extends BaseMapFragment<MainActivity> implements Locati
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         fragmentPool.popFragment(MapFragment.class);
+
+        setHasOptionsMenu(true);
         return super.onCreateView(inflater,container,savedInstanceState);
     }
 
     public void findChildViews(@NotNull View view) {
         NotificationManager.registerClient(this);
+
         ibButtonSendLocation = (ImageButton) view.findViewById(R.id.ibButtonSendLocation);
         ibButtonSendLocation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,6 +112,35 @@ public class MapFragment extends BaseMapFragment<MainActivity> implements Locati
                     showDialogSendLocation(inflater.inflate(R.layout.view_content_dialog_location, null),CustomLocationManager.getInstance().getCurrentLocation());
                 else
                     Toast.makeText(getActivity(), R.string.no_internet_connection, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        getMap().setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                ContactStep contactStep = markerContact.get(marker);
+                ChatActivity.startChatActivity(getHostActivity(), contactStep);
+            }
+        });
+
+        getMap().setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+            @Override
+            public View getInfoWindow(Marker marker) {
+                return null;
+            }
+
+            @Override
+            public View getInfoContents(Marker marker) {
+                View markerContentView = getHostActivity().getLayoutInflater().inflate(R.layout.item_marker_contact, null);
+                ImageView ivAvatar = (ImageView) markerContentView.findViewById(R.id.ivAvatar);
+                TextView tvName = (TextView) markerContentView.findViewById(R.id.tvContactsName);
+
+                ContactStep currentContact = markerContact.get(marker);
+                tvName.setText(currentContact.getName());
+                WhereAreYouApplication.getInstance().getAvatarCache().displayImage(AvatarBase64ImageDownloader.getImageUriFor(currentContact.getName()),ivAvatar);
+
+                return markerContentView;
             }
         });
     }
@@ -113,7 +161,13 @@ public class MapFragment extends BaseMapFragment<MainActivity> implements Locati
         changingCameraPosition(latLng);
         updateLocations(latLng,getString(R.string.title_map_position),getString(R.string.text_map_position));
         zoomIn(latLng,START_ZOOM);
+        queryNearbyContacts();
+        sendToServerUserLocation();
         return true;
+    }
+
+    private void sendToServerUserLocation() {
+        // *** Send to server user latitude and longitude *** //
     }
 
     @Override
@@ -229,7 +283,7 @@ public class MapFragment extends BaseMapFragment<MainActivity> implements Locati
         Location location = getLastKnownLocation();
         LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
         getHostActivity().showProgressDialog();
-        ContactsHelper.getInstance().queryCreateSendLocation(latLng,WhereAreYouApplication.getInstance().getCurrentMobile(),new BaseResponseCallback<String>() {
+        ContactsHelper.getInstance().queryCreateSendLocation(latLng,WhereAreYouApplication.getInstance().getCurrentName(),new BaseResponseCallback<String>() {
             @Override
             public void onSuccess(String result) {
                 if (result.contains(SEND_LOCATION_RESULT_OK))
@@ -256,14 +310,16 @@ public class MapFragment extends BaseMapFragment<MainActivity> implements Locati
         getHostActivity().showProgressDialog();
 
         Location location = CustomLocationManager.getInstance().getCurrentLocation();
-        BaseContactRequest getContacts = BaseContactRequest.createGetNearbyContactsRequest(WhereAreYouApplication.getInstance().getUuid(), location.getLatitude(), location.getLongitude());
+        //BaseContactRequest getContacts = BaseContactRequest.createGetNearbyContactsRequest(WhereAreYouApplication.getInstance().getUuid(), location.getLatitude(), location.getLongitude());
+        ContactRequestStepServer getContacts = ContactRequestStepServer.requestGetNearbyContacts();
+
         HttpServer.submitToServer(getContacts, new BaseResponseCallback<String>() {
             @Override
             public void onSuccess(String result) {
 
                 //Test json array
                 //result = "[{\"name\":\"testp-hone5\",\"latitude\":\"53.4839550\",\"longitude\":\"-2.2567090\",\"dist\":\"0\",\"loc_time\":\"1395752394\",\"mobilenumber\":\"447582178798\"}]";
-                if (result != null && result.contains(TEMPLATE_RESULT_REQUEST)) {
+                if (result != null /*&& result.contains(TEMPLATE_RESULT_REQUEST)*/) {
                     NotificationManager.notifyClients(WhereAreYouAppConstants.NOTIFICATION_CONTACTS_NEARBY, result );
                 } else {
                     Toast.makeText(getActivity(), R.string.toast_location_is_not_available, Toast.LENGTH_SHORT).show();
@@ -280,6 +336,30 @@ public class MapFragment extends BaseMapFragment<MainActivity> implements Locati
     }
 
 
+    private void actionQueryNearbyContact() {
+        if ( !hasConnection(getActivity()) )
+            Toast.makeText(getActivity(), R.string.no_internet_connection, Toast.LENGTH_SHORT).show();
+        else
+            queryNearbyContacts();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.main, menu);
+        menu.findItem(R.id.actionRefresh).setVisible(true);
+        super.onCreateOptionsMenu(menu,inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.actionRefresh:
+                actionQueryNearbyContact();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     @Override
     public void handleNotificationMessage(int what, int arg1, int arg2, Object obj) {
@@ -291,13 +371,19 @@ public class MapFragment extends BaseMapFragment<MainActivity> implements Locati
 
             Gson gson = new Gson();
             try {
-                List<NearbyContact> nearbyList = gson.fromJson(result, new TypeToken<List<NearbyContact>>() {
+                List<ContactStep> nearbyList = gson.fromJson(result, new TypeToken<List<ContactStep>>() {
                 }.getType());
 
-                for (NearbyContact nearbyContact : nearbyList) {
-                    updateLocations(new LatLng(nearbyContact.getLatitude(), nearbyContact.getLongitude()),
+                for (ContactStep nearbyContact : nearbyList) {
+                    /*updateLocations(new LatLng(nearbyContact.getLatitude(), nearbyContact.getLongitude()),
                             nearbyContact.getName(),
-                            nearbyContact.getMobilenumber());
+                            nearbyContact.getMobilenumber());*/
+
+                    Marker marker = updateLocations(new LatLng(nearbyContact.getLatitude(), nearbyContact.getLongitude()),
+                            nearbyContact.getName(),
+                            "Testing MOBILE");
+
+                    markerContact.put(marker, nearbyContact);
                 }
                 calibrateCamera();
 

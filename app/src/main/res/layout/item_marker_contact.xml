@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/blue_a">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ivAvatar"
+            android:src="@drawable/ic_launcher"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/tvContactsName"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/ivAvatar"
+            android:layout_toEndOf="@+id/ivAvatar" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/tvCheckinTime"
+            android:layout_below="@+id/tvContactsName"
+            android:layout_toRightOf="@+id/ivAvatar"
+            android:layout_toEndOf="@+id/ivAvatar" />
+    </RelativeLayout>
+</LinearLayout>

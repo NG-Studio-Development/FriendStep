@@ -31,7 +31,7 @@ public class LoginActivity extends BaseActivity {
         if (savedInstanceState == null && !isLoggedIn) {
             addFragment(new MenuLoginFragment(),false);
         } else if(isLoggedIn) {
-            WhereAreYouApplication.getInstance().setCurrentMobile(WhereAreYouApplication.getPrefString(WhereAreYouAppConstants.PREF_KEY_EMAIL,"380955941708"));
+            WhereAreYouApplication.getInstance().setCurrentName(WhereAreYouApplication.getPrefString(WhereAreYouAppConstants.PREF_KEY_NAME,"380955941708"));
             startMainActivity();
         }
     }

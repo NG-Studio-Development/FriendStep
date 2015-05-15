@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 
 import com.ngstudio.friendstep.FragmentPool;
@@ -46,18 +47,21 @@ public class MainActivity extends BaseActivity implements NotificationManager.Cl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        float dist = distFrom(0.0f, 0.0f, 1.1f, 1.1f);
+        Log.d("DISTANTION", "Distantion = "+dist);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         rvDrawerContainer = (RecyclerView) findViewById(R.id.rwDrawerContainer);
         rvDrawerContainer.setHasFixedSize(true);
-        menuAdapter = new ItemsAdapter(name,email, new ItemsAdapter.OnItemClickListener() {
+        menuAdapter = new ItemsAdapter(this, name, email, new ItemsAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 selectItem(position);
             }
         });
-        
+
         rvDrawerContainer.setAdapter(menuAdapter);
 
         mLayoutManager = new LinearLayoutManager(this);
@@ -91,6 +95,19 @@ public class MainActivity extends BaseActivity implements NotificationManager.Cl
         if (savedInstanceState == null) {
             selectItem(0);
         }
+    }
+
+    public static float distFrom(float lat1, float lng1, float lat2, float lng2) {
+        double earthRadius = 6371000; //meters
+        double dLat = Math.toRadians(lat2-lat1);
+        double dLng = Math.toRadians(lng2-lng1);
+        double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
+                        Math.sin(dLng/2) * Math.sin(dLng/2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        float dist = (float) (earthRadius * c);
+
+        return dist;
     }
 
     @Override

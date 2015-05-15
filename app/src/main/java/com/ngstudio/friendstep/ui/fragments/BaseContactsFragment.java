@@ -42,7 +42,7 @@ public abstract class BaseContactsFragment extends BaseFragment<MainActivity> im
     ListView listView;
     ContactsAdapter adapter;
 
-    private ImageButton buttonPlus;
+    ImageButton buttonPlus;
     private FragmentPool fragmentPool = FragmentPool.getInstance();
 
     @Override

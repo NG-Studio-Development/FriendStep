@@ -18,6 +18,8 @@ public class ContactStep implements Serializable {
                   yourstatus,
                   contact_status;
 
+    double latitude, longitude;
+
     public String getName() {
         return this.name;
     }
@@ -37,6 +39,21 @@ public class ContactStep implements Serializable {
         return contact_status.equals(status);
     }
 
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
 
     @Override
     public boolean equals(Object o) {
