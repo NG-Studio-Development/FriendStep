@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -43,6 +42,7 @@ public class ChatFragment extends BaseFragment<ChatActivity> implements Notifica
     StickyListHeadersListView stickyList;
     EditText messageText;
     ImageButton sendMessage;
+    //ProgressBar pbLoadingList;
     InputMethodManager imm;
 
     public static ChatFragment instance(Bundle args) {
@@ -63,6 +63,7 @@ public class ChatFragment extends BaseFragment<ChatActivity> implements Notifica
 
         setHasOptionsMenu(true);
         getHostActivity().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getHostActivity().getSupportActionBar().setTitle(currentContact.getName());
     }
 
     @Override
@@ -74,6 +75,7 @@ public class ChatFragment extends BaseFragment<ChatActivity> implements Notifica
     public void findChildViews(@NotNull View view) {
         super.findChildViews(view);
 
+        //pbLoadingList = (ProgressBar) view.findViewById(R.id.pbLoadingList);
         messageText = (EditText) view.findViewById(R.id.etWriteMessage);
         sendMessage = (ImageButton) view.findViewById(R.id.ibSendMessage);
         imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -83,7 +85,7 @@ public class ChatFragment extends BaseFragment<ChatActivity> implements Notifica
             adapter.clear();
         adapter = new ChatAdapter(getActivity(), R.layout.item_chat, MessagesHelpers.getInstance().loadMessages(String.valueOf(currentContact.getId())));
 
-        if ( MessagesHelpers.getInstance().size(/*currentContact.getMobilenumber()*/) == 0 )
+        if ( MessagesHelpers.getInstance().size(String.valueOf(currentContact.getId())) == 0 )
             queryGetMessages(WhereAreYouApplication.getInstance().getUserId(), currentContact.getId());
         else
             postList(adapter.getCount() - 1);
@@ -103,13 +105,15 @@ public class ChatFragment extends BaseFragment<ChatActivity> implements Notifica
 
     private void sendMessage() {
         final long idUser = WhereAreYouApplication.getInstance().getUserId();
+        final String nameUser = WhereAreYouApplication.getInstance().getUserName();
+
         final long idFriend = currentContact.getId();
         String message = CommonUtils.getText(messageText);
 
         if(TextUtils.isEmpty(message))
             return;
 
-        MessagesHelpers.getInstance().queryMessagesSend(idUser,idFriend,message,new BaseResponseCallback<String>() {
+        MessagesHelpers.getInstance().queryMessagesSend(idUser,nameUser,idFriend,message,new BaseResponseCallback<String>() {
             @Override
             public void onSuccess(String result) {
                 queryGetMessages(idUser, idFriend);
@@ -129,11 +133,13 @@ public class ChatFragment extends BaseFragment<ChatActivity> implements Notifica
             @Override
             public void onSuccess(String result) {
                 NotificationManager.notifyClients(WhereAreYouAppConstants.NOTIFICATION_MESSAGES, result);
+                //pbLoadingList.setVisibility(View.INVISIBLE);
             }
 
             @Override
             public void onError(Exception error) {
                 Toast.makeText(getActivity(), R.string.toast_unknown_error, Toast.LENGTH_SHORT).show();
+                //pbLoadingList.setVisibility(View.INVISIBLE);
             }
         });
     }
@@ -157,7 +163,6 @@ public class ChatFragment extends BaseFragment<ChatActivity> implements Notifica
 
                 @Override
                 public void onSuccess(String result) {
-                    //NotificationManager.notifyClients(WhereAreYouAppConstants.NOTIFICATION_MESSAGES, result);
                     fillList(result);
                 }
 
@@ -205,11 +210,12 @@ public class ChatFragment extends BaseFragment<ChatActivity> implements Notifica
     private Message getMessageFromIntent(Intent intent) {
         String messageText = intent.getStringExtra(WhereAreYouAppConstants.SERVER_KEY_MESSAGE);
         String fromId = intent.getStringExtra(WhereAreYouAppConstants.SERVER_KEY_FROM_ID);
+        String fromName = intent.getStringExtra(WhereAreYouAppConstants.SERVER_KEY_FROM_NAME);
 
         if(messageText == null || fromId == null /*|| messTime == null*/)
             return null;
 
-        return new Message(null, messageText, null, fromId, null, -1 /*, Long.getLong(messTime)*/ );
+        return new Message(fromName, messageText, null, fromId, null, -1 /*, Long.getLong(messTime)*/ );
     }
 
     @Override
@@ -221,7 +227,6 @@ public class ChatFragment extends BaseFragment<ChatActivity> implements Notifica
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Log.d("ACTION_BAR_CLICK", "Is clicked");
 
         switch (item.getItemId()) {
             case android.R.id.home:

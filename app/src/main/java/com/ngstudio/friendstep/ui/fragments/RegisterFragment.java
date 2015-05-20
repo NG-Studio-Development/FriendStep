@@ -167,8 +167,9 @@ public class RegisterFragment extends BaseFragment<LoginActivity> {
     }
 
     private void signInListener(String name, String pass) {
-        RegisterRequestStepServer request = RegisterRequestStepServer.requestSignIn(name, pass);
+        registerInBackground(name,null,pass);
 
+        /*RegisterRequestStepServer request = RegisterRequestStepServer.requestSignIn(name, pass);
         HttpServer.submitToServer(request, new BaseResponseCallback<String>() {
             @Override
             public void onSuccess(String result) {
@@ -178,7 +179,7 @@ public class RegisterFragment extends BaseFragment<LoginActivity> {
 
             @Override
             public void onError(Exception error) {}
-        });
+        });*/
 
     }
 
@@ -188,23 +189,33 @@ public class RegisterFragment extends BaseFragment<LoginActivity> {
             @Override
             protected String doInBackground(Void... params) {
                 //gcm = GoogleCloudMessaging.getInstance(getHostActivity());
-                String result = null;
+                //String result = null;
                 try {
                     if (gcm == null)
                         gcm = GoogleCloudMessaging.getInstance(context);
+
+                    gcm.unregister();
                     regId = gcm.register(SENDER_ID);
-                    result = sendRegistrationIdToBackend(name,email,pass);
+                    //result = sendRegistrationIdToBackend(name,email,pass);
                     storeRegistrationId(context, regId);
                 } catch (IOException ex) {
-                    result = "Error :" + ex.getMessage();
+                    return "Error :" + ex.getMessage();
                 }
-                return result;
+                sendRegistrationIdToBackend(name, email, pass, regId);
+                return regId;
             }
 
             @Override
             protected void onPostExecute(String result) {
-                Toast.makeText(context,"Registration is successfull", Toast.LENGTH_LONG).show();
-                saveEnterDataFromJson(result);
+
+                if (result.contains("Error")) {
+                    Log.d("REGISTER API",result);
+                    return;
+                }
+
+                Toast.makeText(context,"REGISTRATION IN BACKGROUND IS SUCCESSFULL !!!", Toast.LENGTH_LONG).show();
+                //sendRegistrationIdToBackend(name,email,pass,result);
+                //saveEnterDataFromJson(result);
             }
        }.execute(null, null, null);
     }
@@ -256,7 +267,17 @@ public class RegisterFragment extends BaseFragment<LoginActivity> {
         }
     }
 
-    private String sendRegistrationIdToBackend(final String name, final String email, final String pass) {
+    private void /*String*/ sendRegistrationIdToBackend(String name, String email, String pass, String regId) {
+
+        if (startType == TYPE_REGISTER)
+            regNewUserDEBUG(name, email, pass);
+        else if(startType == TYPE_SIGN_IN)
+            signInUserDEBUG(name, pass, regId);
+        //return result;
+    }
+
+
+    private void regNewUserDEBUG(String name, String email, String pass) {
         URI url = null;
         String result = null;
         try {
@@ -269,14 +290,35 @@ public class RegisterFragment extends BaseFragment<LoginActivity> {
         request.setURI(url);
         try {
             result = getQueryResult(httpclient.execute(request));
-            Log.d("REGISTRATION_BACKEND","Response = "+result);
+            if(!result.contains("Error")) {
+                saveEnterDataFromJson(result);
+            }
+
+                Log.d("REGISTRATION_BACKEND","Response = "+result);
         } catch (ClientProtocolException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
-        return result;
+
+    private void signInUserDEBUG(String name, String pass, String regId) {
+
+        RegisterRequestStepServer request = RegisterRequestStepServer.requestSignIn(name, pass, regId);
+        HttpServer.submitToServer(request, new BaseResponseCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                Log.d("RESULT","Result = "+result);
+                saveEnterDataFromJson(result);
+            }
+
+            @Override
+            public void onError(Exception error) {
+                error.printStackTrace();
+                Log.d("RESULT","Result = "+error.getMessage());
+            }
+        });
     }
 
     private String getQueryResult(HttpResponse response) throws IOException{

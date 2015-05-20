@@ -10,8 +10,8 @@ public class MessageRequestStepServer extends BaseRequest {
         super(WhereAreYouAppConstants.STEP_SERVER_URL,method, RequestType.GET);
     }
 
-    public static MessageRequestStepServer createSendMessageRequest(long idUser, long idFriend, String message) {
-        return new MessageRequestStepServer("send_message.php?userId="+idUser+"&friendId="+idFriend+"&message="+message+"&tempValue=0");
+    public static MessageRequestStepServer createSendMessageRequest(long idUser, String nameUser, long idFriend, String message) {
+        return new MessageRequestStepServer("send_message.php?userId="+idUser+"&nameUser="+nameUser+"&friendId="+idFriend+"&message="+message+"&tempValue=0");
     }
 
     public static MessageRequestStepServer createGetMessagesRequest(long idUser, long idFriend) {

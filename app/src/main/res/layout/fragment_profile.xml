@@ -56,7 +56,7 @@
             android:layout_centerVertical="true">
 
             <TextView
-                android:id="@+id/tvContactMobile"
+                android:id="@+id/tvContactName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
@@ -65,7 +65,7 @@
                 android:text="+380955841708"/>
 
             <TextView
-                android:id="@+id/tvContactStatus"
+                android:id="@+id/tvContactEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 

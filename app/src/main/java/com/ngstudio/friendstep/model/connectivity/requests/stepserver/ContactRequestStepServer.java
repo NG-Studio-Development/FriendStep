@@ -1,5 +1,6 @@
 package com.ngstudio.friendstep.model.connectivity.requests.stepserver;
 
+import android.location.Location;
 import android.util.Log;
 
 import com.ngstudio.friendstep.WhereAreYouApplication;
@@ -26,11 +27,11 @@ public class ContactRequestStepServer extends BaseRequest {
         return addContact(userId, friendName, 1);
     }
 
-    public static ContactRequestStepServer requestGetNearbyContacts(/*long userId, String friendName*/) {
+    public static ContactRequestStepServer requestGetNearbyContacts(Location location, int distentionFind /*long userId, String friendName*/) {
         //return addContact(userId, friendName, 1);
         //?user_id=70&user_lat=47.199702&user_long=39.626338&distance_find=50
-        Log.d("QUERY_NERBY_USER_ID", "Id = " + WhereAreYouApplication.getInstance().getUserId());
-        return new ContactRequestStepServer("get_location_contact.php?user_id="+WhereAreYouApplication.getInstance().getUserId()+"&user_lat=47.199702&user_long=39.626338&distance_find=1000&temp=22",-1,"");
+        Log.d("QUERY_NERBY_USER", "Distantion  = " + distentionFind);
+        return new ContactRequestStepServer("get_location_contact.php?user_id="+WhereAreYouApplication.getInstance().getUserId()+"&user_lat="+location.getLatitude()+"&user_long="+location.getLongitude()+"&distance_find="+distentionFind +"&temp=22",-1,"");
     }
 
     private static ContactRequestStepServer addContact(long userId, String friendName, int action) {

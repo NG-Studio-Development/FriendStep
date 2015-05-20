@@ -46,5 +46,6 @@ public class WhereAreYouAppConstants {
 
     public static String SERVER_KEY_MESSAGE = "price";
     public static String SERVER_KEY_FROM_ID = "from_id";
+    public static final String SERVER_KEY_FROM_NAME = "from_name";
     public static String SERVER_KEY_MESS_TIME = "mess_time";
 }

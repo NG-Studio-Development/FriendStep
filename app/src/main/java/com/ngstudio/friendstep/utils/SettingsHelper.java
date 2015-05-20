@@ -5,9 +5,13 @@ import android.content.SharedPreferences;
 import com.ngstudio.friendstep.CodesMap;
 import com.ngstudio.friendstep.WhereAreYouApplication;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class SettingsHelper {
 
     //private static SettingsHelper instance;
+    private static Map<Integer,Integer> distentionsMap;
     public static SettingsHelper getInstance() {
         return SettingsHolder.HOLDER_INSTANCE;
     }
@@ -17,8 +21,14 @@ public class SettingsHelper {
     }
 
     private SettingsHelper() {
-        settings = WhereAreYouApplication.getInstance().getApplicationPreferences();//PreferenceManager.getDefaultSharedPreferences(activity);
-        edit = WhereAreYouApplication.getInstance().getApplicationPreferencesEditor();//settings.edit();
+        distentionsMap = new HashMap<>();
+        distentionsMap.put(DISTANCE_50,   50);
+        distentionsMap.put(DISTANCE_100,  100);
+        distentionsMap.put(DISTANCE_500,  500);
+        distentionsMap.put(DISTANCE_1000, 1000);
+
+        settings = WhereAreYouApplication.getInstance().getApplicationPreferences();   //PreferenceManager.getDefaultSharedPreferences(activity);
+        edit = WhereAreYouApplication.getInstance().getApplicationPreferencesEditor(); //settings.edit();
     }
 
     public static final int DISTANCE_50 = 0;
@@ -46,11 +56,11 @@ public class SettingsHelper {
         edit.putBoolean(SEND_LOCATION, stateSendLocation).commit();
     }
 
-    public int getDistance() {
+    public int getDistanceKey() {
         return settings.getInt(DISTANCE, defaultDistance);
     }
 
-    public void putDistance(int distanceState) {
+    public void putDistanceKey(int distanceState) {
         edit.putInt(DISTANCE, distanceState).commit();
     }
 
@@ -60,5 +70,9 @@ public class SettingsHelper {
 
     public void setLanguage(String language) {
         edit.putString(LANGUAGE, language).commit();
+    }
+
+    public  int getDistance() {
+        return distentionsMap.get(getDistanceKey());
     }
 }

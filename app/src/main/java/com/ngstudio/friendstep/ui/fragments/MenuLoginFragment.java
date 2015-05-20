@@ -12,26 +12,6 @@ import com.ngstudio.friendstep.ui.activities.LoginActivity;
 public class MenuLoginFragment extends BaseFragment<LoginActivity> implements View.OnClickListener {
 
 
-    /*public static MenuLoginFragment createSendMessageRequest() {
-        MenuLoginFragment fragment = new MenuLoginFragment();
-        Bundle args = new Bundle();
-
-        fragment.setArguments(args);
-        return fragment;
-    }*/
-
-
-
-    /*@Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-
-        }
-    }*/
-
-
-
     @Override
     public int getLayoutResID() {
         return R.layout.fragment_menu_login;

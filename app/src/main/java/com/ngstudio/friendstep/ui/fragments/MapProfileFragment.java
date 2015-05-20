@@ -59,5 +59,6 @@ public class MapProfileFragment  extends BaseMapFragment<ProfileActivity> implem
 
     @Override
     public void onProviderDisabled(String provider) {}
+
 }
 

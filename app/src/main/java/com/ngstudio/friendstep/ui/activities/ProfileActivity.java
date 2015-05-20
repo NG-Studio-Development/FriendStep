@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.ngstudio.friendstep.R;
@@ -37,10 +38,12 @@ public class ProfileActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         if(savedInstanceState == null) {
             addFragment(ProfileFragment.class,getIntent().getExtras(),false);
         }
-
     }
 
     public void initActionBar(boolean isMyProfile) {
@@ -65,12 +68,12 @@ public class ProfileActivity extends BaseActivity {
         return actionBarHolder;
     }
 
-    @Override
+    /*@Override
     public void onBackPressed() {
         if(actionBarHolder.collapseSearchField(actionBarHolder.findViewById(R.id.ivEdit))) {
             return;
         }
 
         super.onBackPressed();
-    }
+    }*/
 }

@@ -16,6 +16,7 @@ import com.ngstudio.friendstep.model.connectivity.requests.stepserver.ContactReq
 import com.ngstudio.friendstep.model.entity.NearbyContact;
 import com.ngstudio.friendstep.model.entity.step.ContactStep;
 import com.ngstudio.friendstep.ui.activities.ChatActivity;
+import com.ngstudio.friendstep.utils.SettingsHelper;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -35,10 +36,12 @@ public class ContactsFragment extends BaseContactsFragment implements Notificati
             }
         });
 
+        getHostActivity().getSupportActionBar().setTitle(getString(R.string.title_screen_contact));
+        tvEmptyList.setText(getString(R.string.text_empty_contacts_list));
         buttonPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                queryNearbyContacts();
+                //queryNearbyContacts();
             }
         });
     }
@@ -47,7 +50,7 @@ public class ContactsFragment extends BaseContactsFragment implements Notificati
     public void queryNearbyContacts() {
         Location currentLocation = CustomLocationManager.getInstance().getCurrentLocation();
         //BaseContactRequest getContacts = BaseContactRequest.createGetNearbyContactsRequest(WhereAreYouApplication.getInstance().getUuid(), currentLocation.getLatitude(), currentLocation.getLongitude());
-        ContactRequestStepServer getContacts = ContactRequestStepServer.requestGetNearbyContacts();
+        ContactRequestStepServer getContacts = ContactRequestStepServer.requestGetNearbyContacts(currentLocation, SettingsHelper.getInstance().getDistanceKey());
         HttpServer.submitToServer(getContacts, new BaseResponseCallback<String>() {
             @Override
             public void onSuccess(String result) {

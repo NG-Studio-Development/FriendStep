@@ -50,14 +50,14 @@ public class MessagesHelpers {
         }
     }
 
-    public List<Message> loadMessages(String mobile) {
+    public List<Message> loadMessages(String contactId) {
         if (messageList.size() == 0)
             loadMessages();
 
-        if (!messageMap.containsKey(mobile))
-            messageMap.put(mobile, new ArrayList<Message>());
+        if (!messageMap.containsKey(contactId))
+            messageMap.put(contactId, new ArrayList<Message>());
 
-        return messageMap.get(mobile);
+        return messageMap.get(contactId);
     }
 
     private List<Message> loadMessages() {
@@ -100,9 +100,9 @@ public class MessagesHelpers {
         }
     }
 
-    public int size(/*String mobile*/) {
-        //return messageMap.get(mobile).size();
-        return -1;
+    public int size(String contactId) {
+        return messageMap.get(contactId).size();
+        //return -1;
     }
 
     public boolean saveMessages(List<Message> messages) {
@@ -119,8 +119,8 @@ public class MessagesHelpers {
         HttpServer.submitToServer(sendMessageRequest,callback);
     } */
 
-    public void queryMessagesSend(long idUser, long idFriend, String message, BaseResponseCallback<String> callback) {
-        MessageRequestStepServer messageRequestStepServer = MessageRequestStepServer.createSendMessageRequest(idUser, idFriend, message);
+    public void queryMessagesSend(long idUser, String nameUser, long idFriend, String message, BaseResponseCallback<String> callback) {
+        MessageRequestStepServer messageRequestStepServer = MessageRequestStepServer.createSendMessageRequest(idUser, nameUser, idFriend, message);
         HttpServer.submitToServer(messageRequestStepServer,callback);
     }
 

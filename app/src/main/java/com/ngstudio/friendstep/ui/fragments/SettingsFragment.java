@@ -18,12 +18,16 @@ import android.widget.ToggleButton;
 import com.ngstudio.friendstep.CodesMap;
 import com.ngstudio.friendstep.FragmentPool;
 import com.ngstudio.friendstep.R;
+import com.ngstudio.friendstep.WhereAreYouApplication;
 import com.ngstudio.friendstep.components.CustomLocationManager;
 import com.ngstudio.friendstep.components.GeoService;
-import com.ngstudio.friendstep.ui.activities.LoginActivity;
+import com.ngstudio.friendstep.model.connectivity.HttpServer;
+import com.ngstudio.friendstep.model.connectivity.requests.stepserver.InsertGeoCordsRequestStepServer;
+import com.ngstudio.friendstep.ui.activities.MainActivity;
 import com.ngstudio.friendstep.ui.activities.ProfileActivity;
 import com.ngstudio.friendstep.utils.SettingsHelper;
 
+import org.apache.http.HttpException;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -31,7 +35,7 @@ import java.util.Map;
 
 
 
-public class SettingsFragment extends BaseFragment<LoginActivity> {
+public class SettingsFragment extends BaseFragment<MainActivity> {
 
     @Override
     public int getLayoutResID() {
@@ -51,7 +55,6 @@ public class SettingsFragment extends BaseFragment<LoginActivity> {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         fragmentPool.popFragment(MapFragment.class);
-
         return super.onCreateView(inflater,container,savedInstanceState);
     }
 
@@ -78,12 +81,14 @@ public class SettingsFragment extends BaseFragment<LoginActivity> {
             @Override
             public void onNothingSelected(AdapterView<?> parent) { /* Optional */ }
         });
+
         tbSendLocation = (ToggleButton) view.findViewById(R.id.tbSwitchSendLocation);
         tbSendLocation.setChecked(settings.getStateSendLocation());
         tbSendLocation.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 settings.putStateSendLocation(isChecked);
+                sendStateShowLocationToServer(isChecked);
                 if(isChecked) {
                     getActivity().startService(new Intent(getActivity(), GeoService.class));
                 } else {
@@ -106,6 +111,7 @@ public class SettingsFragment extends BaseFragment<LoginActivity> {
         tbSwitchAlertFriend.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
                 if (isChecked) {
                     rlAlertDistancePanel.setVisibility(View.VISIBLE);
                 } else {
@@ -116,6 +122,7 @@ public class SettingsFragment extends BaseFragment<LoginActivity> {
 
         tvCounter = (TextView) view.findViewById(R.id.tvCounter);
         sbAlertDistance = (SeekBar) view.findViewById(R.id.sbAlertDistance);
+
         sbAlertDistance.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -136,7 +143,7 @@ public class SettingsFragment extends BaseFragment<LoginActivity> {
                         break;
                 }
                 tvCounter.setText(distance+getString(R.string.inscription_m));
-                settings.putDistance(progress);
+                settings.putDistanceKey(progress);
             }
 
             @Override
@@ -148,7 +155,8 @@ public class SettingsFragment extends BaseFragment<LoginActivity> {
             public void onStopTrackingTouch(SeekBar seekBar) {}
         });
 
-        sbAlertDistance.setProgress(settings.getDistance());
+        sbAlertDistance.setProgress(settings.getDistanceKey());
+        tvCounter.setText(SettingsHelper.getInstance().getDistance()+getString(R.string.inscription_m));
         profileSettings = (LinearLayout) view.findViewById(R.id.lnProfileSettings);
         profileSettings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,6 +164,24 @@ public class SettingsFragment extends BaseFragment<LoginActivity> {
                 ProfileActivity.startProfileActivity(getActivity(),null);
             }
         });
+
+        getHostActivity().getSupportActionBar().setTitle(getString(R.string.title_screen_settings));
+
+    }
+
+    private void sendStateShowLocationToServer(boolean state) {
+        final InsertGeoCordsRequestStepServer request  = InsertGeoCordsRequestStepServer
+                .requestChangeAccessibleShowState( WhereAreYouApplication.getInstance().getUserId(),
+                        state);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    HttpServer.sendRequestToServer(request);
+                } catch (HttpException ex) {ex.printStackTrace();}
+            }
+        }).start();
     }
 
     @Override

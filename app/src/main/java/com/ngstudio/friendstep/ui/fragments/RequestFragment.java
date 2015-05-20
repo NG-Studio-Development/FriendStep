@@ -20,6 +20,8 @@ public class RequestFragment extends BaseContactsFragment implements Notificatio
     public void findChildViews(@NotNull View view) {
         super.findChildViews(view);
 
+        buttonPlus.setVisibility(View.INVISIBLE);
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -40,6 +42,9 @@ public class RequestFragment extends BaseContactsFragment implements Notificatio
                 });
             }
         });
+
+        tvEmptyList.setText(getString(R.string.text_empty_request_list));
+        getHostActivity().getSupportActionBar().setTitle(getString(R.string.title_screen_request));
     }
 
     @Override

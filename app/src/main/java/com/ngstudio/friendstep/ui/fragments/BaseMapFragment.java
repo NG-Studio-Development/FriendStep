@@ -21,7 +21,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
 
-public abstract class BaseMapFragment<ActivityClass extends BaseActivity> extends BaseFragment<ActivityClass> {
+public abstract class BaseMapFragment<ActivityClass extends BaseActivity> extends BaseFragment<ActivityClass> implements GoogleMap.OnMapLoadedCallback {
 
     private MapView mapView;
     private GoogleMap map;
@@ -61,6 +61,9 @@ public abstract class BaseMapFragment<ActivityClass extends BaseActivity> extend
         super.onPause();
     }
 
+    @Override
+    public void onMapLoaded() { /* Options */ }
+
     public GoogleMap getMap() { return map; }
 
     protected Marker updateLocations(LatLng latLng, String title, String text) {
@@ -85,12 +88,21 @@ public abstract class BaseMapFragment<ActivityClass extends BaseActivity> extend
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
     }
 
-    protected void calibrateCamera() {
+    protected LatLng getOptimalCameraPosition() {
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
         builder.include(new LatLng(minLat,minLong));
         builder.include(new LatLng(maxLat,maxLong));
         LatLngBounds tmpBounds = builder.build();
-        map.moveCamera(CameraUpdateFactory.newLatLng(tmpBounds.getCenter()));
+
+        return tmpBounds.getCenter();
+    }
+
+    protected void calibrateCamera() {
+        /*(LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        builder.include(new LatLng(minLat,minLong));
+        builder.include(new LatLng(maxLat,maxLong));
+        LatLngBounds tmpBounds = builder.build();*/
+        map.moveCamera(CameraUpdateFactory.newLatLng(getOptimalCameraPosition()));
     }
 
     /*protected Location getLocation() {
@@ -98,7 +110,7 @@ public abstract class BaseMapFragment<ActivityClass extends BaseActivity> extend
     }*/
 
     protected Location getLastKnownLocation() {
-        LocationManager mLocationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        LocationManager mLocationManager = (LocationManager) getHostActivity().getSystemService(Context.LOCATION_SERVICE);
         List<String> providers = mLocationManager.getProviders(true);
         Location bestLocation = null;
         for (String provider : providers) {

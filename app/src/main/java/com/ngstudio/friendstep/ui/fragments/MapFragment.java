@@ -42,15 +42,19 @@ import com.ngstudio.friendstep.model.Callback;
 import com.ngstudio.friendstep.model.connectivity.BaseResponseCallback;
 import com.ngstudio.friendstep.model.connectivity.HttpServer;
 import com.ngstudio.friendstep.model.connectivity.requests.stepserver.ContactRequestStepServer;
+import com.ngstudio.friendstep.model.connectivity.requests.stepserver.InsertGeoCordsRequestStepServer;
 import com.ngstudio.friendstep.model.entity.step.ContactStep;
+import com.ngstudio.friendstep.ui.activities.BaseActivity;
 import com.ngstudio.friendstep.ui.activities.ChatActivity;
 import com.ngstudio.friendstep.ui.activities.MainActivity;
 import com.ngstudio.friendstep.ui.dialogs.AlertDialogBase;
 import com.ngstudio.friendstep.utils.CommonUtils;
 import com.ngstudio.friendstep.utils.ContactsHelper;
 import com.ngstudio.friendstep.utils.ReverseGeoLocation;
+import com.ngstudio.friendstep.utils.SettingsHelper;
 import com.ngstudio.friendstep.utils.WhereAreYouAppConstants;
 
+import org.apache.http.HttpException;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -60,14 +64,12 @@ import java.util.Map;
 
 public class MapFragment extends BaseMapFragment<MainActivity> implements LocationListener,NotificationManager.Client {
 
-    //private final float START_ZOOM = 16.0f;
-    private final float START_ZOOM = 16.0f;
+    private static final float START_ZOOM = 14.0f;
     private final String SEND_LOCATION_RESULT_OK = "Location Sent";
-    private final String TEMPLATE_RESULT_REQUEST = "[{\"name\":";
+
 
     private ImageButton ibButtonSendLocation;
     private FragmentPool fragmentPool = FragmentPool.getInstance();
-
     private Map<Marker, ContactStep> markerContact;
 
 
@@ -81,22 +83,11 @@ public class MapFragment extends BaseMapFragment<MainActivity> implements Locati
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         markerContact = new HashMap<>();
-        /* getHostActivity().getActionBarHolder().setMenuItemClickListener(R.id.ivRefresh, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if ( !hasConnection(getActivity()) )
-                    Toast.makeText(getActivity(), R.string.no_internet_connection, Toast.LENGTH_SHORT).show();
-                else
-                    queryNearbyContacts();
-            }
-        }); */
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         fragmentPool.popFragment(MapFragment.class);
-
-        setHasOptionsMenu(true);
         return super.onCreateView(inflater,container,savedInstanceState);
     }
 
@@ -115,12 +106,14 @@ public class MapFragment extends BaseMapFragment<MainActivity> implements Locati
             }
         });
 
+        getMap().setOnMapLoadedCallback(this);
 
         getMap().setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
                 ContactStep contactStep = markerContact.get(marker);
-                ChatActivity.startChatActivity(getHostActivity(), contactStep);
+                if (contactStep != null)
+                    ChatActivity.startChatActivity(getHostActivity(), contactStep);
             }
         });
 
@@ -136,38 +129,73 @@ public class MapFragment extends BaseMapFragment<MainActivity> implements Locati
                 ImageView ivAvatar = (ImageView) markerContentView.findViewById(R.id.ivAvatar);
                 TextView tvName = (TextView) markerContentView.findViewById(R.id.tvContactsName);
 
-                ContactStep currentContact = markerContact.get(marker);
-                tvName.setText(currentContact.getName());
-                WhereAreYouApplication.getInstance().getAvatarCache().displayImage(AvatarBase64ImageDownloader.getImageUriFor(currentContact.getName()),ivAvatar);
+                ContactStep contact = markerContact.get(marker);
+
+                tvName.setText(contact != null ? contact.getName() : "It's you");
+                WhereAreYouApplication.getInstance().getAvatarCache().displayImage(AvatarBase64ImageDownloader.getImageUriFor(contact != null ? contact.getName() : WhereAreYouApplication.getInstance().getUserName()),ivAvatar);
 
                 return markerContentView;
             }
         });
-    }
 
-    @Override
-    public void onResume() {
-        super.onResume();
+        getHostActivity().getSupportActionBar().setTitle(R.string.title_screen_map);
+
         if (!changeUserLocation())
             Toast.makeText(getActivity(), R.string.toast_impossible_to_obtain_location, Toast.LENGTH_SHORT).show();
     }
+
+
+    @Override
+    public void onMapLoaded() {
+        zoomIn(getOptimalCameraPosition(), START_ZOOM);
+    }
+
 
     private boolean changeUserLocation() {
         Location location = getLastKnownLocation();
         if (location == null)
             return false;
 
-        LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
+        /* LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
         changingCameraPosition(latLng);
-        updateLocations(latLng,getString(R.string.title_map_position),getString(R.string.text_map_position));
-        zoomIn(latLng,START_ZOOM);
-        queryNearbyContacts();
-        sendToServerUserLocation();
+        updateLocations(latLng,getString(R.string.title_map_position),getString(R.string.text_map_position)); */
+
+        setUserMarker(location);
+
+        if (nearbyList != null)
+            setListMarker(nearbyList);
+        else
+            queryNearbyContacts(getHostActivity());
+
+        sendToServerUserLocation(location);
         return true;
     }
 
-    private void sendToServerUserLocation() {
-        // *** Send to server user latitude and longitude *** //
+    private void setUserMarker(Location location) {
+        LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
+        changingCameraPosition(latLng);
+        updateLocations(latLng,getString(R.string.title_map_position),getString(R.string.text_map_position));
+    }
+
+    private void sendToServerUserLocation(Location location) {
+        /*
+         * Send to server user latitude and longitude
+         */
+
+        final InsertGeoCordsRequestStepServer request  = InsertGeoCordsRequestStepServer
+                .requestInsertGeoCoordinates( WhereAreYouApplication.getInstance().getUserId(),
+                                                                        location.getLatitude(),
+                                                                        location.getLongitude(),
+                                                                        SettingsHelper.getInstance().getStateSendLocation());
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    HttpServer.sendRequestToServer(request);
+                } catch (HttpException ex) {ex.printStackTrace();}
+            }
+        }).start();
     }
 
     @Override
@@ -178,6 +206,7 @@ public class MapFragment extends BaseMapFragment<MainActivity> implements Locati
     }
 
     public void showDialogSendLocation(View view, Location location) {
+
         final EditText etPhone = (EditText) view.findViewById(R.id.etMobile);
         Button buttonSend = (Button) view.findViewById(R.id.buttonSend);
         Button buttonCancel = (Button) view.findViewById(R.id.buttonCancel);
@@ -305,42 +334,43 @@ public class MapFragment extends BaseMapFragment<MainActivity> implements Locati
     @Override
     public void onLocationChanged(Location location) {}
 
-    public void queryNearbyContacts() {
-        //ProgressDialogBase.getInstance(getActivity()).setContent("Title","Fish fish fish").show();
-        getHostActivity().showProgressDialog();
+    public void queryNearbyContacts(final BaseActivity activity) {
+        activity.showProgressDialog();
 
-        Location location = CustomLocationManager.getInstance().getCurrentLocation();
-        //BaseContactRequest getContacts = BaseContactRequest.createGetNearbyContactsRequest(WhereAreYouApplication.getInstance().getUuid(), location.getLatitude(), location.getLongitude());
-        ContactRequestStepServer getContacts = ContactRequestStepServer.requestGetNearbyContacts();
+        ContactRequestStepServer getContacts = ContactRequestStepServer.requestGetNearbyContacts(getLastKnownLocation(), SettingsHelper.getInstance().getDistance());
 
         HttpServer.submitToServer(getContacts, new BaseResponseCallback<String>() {
             @Override
             public void onSuccess(String result) {
 
-                //Test json array
-                //result = "[{\"name\":\"testp-hone5\",\"latitude\":\"53.4839550\",\"longitude\":\"-2.2567090\",\"dist\":\"0\",\"loc_time\":\"1395752394\",\"mobilenumber\":\"447582178798\"}]";
                 if (result != null /*&& result.contains(TEMPLATE_RESULT_REQUEST)*/) {
-                    NotificationManager.notifyClients(WhereAreYouAppConstants.NOTIFICATION_CONTACTS_NEARBY, result );
+                    NotificationManager.notifyClients(WhereAreYouAppConstants.NOTIFICATION_CONTACTS_NEARBY, result);
                 } else {
-                    Toast.makeText(getActivity(), R.string.toast_location_is_not_available, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity, R.string.toast_location_is_not_available, Toast.LENGTH_SHORT).show();
                 }
-                getHostActivity().hideProgressDialog();
+
+                WhereAreYouApplication.getInstance().setFriendLoadedInMap(true);
+                activity.hideProgressDialog();
+
             }
             @Override
             public void onError(Exception error) {
-                //ProgressDialogBase.getInstance(getActivity()).cancel();
-                getHostActivity().hideProgressDialog();
-                Toast.makeText(getActivity(), R.string.toast_location_is_not_available, Toast.LENGTH_SHORT).show();
+                WhereAreYouApplication.getInstance().setFriendLoadedInMap(true);
+                activity.hideProgressDialog();
+                Toast.makeText(activity, R.string.toast_location_is_not_available, Toast.LENGTH_SHORT).show();
             }
         });
     }
 
 
     private void actionQueryNearbyContact() {
-        if ( !hasConnection(getActivity()) )
+        if ( !hasConnection(getActivity()) ) {
             Toast.makeText(getActivity(), R.string.no_internet_connection, Toast.LENGTH_SHORT).show();
-        else
-            queryNearbyContacts();
+        } else {
+            removeAllContactMarker(getLastKnownLocation());
+            queryNearbyContacts(getHostActivity());
+        }
+
     }
 
     @Override
@@ -361,6 +391,23 @@ public class MapFragment extends BaseMapFragment<MainActivity> implements Locati
         }
     }
 
+    private void setListMarker(List<ContactStep> nearbyList) {
+        MapFragment.nearbyList = nearbyList;
+
+        for (ContactStep nearbyContact : nearbyList) {
+            Marker marker = updateLocations(new LatLng(nearbyContact.getLatitude(), nearbyContact.getLongitude()),null,null);
+            markerContact.put(marker, nearbyContact);
+        }
+    }
+
+    private void removeAllContactMarker(Location location) {
+        getMap().clear();
+        markerContact.clear();
+        setUserMarker(location);
+    }
+
+    private static List<ContactStep> nearbyList;
+
     @Override
     public void handleNotificationMessage(int what, int arg1, int arg2, Object obj) {
         if(obj == null)
@@ -374,18 +421,7 @@ public class MapFragment extends BaseMapFragment<MainActivity> implements Locati
                 List<ContactStep> nearbyList = gson.fromJson(result, new TypeToken<List<ContactStep>>() {
                 }.getType());
 
-                for (ContactStep nearbyContact : nearbyList) {
-                    /*updateLocations(new LatLng(nearbyContact.getLatitude(), nearbyContact.getLongitude()),
-                            nearbyContact.getName(),
-                            nearbyContact.getMobilenumber());*/
-
-                    Marker marker = updateLocations(new LatLng(nearbyContact.getLatitude(), nearbyContact.getLongitude()),
-                            nearbyContact.getName(),
-                            "Testing MOBILE");
-
-                    markerContact.put(marker, nearbyContact);
-                }
-                calibrateCamera();
+                setListMarker(nearbyList);
 
             } catch (Exception e) {
                 e.printStackTrace();

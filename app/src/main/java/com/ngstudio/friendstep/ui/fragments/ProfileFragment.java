@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.ImageButton;
@@ -26,6 +27,7 @@ import com.google.gson.reflect.TypeToken;
 import com.ngstudio.friendstep.R;
 import com.ngstudio.friendstep.WhereAreYouApplication;
 import com.ngstudio.friendstep.components.NotificationManager;
+import com.ngstudio.friendstep.components.cache.AvatarBase64ImageDownloader;
 import com.ngstudio.friendstep.model.connectivity.BaseResponseCallback;
 import com.ngstudio.friendstep.model.connectivity.HttpServer;
 import com.ngstudio.friendstep.model.connectivity.requests.BaseAvatarRequest;
@@ -68,8 +70,9 @@ public class ProfileFragment extends BaseFragment<ProfileActivity> implements No
 
     ImageView avatar;
     TextView profileName;
-    TextView contactMobile;
-    TextView contactStatus;
+
+    TextView contactName;
+    TextView contactEmail;
     AlertDialogBase dialogSendLocation;
     ContactStep currentContact;
     ItemsAdapter adapter;
@@ -91,7 +94,9 @@ public class ProfileFragment extends BaseFragment<ProfileActivity> implements No
         //getHostActivity().initActionBar(currentContact == null);
         //getActivity().getActionBar().hide();
 
-
+        setHasOptionsMenu(true);
+        getHostActivity().getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getHostActivity().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 
@@ -118,8 +123,11 @@ public class ProfileFragment extends BaseFragment<ProfileActivity> implements No
         profileButtons = (LinearLayout) view.findViewById(R.id.lnProfileButtons);
         profileName = (TextView) view.findViewById(R.id.tvProfileName);
         contactData = (RelativeLayout) view.findViewById(R.id.rlContactData);
-        contactMobile = (TextView) view.findViewById(R.id.tvContactMobile);
-        contactStatus = (TextView) view.findViewById(R.id.tvContactStatus);
+        contactName = (TextView) view.findViewById(R.id.tvContactName);
+        contactEmail = (TextView) view.findViewById(R.id.tvContactEmail);
+
+        contactName.setText(WhereAreYouApplication.getInstance().getUserName());
+        contactEmail.setText(WhereAreYouApplication.getInstance().getUserEmail());
 
         if(currentContact != null) {
             //photoControls.setAdapter(adapter = ItemsAdapter.getProfileItemsAdapter(getActivity()));
@@ -147,8 +155,8 @@ public class ProfileFragment extends BaseFragment<ProfileActivity> implements No
             });*/
 
             contactData.setVisibility(View.VISIBLE);
-            //contactMobile.setText("+" + currentContact.getMobilenumber());
-            //contactStatus.setText(String.format(getString(R.string.text_contact_status),currentContact.getContact_status()));
+            //contactName.setText("+" + currentContact.getMobilenumber());
+            //contactEmail.setText(String.format(getString(R.string.text_contact_status),currentContact.getContact_status()));
 
             dialogSendLocation = new AlertDialogBase(getActivity());
             dialogSendLocation.setCustomView(R.layout.dialog_profile_approve_contact);
@@ -245,7 +253,7 @@ public class ProfileFragment extends BaseFragment<ProfileActivity> implements No
 
             avatarMenu.setImageResource(R.drawable.drawable_ic_camera);
             profileName.setText(R.string.text_my_profile);
-            contactData.setVisibility(View.GONE);
+            //contactData.setVisibility(View.GONE);
         }
 
         capture.setOnClickListener(new View.OnClickListener() {
@@ -288,8 +296,8 @@ public class ProfileFragment extends BaseFragment<ProfileActivity> implements No
             }
         });
 
-        /*WhereAreYouApplication.getInstance().getAvatarCache().displayImage(
-                AvatarBase64ImageDownloader.getImageUriFor(currentContact == null ? WhereAreYouApplication.getInstance().getCurrentMobile() : currentContact.getMobilenumber()), avatar);*/
+        WhereAreYouApplication.getInstance().getAvatarCache().displayImage(
+                AvatarBase64ImageDownloader.getImageUriFor(currentContact == null ? WhereAreYouApplication.getInstance().getUserName() : currentContact.getName()), avatar);
     }
 
     private void sendStatus(String status, String message, LatLng latLng){
@@ -384,6 +392,16 @@ public class ProfileFragment extends BaseFragment<ProfileActivity> implements No
             contactLocation = loaded.get(0);
             MapForPushActivity.startMapProfile(getActivity(),contactLocation);
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                getHostActivity().onBackPressed();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

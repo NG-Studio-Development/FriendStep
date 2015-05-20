@@ -184,6 +184,30 @@ public class WhereAreYouApplication extends Application {
         return userId;
     }
 
+    public String getUserName() {
+        String userName = getApplicationPreferences().getString(WhereAreYouAppConstants.PREF_KEY_NAME, null);
+        if(userName == null)
+            throw new Error("Not found name user in preferences");
+        return userName;
+    }
+
+    public String getUserEmail() {
+        String userName = getApplicationPreferences().getString(WhereAreYouAppConstants.PREF_KEY_EMAIL, null);
+        if(userName == null)
+            throw new Error("Not found name user in preferences");
+        return userName;
+    }
+
+    public boolean getIsFriendLoadedInMap() {
+      return isFriendLoaded;
+    }
+
+    public void  setFriendLoadedInMap(boolean isFriendLoaded) {
+        this.isFriendLoaded = isFriendLoaded;
+    }
+
+    private static boolean isFriendLoaded = false; // Temp variable, write to anywhere later
+
     /*private String currentMobile = "380955841708";
     //private String currentMobile = "987654321";
 

@@ -32,8 +32,8 @@ public class MainActivity extends BaseActivity implements NotificationManager.Cl
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle mDrawerToggle;
 
-    String name = "Akash Bangad";
-    String email = "akash.bangad@android4devs.com";
+    //String name = "Akash Bangad";
+    //String email = "akash.bangad@android4devs.com";
 
     public static final int REQUEST_CODE_ENABLE_GPS = 1;
 
@@ -55,12 +55,14 @@ public class MainActivity extends BaseActivity implements NotificationManager.Cl
 
         rvDrawerContainer = (RecyclerView) findViewById(R.id.rwDrawerContainer);
         rvDrawerContainer.setHasFixedSize(true);
-        menuAdapter = new ItemsAdapter(this, name, email, new ItemsAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                selectItem(position);
-            }
-        });
+        menuAdapter = new ItemsAdapter(this,
+                WhereAreYouApplication.getInstance().getUserName(),
+                WhereAreYouApplication.getInstance().getUserEmail(), new ItemsAdapter.OnItemClickListener() {
+                                                                                @Override
+                                                                                public void onItemClick(int position) {
+                                                                                    selectItem(position);
+                                                                                }
+                                                                            });
 
         rvDrawerContainer.setAdapter(menuAdapter);
 
@@ -158,7 +160,9 @@ public class MainActivity extends BaseActivity implements NotificationManager.Cl
     @Override
     public void handleNotificationMessage(int what, int arg1, int arg2, Object obj) {
         if(what == WhereAreYouAppConstants.NOTIFICATION_USER_AVATAR_LOADED) {
-            // WhereAreYouApplication.getInstance().getAvatarCache().displayImage(AvatarBase64ImageDownloader.getImageUriFor(WhereAreYouApplication.getInstance().getCurrentMobile()),avatar);
+             //WhereAreYouApplication.getInstance().getAvatarCache().displayImage(AvatarBase64ImageDownloader.getImageUriFor(WhereAreYouApplication.getInstance().getCurrentMobile()),avatar);
+        } else if (what == WhereAreYouAppConstants.NOTIFICATION_CONTACTS_NEARBY) {
+
         }
     }
 }

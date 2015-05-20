@@ -10,7 +10,7 @@ import com.ngstudio.friendstep.WhereAreYouApplication;
 public class Message implements Comparable {
 
     @DbAnnotation
-    String sendername, message, receivername, sender_id, receiver_id,/*receivermobilenumber,*/ receivemessage;
+    String sendername, message, receivername, sender_id, receiver_id, receivemessage;
 
     @DbAnnotation(dbType = "integer")
     long messagetime;

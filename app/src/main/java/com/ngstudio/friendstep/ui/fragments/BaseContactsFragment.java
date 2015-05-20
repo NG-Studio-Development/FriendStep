@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alexutils.helpers.BitmapUtils;
@@ -41,8 +43,9 @@ public abstract class BaseContactsFragment extends BaseFragment<MainActivity> im
 
     ListView listView;
     ContactsAdapter adapter;
-
+    TextView tvEmptyList;
     ImageButton buttonPlus;
+    ProgressBar pbLoadingList;
     private FragmentPool fragmentPool = FragmentPool.getInstance();
 
     @Override
@@ -84,6 +87,11 @@ public abstract class BaseContactsFragment extends BaseFragment<MainActivity> im
                 showDialogAddContacts(inflater.inflate(R.layout.view_dontent_dialog_contacts, null, false));
             }
         });
+
+        tvEmptyList = (TextView) view.findViewById(R.id.tvEmptyList);
+
+
+        pbLoadingList = (ProgressBar) view.findViewById(R.id.pbLoadingList);
 
         listView = (ListView) view.findViewById(R.id.listContacts);
 
@@ -200,7 +208,7 @@ public abstract class BaseContactsFragment extends BaseFragment<MainActivity> im
                     } else if(result.contains("null")) {
                         Toast.makeText(getActivity(),R.string.toast_unknown_error,Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(getActivity(),R.string.toast_contact_request_sent,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), R.string.toast_contact_request_sent, Toast.LENGTH_SHORT).show();
                         queryContacts();
                     }
                     getHostActivity().hideProgressDialog();
@@ -260,7 +268,7 @@ public abstract class BaseContactsFragment extends BaseFragment<MainActivity> im
             try {
                 String result = (String) obj;
                 
-                if(!result.contains("No contacts have been added for this user")) {
+                if (!result.contains("No contacts have been added for this user")) {
 
                     List<ContactStep> contactStepList = gson.fromJson(result, new TypeToken<List<ContactStep>>() {
                     }.getType());
@@ -273,6 +281,11 @@ public abstract class BaseContactsFragment extends BaseFragment<MainActivity> im
                             ContactsHelper.getInstance().getContactsByStatus(getStatusContactFilter()));
 
                     listView.setAdapter(adapter);
+                    pbLoadingList.setVisibility(View.GONE);
+
+                    if (adapter.getCount() == 0)
+                        tvEmptyList.setVisibility(View.VISIBLE);
+
                 } else {
                     Toast.makeText(getActivity(),R.string.toast_no_contacts,Toast.LENGTH_SHORT).show();
                 }

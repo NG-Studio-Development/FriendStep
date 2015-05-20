@@ -71,7 +71,10 @@ public class ChatAdapter extends BaseArrayAdapter<Message> implements StickyList
                 holder.ivIcon.setLayoutParams(new RelativeLayout.LayoutParams(iconSize,0));
             }
         }
-        WhereAreYouApplication.getInstance().getAvatarCache().displayImage(AvatarBase64ImageDownloader.getImageUriFor(message.getSenderId()),holder.ivIcon);
+
+        //WhereAreYouApplication.getInstance().getAvatarCache().displayImage(AvatarBase64ImageDownloader.getImageUriFor(message.getSenderId()),holder.ivIcon);
+        Log.d("SENDER_NAME", "Name = "+message.getSendername());
+        WhereAreYouApplication.getInstance().getAvatarCache().displayImage(AvatarBase64ImageDownloader.getImageUriFor(message.getSendername()), holder.ivIcon);
         holder.tvMessage.setText( message.isMine() || TextUtils.isEmpty(message.getReceivemessage()) ? message.getMessage() : message.getReceivemessage());
         holder.tvTime.setText(formatTime(message.getMessagetime()));
         return convertView;
