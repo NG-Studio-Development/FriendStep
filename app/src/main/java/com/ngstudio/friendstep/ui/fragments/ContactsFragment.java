@@ -1,6 +1,7 @@
 package com.ngstudio.friendstep.ui.fragments;
 
 import android.location.Location;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
@@ -42,6 +43,8 @@ public class ContactsFragment extends BaseContactsFragment implements Notificati
             @Override
             public void onClick(View v) {
                 //queryNearbyContacts();
+                LayoutInflater inflater = LayoutInflater.from(getActivity());
+                showDialogAddContacts(inflater.inflate(R.layout.view_dontent_dialog_contacts, null, false));
             }
         });
     }

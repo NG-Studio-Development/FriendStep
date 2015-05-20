@@ -2,14 +2,14 @@
 <resources>
     <color name="background_app_default">@android:color/white</color>
     <color name="background_action_bar_default">@android:color/transparent</color>
-    <color name="background_action_bar">@color/orange_bright</color>
+    <color name="background_action_bar">@color/violet_bright</color>
     <color name="background_widget_default">@android:color/background_dark</color>
 
     <color name="dialog_shadow_color_top">#5f707070</color>
     <color name="dialog_shadow_color_bottom">#5f010200</color>
     <color name="dialog_divider_buttons_bar">@color/yellow_b</color>
     <color name="dialog_button_generic_pressed">#40000000</color>
-    <color name="text_color_section_title">@color/blue_a</color>
+    <color name="text_color_section_title">@color/violet_bright</color>
 
 
     <!-- palette -->
@@ -22,6 +22,7 @@
     <color name="black">#000</color>
     <color name="orange">#F5BE19</color>
     <color name="orange_dark">#DB9703</color>
+    <color name="violet_bright">#5f3b78</color>
     <color name="orange_bright">#f4a816</color>
 
     <!-- tt -->

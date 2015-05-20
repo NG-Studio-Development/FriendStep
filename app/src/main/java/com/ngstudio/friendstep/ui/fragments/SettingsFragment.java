@@ -5,13 +5,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -30,7 +28,6 @@ import com.ngstudio.friendstep.utils.SettingsHelper;
 import org.apache.http.HttpException;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
 import java.util.Map;
 
 
@@ -46,10 +43,10 @@ public class SettingsFragment extends BaseFragment<MainActivity> {
     private FragmentPool fragmentPool = FragmentPool.getInstance();
     private TextView tvCounter;
     private SeekBar sbAlertDistance;
-    private ToggleButton tbSwitchAlertFriend;
-    private ToggleButton tbChatTransaction;
+    //private ToggleButton tbSwitchAlertFriend;
+    //private ToggleButton tbChatTransaction;
     private ToggleButton tbSendLocation;
-    private Spinner spinnerChatTransaction;
+    //private Spinner spinnerChatTransaction;
     private RelativeLayout rlAlertDistancePanel;
 
     @Override
@@ -67,8 +64,8 @@ public class SettingsFragment extends BaseFragment<MainActivity> {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item,languageMap);
         rlAlertDistancePanel = (RelativeLayout) view.findViewById(R.id.rlAlertDistancePanel);
-        rlAlertDistancePanel.setVisibility(View.GONE);
-        spinnerChatTransaction = (Spinner) view.findViewById(R.id.spinnerChatTransaction);
+        //rlAlertDistancePanel.setVisibility(View.GONE);
+        /*spinnerChatTransaction = (Spinner) view.findViewById(R.id.spinnerChatTransaction);
         spinnerChatTransaction.setAdapter(adapter);
         spinnerChatTransaction.setSelection(Arrays.asList(languageMap).indexOf(settings.getLanguage()));
         spinnerChatTransaction.setVisibility(View.GONE);
@@ -79,8 +76,8 @@ public class SettingsFragment extends BaseFragment<MainActivity> {
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) { /* Optional */ }
-        });
+            public void onNothingSelected(AdapterView<?> parent) {  }
+        }); */
 
         tbSendLocation = (ToggleButton) view.findViewById(R.id.tbSwitchSendLocation);
         tbSendLocation.setChecked(settings.getStateSendLocation());
@@ -97,7 +94,7 @@ public class SettingsFragment extends BaseFragment<MainActivity> {
             }
         });
 
-        tbChatTransaction = (ToggleButton) view.findViewById(R.id.tbChatTransaction);
+        /*tbChatTransaction = (ToggleButton) view.findViewById(R.id.tbChatTransaction);
         tbChatTransaction.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -107,8 +104,8 @@ public class SettingsFragment extends BaseFragment<MainActivity> {
                     spinnerChatTransaction.setVisibility(View.GONE);
             }
         });
-        tbSwitchAlertFriend = (ToggleButton) view.findViewById(R.id.tbSwitchAlertFriend);
-        tbSwitchAlertFriend.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        tbSwitchAlertFriend = (ToggleButton) view.findViewById(R.id.tbSwitchAlertFriend); */
+        /*tbSwitchAlertFriend.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
@@ -118,7 +115,7 @@ public class SettingsFragment extends BaseFragment<MainActivity> {
                     rlAlertDistancePanel.setVisibility(View.GONE);
                 }
             }
-        });
+        }); */
 
         tvCounter = (TextView) view.findViewById(R.id.tvCounter);
         sbAlertDistance = (SeekBar) view.findViewById(R.id.sbAlertDistance);
