@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <!--
+    android:background="@color/blue_a" -->
 
-    <RelativeLayout
+    <!-- <RelativeLayout
         android:layout_width="@dimen/width_camera_field"
         android:layout_height="@dimen/height_dialog"
-        android:background="@color/orange_bright"
+        android:background="@color/violet_additional_dark"
         android:id="@+id/relativeLayout">
 
         <ImageView
@@ -17,60 +20,73 @@
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:src="@drawable/ic_camera"/>
-    </RelativeLayout>
+    </RelativeLayout> -->
 
     <TextView
-        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/title_new_contact"
         android:id="@+id/tvTitle"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/relativeLayout"
-        android:layout_toEndOf="@+id/relativeLayout"
-        android:layout_marginLeft="@dimen/margin_widget_default_medium"
+
+        android:layout_marginLeft="@dimen/margin_widget_default_extra_large"
         style="@style/orange_style_title_tv" />
+    <!--         android:layout_toRightOf="@+id/relativeLayout"
+        android:layout_toEndOf="@+id/relativeLayout" -->
 
     <EditText
         android:paddingTop="@dimen/activity_vertical_margin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="@dimen/margin_widget_default_normal"
+
         android:id="@+id/etName"
-        android:layout_below="@+id/tvTitle"
-        android:layout_toRightOf="@+id/relativeLayout"
-        android:layout_toEndOf="@+id/relativeLayout"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:background="@drawable/edit_text_design"
-        android:layout_marginLeft="@dimen/margin_widget_default_medium"
+
         android:hint="@string/hint_name"
         android:paddingLeft="@dimen/left_padding_et"
         android:singleLine="true"
-        android:layout_marginRight="@dimen/margin_widget_default_medium"
-        style="@style/orange_style"/>
+        style="@style/edit_text_style"
+        android:background="@drawable/edit_text_design"
+        android:layout_below="@+id/tvTitle"
+        android:layout_alignLeft="@+id/tvTitle"
+        android:layout_alignStart="@+id/tvTitle"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
-    <EditText
+    <!--
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:layout_toRightOf="@+id/relativeLayout"
+        android:layout_toEndOf="@+id/relativeLayout"
+        android:background="@drawable/edit_text_design" -->
+
+    <!-- <EditText
         android:layout_marginTop="@dimen/distance_row_edit_dialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/etPhone"
         android:layout_below="@+id/etName"
-        android:layout_toRightOf="@+id/relativeLayout"
-        android:layout_toEndOf="@+id/relativeLayout"
+
         android:layout_alignRight="@+id/etName"
         android:layout_alignEnd="@+id/etName"
         android:layout_marginLeft="@dimen/margin_widget_default_medium"
         android:paddingLeft="@dimen/left_padding_et"
-        style="@style/orange_style"
-        android:background="@drawable/edit_text_design"
+        style="@style/edit_text_style"
+
         android:hint="@string/hint_email"
         android:inputType="number"
-        android:singleLine="true"/>
+        android:singleLine="true"/> -->
+    <!--
+        android:background="@drawable/edit_text_design"
+        android:layout_toRightOf="@+id/relativeLayout"
+        android:layout_toEndOf="@+id/relativeLayout" -->
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etPhone"
+        android:layout_below="@+id/etName"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="@dimen/top_button_bar_dialog_location"

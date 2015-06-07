@@ -71,7 +71,6 @@
         <item name="android:textColorPrimaryInverse">#fff</item>
         <item name="android:textColorSecondary">#fff</item>
         <item name="actionMenuTextColor">#fff</item>
-
     </style>
 
     <style name="ButtonGeneric" parent="android:Widget.Button">
@@ -108,6 +107,12 @@
         <item name="android:textSize">@dimen/text_size_action_bar_title</item>
     </style>
 
+    <style name="TextViewTitleRegister" parent="android:Widget.TextView">
+        <item name="android:textSize">30sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/violet_bright</item>
+    </style>
+
     <style name="TextViewSubtitle" parent="android:Widget.TextView">
         <item name="android:gravity">center</item>
         <!--<item name="android:textColor">@color/text_color_action_bar_subtitle</item>-->
@@ -127,13 +132,29 @@
     </style>
 
     <!-- ORANGE STYLE -->
-    <style name="orange_style" parent="android:Widget.EditText">
-        <!--<item name="android:background">@drawable/bg_text_field</item>-->
-        <item name="android:background">@color/orange</item>
-        <item name="android:textColor">@color/background_app_default</item>
-        <item name="android:textColorHint">@color/orange_dark</item>
+    <style name="edit_text_style" parent="android:Widget.EditText">
+        <!-- <item name="android:background">@drawable/bg_text_field</item> -->
+        <item name="android:background">@color/violet_additional_dark</item>
+        <item name="android:textColor">@color/violet_bright</item>
+        <item name="android:textColorHint">@color/violet_additional_bright</item>
         <item name="android:textSize">@dimen/text_size_dialog</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="edit_text_authorized_style" parent="edit_text_style">
+        <!-- <item name="android:background">@drawable/bg_text_field</item> -->
+        <item name="android:textColorHint">@color/violet_additional_light</item>
+        <!-- <item name="android:textCursorDrawable">@null</item> -->
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="edit_text_reg_style" parent="edit_text_style">
+        <!-- <item name="android:background">@drawable/color_et_line_enabled</item> -->
+        <item name="android:background">@drawable/color_line_et_enabled</item>
+        <item name="android:textColorHint">@color/violet_additional_light</item>
+        <item name="android:textStyle">normal</item>
+        <!-- <item name="android:textCursorDrawable">@null</item> -->
+        <item name="android:textSize">22dp</item>
     </style>
 
     <style name="orange_style_ed_message" parent="android:Widget.EditText">
@@ -149,6 +170,12 @@
         <item name="android:textSize">22dp</item>
     </style>
 
+    <style name="text_view_style" parent="android:Widget.TextView">
+        <item name="android:textColor">@drawable/color_text_click</item>
+        <item name="android:textSize">@dimen/text_size_dialog</item>
+
+    </style>
+
     <style name="orange_style_tv_light" parent="android:Widget.TextView">
         <item name="android:textColor">@color/gray_light</item>
         <item name="android:textSize">25dp</item>
@@ -159,7 +186,7 @@
     <style name="orange_style_button" parent="android:Widget.Button">
         <item name="android:textColor">@drawable/color_text_button_action</item>
         <item name="android:buttonStyle">@android:color/white</item>
-        <item name="android:background">@color/orange</item>
+        <item name="android:background">@color/violet_additional_dark</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">@dimen/text_size_button</item>
     </style>
@@ -177,6 +204,22 @@
         <item name="android:textSize">@dimen/text_size_dialog</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <!-- Text of toggle button -->
+    <style name="text_toggle_button">
+        <item name="android:textSize">9sp</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="text_toggle_button_on" parent="text_toggle_button">
+        <item name="android:color">@color/green_active</item>>
+    </style>
+
+    <style name="text_toggle_button_off" parent="text_toggle_button">
+        <item name="android:color">@color/white_a</item>>
+    </style>
+
 
     <style name="orange_style_list_main_tv" parent="android:Widget.TextView">
 

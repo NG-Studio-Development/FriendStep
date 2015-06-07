@@ -9,7 +9,7 @@
     android:layout_height="match_parent"
     android:layout_marginBottom="400dp"
 
-    style="@style/orange_style">
+    style="@style/edit_text_style">
 
     <LinearLayout
 

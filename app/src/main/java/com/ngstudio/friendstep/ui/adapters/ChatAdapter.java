@@ -66,6 +66,7 @@ public class ChatAdapter extends BaseArrayAdapter<Message> implements StickyList
                         resetTime(message.getMessagetime()) - resetTime(previousMessage.getMessagetime()) >= DAY_IN_MILLIS ) {
                 holder.ivIcon.setVisibility(View.VISIBLE);
                 holder.ivIcon.setLayoutParams(new RelativeLayout.LayoutParams(iconSize,iconSize));
+
             } else {
                 holder.ivIcon.setVisibility(View.INVISIBLE);
                 holder.ivIcon.setLayoutParams(new RelativeLayout.LayoutParams(iconSize,0));

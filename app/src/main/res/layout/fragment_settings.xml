@@ -78,26 +78,29 @@
             android:layout_marginLeft="@dimen/margin_widget_default_small"
             android:layout_marginRight="@dimen/margin_widget_default_small">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/inscription_send_location"
-            android:textStyle="bold"
-            android:textColor="@color/gray_hard"
-            android:layout_gravity="left|top"
-            android:textSize="@dimen/text_size_default"/>
+            <!--             android:layout_width="@dimen/width_switch_settings"
+                android:layout_height="@dimen/height_switch_settings" -->
 
         <ToggleButton
             android:id="@+id/tbSwitchSendLocation"
-            android:layout_width="@dimen/width_switch_settings"
-            android:layout_height="@dimen/height_switch_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="right|top"
             android:background="@drawable/toggle_selector"
-            android:textOff=""
-            android:textOn=""/>
-    </FrameLayout>
+            android:textOff="OFF"
+            android:textOn="ON"
+            android:textColor="@color/toggle_text"
+            android:textStyle="bold"/>
 
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/inscription_send_location"
+                android:textStyle="bold"
+                android:textColor="@color/gray_hard"
+                android:layout_gravity="left|center_vertical"
+                android:textSize="@dimen/text_size_default"/>
+        </FrameLayout>
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -159,7 +162,7 @@
         android:layout_below="@+id/rlAlertDistancePanel"
         android:layout_marginTop="@dimen/margin_widget_default_small" />
 
-    <TextView
+    <!-- <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/inscription_help"
@@ -204,6 +207,6 @@
         android:layout_below="@+id/ivHelpIcon"
         android:layout_marginTop="@dimen/margin_widget_default_medium"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true" /> -->
 
 </RelativeLayout>

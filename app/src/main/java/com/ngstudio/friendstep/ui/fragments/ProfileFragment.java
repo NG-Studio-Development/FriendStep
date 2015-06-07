@@ -285,7 +285,7 @@ public class ProfileFragment extends BaseFragment<ProfileActivity> implements No
                         getHostActivity().hideProgressDialog();
 
                         //WhereAreYouApplication.removeAvatarFromCache(WhereAreYouApplication.getInstance().getCurrentMobile());
-                        WhereAreYouApplication.removeAvatarFromCache(WhereAreYouApplication.getInstance().getCurrentName());
+                        WhereAreYouApplication.removeAvatarFromCache(WhereAreYouApplication.getInstance().getUserName());
                     }
 
                     @Override
@@ -298,6 +298,9 @@ public class ProfileFragment extends BaseFragment<ProfileActivity> implements No
 
         WhereAreYouApplication.getInstance().getAvatarCache().displayImage(
                 AvatarBase64ImageDownloader.getImageUriFor(currentContact == null ? WhereAreYouApplication.getInstance().getUserName() : currentContact.getName()), avatar);
+
+
+
     }
 
     private void sendStatus(String status, String message, LatLng latLng){
@@ -408,7 +411,7 @@ public class ProfileFragment extends BaseFragment<ProfileActivity> implements No
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Log.d("CAM_WAY","yes");
-        Log.d("CAM_WAY","resultCode = "+resultCode);
+        Log.d("CAM_WAY", "resultCode = " + resultCode);
         if (resultCode == Activity.RESULT_OK) {
             final Uri uri;
             if (requestCode == REQUEST_CODE_CHOOSE_IMAGE) {
@@ -428,21 +431,20 @@ public class ProfileFragment extends BaseFragment<ProfileActivity> implements No
                 public void run() {
                     try {
                         final Bitmap avatarImage = BitmapUtils.decodeUri(getActivity(), uri, BitmapUtils.DESIRED_SIZE, BitmapUtils.DESIRED_SIZE, BitmapUtils.DecodeType.BOTH_SHOULD_BE_EQUAL_CUT);
-                        final String base64Image = BitmapUtils.convertBitmapToBase64(avatarImage,false);
+                        final String base64Image = BitmapUtils.convertBitmapToBase64(avatarImage, false);
                         WhereAreYouApplication.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 //BaseAvatarRequest request = BaseAvatarRequest.getImagePostRequest(WhereAreYouApplication.getInstance().getUuid(),System.currentTimeMillis(),base64Image);
-                                AvatarRequestStepServer request = AvatarRequestStepServer.getImagePostRequest(WhereAreYouApplication.getInstance().getCurrentName(),base64Image);
+                                AvatarRequestStepServer request = AvatarRequestStepServer.getImagePostRequest(WhereAreYouApplication.getInstance().getUserName(),base64Image);
                                 HttpServer.submitToServer(request, new BaseResponseCallback<String>() {
                                     @Override
                                     public void onSuccess(String result) {
                                         getHostActivity().hideProgressDialog();
                                         //String avatarUri = AvatarBase64ImageDownloader.getImageUriFor(WhereAreYouApplication.getInstance().getCurrentMobile());
                                         String avatarUri = uri.toString();
-                                        WhereAreYouApplication.removeAvatarFromCache(WhereAreYouApplication.getInstance().getCurrentName());
-
-                                        WhereAreYouApplication.getInstance().getAvatarCache().displayImage(avatarUri,avatar, new ImageLoadingListener() {
+                                        WhereAreYouApplication.removeAvatarFromCache(WhereAreYouApplication.getInstance().getUserName());
+                                        WhereAreYouApplication.getInstance().getAvatarCache().displayImage(avatarUri, avatar, new ImageLoadingListener() {
                                             @Override
                                             public void onLoadingStarted(String imageUri, View view) {}
 

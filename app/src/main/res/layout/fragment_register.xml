@@ -1,86 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="fill_parent"
-    android:paddingLeft="@dimen/margin_widget_default_medium"
-    android:paddingRight="@dimen/margin_widget_default_medium"
-    android:paddingTop="@dimen/margin_widget_default_medium" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
-    <!-- android:layout_marginLeft="@dimen/margin_widget_default_large" -->
-    <EditText
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:paddingLeft="@dimen/margin_widget_default_medium"
+        android:paddingRight="@dimen/margin_widget_default_medium"
+        android:paddingTop="@dimen/margin_widget_default_medium"
+        android:layout_marginLeft="@dimen/margin_widget_default_extra_large"
+        android:layout_marginRight="@dimen/margin_widget_default_extra_large"
+        android:id="@+id/linearLayout"
+        android:layout_below="@+id/linearLayout2"
+        >
+
+        <!-- android:layout_marginLeft="@dimen/margin_widget_default_large" -->
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etUserName"
+            android:singleLine="true"
+            android:hint="@string/hint_name"
+            android:paddingLeft="@dimen/left_padding_et"
+            android:layout_weight="1"
+            android:gravity="bottom"
+            style="@style/edit_text_reg_style" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:hint="@string/hint_email"
+            android:id="@+id/etEmail"
+            android:paddingLeft="@dimen/left_padding_et"
+
+            android:layout_weight="1"
+            android:gravity="bottom"
+            style="@style/edit_text_reg_style" />
+
+        <!-- android:layout_marginLeft="35dp" -->
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edPass"
+            android:paddingLeft="@dimen/left_padding_et"
+
+            android:hint="@string/hint_pass"
+            android:singleLine="true"
+            android:layout_weight="1"
+            android:gravity="bottom"
+            style="@style/edit_text_reg_style" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edRepass"
+            android:paddingLeft="@dimen/left_padding_et"
+
+            android:hint="@string/hint_repass"
+            android:singleLine="true"
+            android:layout_weight="1"
+            android:gravity="bottom"
+            style="@style/edit_text_reg_style" />
+
+        <!-- android:layout_weight="1" -->
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_widget_default_tiny"
+            android:layout_weight="10">
+
+              <!-- <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/inscription_clear_info"
+                android:textSize="@dimen/text_size_default"
+                android:textStyle="bold"
+                android:textColor="@color/gray_hard"
+                android:id="@+id/tvClearInfo"
+                android:layout_toLeftOf="@+id/buttonRegister"
+                style="@style/orange_style_tv_light"
+                android:layout_centerVertical="true" /> -->
+
+            <!-- <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonRegister"
+                android:minWidth="@dimen/width_button"
+                android:text="@string/inscription_register"
+                style="@style/orange_style_button"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" /> -->
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/inscription_register"
+                android:id="@+id/buttonRegister"
+                android:textColor="@color/white_a"
+                android:background="@drawable/bg_button_logining"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/etUserName"
-        android:singleLine="true"
-        android:hint="@string/hint_name"
-        android:paddingLeft="@dimen/left_padding_et"
-        android:background="@drawable/drawable_bg_edit_chat"
-        style="@style/orange_style_ed_light"/>
+        android:id="@+id/linearLayout2"
+        android:layout_marginTop="@dimen/margin_widget_default_medium"
+        >
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:hint="@string/hint_email"
-        android:id="@+id/etEmail"
-        android:paddingLeft="@dimen/left_padding_et"
-        android:background="@drawable/drawable_bg_edit_chat"
-        style="@style/orange_style_ed_light" />
-
-    <!-- android:layout_marginLeft="35dp" -->
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/edPass"
-        android:paddingLeft="@dimen/left_padding_et"
-        android:background="@drawable/drawable_bg_edit_chat"
-        android:hint="@string/hint_pass"
-        android:singleLine="true"
-        style="@style/orange_style_ed_light" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/edRepass"
-        android:paddingLeft="@dimen/left_padding_et"
-        android:background="@drawable/drawable_bg_edit_chat"
-        android:hint="@string/hint_repass"
-        android:singleLine="true"
-        style="@style/orange_style_ed_light" />
-
-    <!-- android:layout_weight="1" -->
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_widget_default_tiny">
-
-          <TextView
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/inscription_clear_info"
-            android:textSize="@dimen/text_size_default"
-            android:textStyle="bold"
-            android:textColor="@color/gray_hard"
-            android:id="@+id/tvClearInfo"
-            android:layout_toLeftOf="@+id/buttonRegister"
-            style="@style/orange_style_tv_light"
-            android:layout_centerVertical="true" />
+            android:id="@+id/ibBack"
+            android:src="@drawable/ic_back_pressed"
+            android:background="#00000000"
+            android:padding="10dp"
+            android:layout_marginLeft="@dimen/margin_widget_default_medium"
+            android:layout_marginRight="@dimen/margin_widget_default_medium"
+            android:layout_gravity="center"
+            />
 
-        <Button
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_widget_default_small"
-            android:id="@+id/buttonRegister"
-            android:minWidth="@dimen/width_button"
-            android:text="@string/inscription_register"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            style="@style/orange_style_button" />
-    </RelativeLayout>
-</LinearLayout>
+            android:text="@string/title_create_account"
+            android:id="@+id/textView2"
+            android:layout_gravity="center_horizontal"
+            style="@style/TextViewTitleRegister"
+            android:layout_alignParentTop="true"
+            android:layout_alignLeft="@+id/linearLayout"
+            android:layout_alignStart="@+id/linearLayout"
+            />
 
+    </LinearLayout>
+</RelativeLayout>
 
 <!--
 <LinearLayout

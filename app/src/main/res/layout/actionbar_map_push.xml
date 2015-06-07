@@ -4,7 +4,7 @@
     xmlns:local="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rlActionbarHolder"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@color/orange_bright">
+    android:background="@color/violet_bright">
 
     <com.ngstudio.friendstep.ui.widgets.AspectImageButton
         android:id="@+id/ivActionbarIcon"

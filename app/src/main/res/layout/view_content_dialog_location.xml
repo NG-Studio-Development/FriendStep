@@ -60,7 +60,7 @@
             android:id="@+id/etMobile"
             android:layout_toEndOf="@+id/ivIconPhone"
             android:hint="@string/hint_email"
-            style="@style/orange_style"
+            style="@style/edit_text_style"
             android:layout_toRightOf="@+id/ivIconPhone"
             android:layout_marginLeft="@dimen/margin_left_from_icon_send_location"
             android:drawableBottom="@color/gray_light"

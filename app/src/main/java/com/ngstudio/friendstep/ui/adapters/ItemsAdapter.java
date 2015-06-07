@@ -21,12 +21,15 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
     private static final MenuItem[] sideMenuItems = { new MenuItem(R.drawable.drawable_item_menu_map, R.string.text_item_menu_map),
             new MenuItem(R.drawable.drawable_item_menu_contacts, R.string.text_item_menu_contacts),
             new MenuItem(R.drawable.drawable_item_requests, R.string.text_item_menu_requests),
-            new MenuItem(R.drawable.drawable_item_menu_settings, R.string.text_item_menu_settings),
-            new MenuItem(R.drawable.drawable_item_menu_about, R.string.text_item_menu_about) };
+            new MenuItem(R.drawable.drawable_item_menu_settings, R.string.text_item_menu_settings)};
+
+    // new MenuItem(R.drawable.drawable_item_menu_about, R.string.text_item_menu_about)
 
     private Context context;
     private String name;
     private String email;
+
+    private View previousView;
 
     OnItemClickListener onItemClickListener;
 
@@ -36,7 +39,6 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
         TextView textView;
         ImageView imageView;
         ImageView ivAvatar;
-        //CircleImageView ivAvatar;
         TextView tvName;
         TextView tvEmail;
 
@@ -77,8 +79,17 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
             viewHolderItem.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(onItemClickListener != null)
+                    if(onItemClickListener != null) {
                         onItemClickListener.onItemClick(viewHolderItem.getAdapterPosition() - 1);
+
+                        if (previousView != null)
+                            previousView.setSelected(false);
+                        previousView = view;
+
+                        view.setSelected(true);
+
+
+                    }
                 }
             });
             return viewHolderItem;
@@ -100,7 +111,8 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
             holder.imageView.setImageResource(sideMenuItems[position - 1].iconId);
         } else if(holder.holderId == 0){
             WhereAreYouApplication.getInstance()
-                    .getAvatarCache().displayImage(AvatarBase64ImageDownloader.getImageUriFor(WhereAreYouApplication.getInstance().getCurrentName()),holder.ivAvatar);
+                    .getAvatarCache().displayImage(AvatarBase64ImageDownloader.getImageUriFor(WhereAreYouApplication.getInstance().getUserName()),holder.ivAvatar);
+
             holder.ivAvatar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

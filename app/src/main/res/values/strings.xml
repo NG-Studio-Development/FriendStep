@@ -26,6 +26,9 @@
     <string name="text_item_profile_sms">Regular Sms</string>
     <string name="text_item_profile_location">Get Location</string>
     <string name="text_username">Name</string>
+    <string name="text_create_account">Create account</string>
+
+
     <string name="title_activity_login">Sign in</string>
     <string name="inscription_phone_number">Phone number</string>
     <string name="inscription_change_info">Change Info</string>
@@ -62,8 +65,9 @@
     <string name="text_button_send">SEND</string>
     <string name="text_button_cancel">CANCEL</string>
 
-    <string name="text_button_register">REGISTER</string>
+    <string name="text_button_register">Register</string>
     <string name="text_button_sign_in">SIGN IN</string>
+    <string name="text_button_enter">Enter</string>
 
     <string name="text_map_position"> it\'s you</string>
     <string name="text_my_profile">My Profile</string>
@@ -78,6 +82,7 @@
     <string name="hint_mobile">Mobile number</string>
     <string name="hint_email">Email</string>
     <string name="hint_pass">Pass</string>
+    <string name="hint_login">Login</string>
     <string name="hint_repass">Repass</string>
     <string name="hint_message_chat">Write a message</string>
     <string name="hint_message">Your Message</string>
@@ -86,6 +91,10 @@
     <string name="item_select_from">Select from Address Book</string>
     <string name="item_enter_mobile_number">Enter mobile number</string>
     <string name="item_cancel">Cancel</string>
+
+    <!-- Notifications -->
+    <string name="notis_enter_valid_data">Enter valid data.</string>
+    <string name="notis_authorization_incorrect_data">Login or password is not correct.</string>
 
     <!-- Toast messages -->
     <string name="toast_wrong_email">Enter valid email.</string>
@@ -99,6 +108,9 @@
 
     <string name="title_activity_chat">ChatActivity</string>
     <string name="title_request">Request</string>
+
+    <string name="title_create_account">Create account</string>
+
     <string name="title_activity_test_h">TestH</string>
     <string name="text_address_is_determined">address is determined…</string>
     <string name="toast_empty_text">Empty text</string>

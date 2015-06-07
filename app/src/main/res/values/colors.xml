@@ -11,19 +11,27 @@
     <color name="dialog_button_generic_pressed">#40000000</color>
     <color name="text_color_section_title">@color/violet_bright</color>
 
+    <color name="gray_light_low"> #e8e8e8 </color>
 
     <!-- palette -->
     <color name="yellow_a">#fdea9e</color>
     <color name="yellow_b">#d2c187</color>
     <color name="blue_a">#0000ff</color>
+    <color name="white_a">#ffffff</color>
 
     <color name="gray_hard">#757575</color>
     <color name="gray_light">#bdbdbd</color>
     <color name="black">#000</color>
-    <color name="orange">#F5BE19</color>
-    <color name="orange_dark">#DB9703</color>
+
     <color name="violet_bright">#5f3b78</color>
-    <color name="orange_bright">#f4a816</color>
+    <color name="violet_additional_dark">#4C385A</color>
+    <color name="violet_additional_bright">#9f74bc</color>
+    <color name="violet_additional_light">#dbcfe4</color>
+    <color name="green_active">#dfde6d</color>
+
+    <!-- <color name="orange_bright">#f4a816</color>
+    <color name="orange">#F5BE19</color>
+    <color name="orange_dark">#DB9703</color> -->
 
     <!-- tt -->
     <color name="transparent">#00000000</color>

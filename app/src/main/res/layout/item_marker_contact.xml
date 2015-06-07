@@ -9,10 +9,11 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+
             android:id="@+id/ivAvatar"
             android:src="@drawable/ic_launcher"
+            android:layout_width="@dimen/size_small_avatar_imageview"
+            android:layout_height="@dimen/size_small_avatar_imageview"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
@@ -20,19 +21,23 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:minWidth="110dp"
+            android:maxLines="1"
+            android:gravity="center"
             android:text="New Text"
+            android:layout_margin="@dimen/margin_widget_default_medium"
             android:id="@+id/tvContactsName"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/ivAvatar"
-            android:layout_toEndOf="@+id/ivAvatar" />
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/ivAvatar" />
 
-        <TextView
+        <!-- android:id="@+id/tvCheckinTime" -->
+        <!-- <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New Text"
-            android:id="@+id/tvCheckinTime"
+            android:id="@+id/tvEmail"
             android:layout_below="@+id/tvContactsName"
             android:layout_toRightOf="@+id/ivAvatar"
-            android:layout_toEndOf="@+id/ivAvatar" />
+            android:layout_toEndOf="@+id/ivAvatar" /> -->
     </RelativeLayout>
 </LinearLayout>

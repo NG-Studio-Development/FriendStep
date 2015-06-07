@@ -128,7 +128,9 @@ public class MainActivity extends BaseActivity implements NotificationManager.Cl
     }
 
     private void selectItem(int position) {
+
         //if(!sliderMenu.setSelected(position)) return;
+          
 
         ItemsAdapter.MenuItem item = menuAdapter.getItem(position);
         Fragment fragment;

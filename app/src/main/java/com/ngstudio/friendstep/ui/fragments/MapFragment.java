@@ -17,7 +17,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,7 +34,6 @@ import com.google.i18n.phonenumbers.Phonenumber;
 import com.ngstudio.friendstep.FragmentPool;
 import com.ngstudio.friendstep.R;
 import com.ngstudio.friendstep.WhereAreYouApplication;
-import com.ngstudio.friendstep.components.CustomLocationManager;
 import com.ngstudio.friendstep.components.NotificationManager;
 import com.ngstudio.friendstep.components.cache.AvatarBase64ImageDownloader;
 import com.ngstudio.friendstep.model.Callback;
@@ -48,7 +46,6 @@ import com.ngstudio.friendstep.ui.activities.BaseActivity;
 import com.ngstudio.friendstep.ui.activities.ChatActivity;
 import com.ngstudio.friendstep.ui.activities.MainActivity;
 import com.ngstudio.friendstep.ui.dialogs.AlertDialogBase;
-import com.ngstudio.friendstep.utils.CommonUtils;
 import com.ngstudio.friendstep.utils.ContactsHelper;
 import com.ngstudio.friendstep.utils.ReverseGeoLocation;
 import com.ngstudio.friendstep.utils.SettingsHelper;
@@ -68,7 +65,7 @@ public class MapFragment extends BaseMapFragment<MainActivity> implements Locati
     private final String SEND_LOCATION_RESULT_OK = "Location Sent";
 
 
-    private ImageButton ibButtonSendLocation;
+    //private ImageButton ibButtonSendLocation;
     private FragmentPool fragmentPool = FragmentPool.getInstance();
     private Map<Marker, ContactStep> markerContact;
 
@@ -94,7 +91,7 @@ public class MapFragment extends BaseMapFragment<MainActivity> implements Locati
     public void findChildViews(@NotNull View view) {
         NotificationManager.registerClient(this);
 
-        ibButtonSendLocation = (ImageButton) view.findViewById(R.id.ibButtonSendLocation);
+        /*ibButtonSendLocation = (ImageButton) view.findViewById(R.id.ibButtonSendLocation);
         ibButtonSendLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,7 +101,7 @@ public class MapFragment extends BaseMapFragment<MainActivity> implements Locati
                 else
                     Toast.makeText(getActivity(), R.string.no_internet_connection, Toast.LENGTH_SHORT).show();
             }
-        });
+        }); */
 
         getMap().setOnMapLoadedCallback(this);
 
@@ -131,8 +128,10 @@ public class MapFragment extends BaseMapFragment<MainActivity> implements Locati
 
                 ContactStep contact = markerContact.get(marker);
 
-                tvName.setText(contact != null ? contact.getName() : "It's you");
-                WhereAreYouApplication.getInstance().getAvatarCache().displayImage(AvatarBase64ImageDownloader.getImageUriFor(contact != null ? contact.getName() : WhereAreYouApplication.getInstance().getUserName()),ivAvatar);
+                tvName.setText(contact != null ? "Friend: "+contact.getName() : "It's you");
+
+                String uri = AvatarBase64ImageDownloader.getImageUriFor(contact != null ? contact.getName() : WhereAreYouApplication.getInstance().getUserName());
+                WhereAreYouApplication.getInstance().getAvatarCache().displayImage(uri, ivAvatar);
 
                 return markerContentView;
             }
@@ -156,10 +155,6 @@ public class MapFragment extends BaseMapFragment<MainActivity> implements Locati
         if (location == null)
             return false;
 
-        /* LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
-        changingCameraPosition(latLng);
-        updateLocations(latLng,getString(R.string.title_map_position),getString(R.string.text_map_position)); */
-
         setUserMarker(location);
 
         if (nearbyList != null)
@@ -174,7 +169,7 @@ public class MapFragment extends BaseMapFragment<MainActivity> implements Locati
     private void setUserMarker(Location location) {
         LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
         changingCameraPosition(latLng);
-        updateLocations(latLng,getString(R.string.title_map_position),getString(R.string.text_map_position));
+        updateLocations(latLng, getString(R.string.title_map_position), getString(R.string.text_map_position));
     }
 
     private void sendToServerUserLocation(Location location) {
@@ -312,7 +307,7 @@ public class MapFragment extends BaseMapFragment<MainActivity> implements Locati
         Location location = getLastKnownLocation();
         LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
         getHostActivity().showProgressDialog();
-        ContactsHelper.getInstance().queryCreateSendLocation(latLng,WhereAreYouApplication.getInstance().getCurrentName(),new BaseResponseCallback<String>() {
+        ContactsHelper.getInstance().queryCreateSendLocation(latLng,WhereAreYouApplication.getInstance().getUserName(),new BaseResponseCallback<String>() {
             @Override
             public void onSuccess(String result) {
                 if (result.contains(SEND_LOCATION_RESULT_OK))
@@ -335,24 +330,37 @@ public class MapFragment extends BaseMapFragment<MainActivity> implements Locati
     public void onLocationChanged(Location location) {}
 
     public void queryNearbyContacts(final BaseActivity activity) {
+
+        if (!hasConnection(activity)) {
+            Toast.makeText(activity, getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        removeAllContactMarker(getLastKnownLocation());
+
         activity.showProgressDialog();
 
-        ContactRequestStepServer getContacts = ContactRequestStepServer.requestGetNearbyContacts(getLastKnownLocation(), SettingsHelper.getInstance().getDistance());
+        ContactRequestStepServer getContacts
+                = ContactRequestStepServer
+                .requestGetNearbyContacts(getLastKnownLocation(), SettingsHelper
+                        .getInstance()
+                        .getDistance());
 
         HttpServer.submitToServer(getContacts, new BaseResponseCallback<String>() {
             @Override
             public void onSuccess(String result) {
 
-                if (result != null /*&& result.contains(TEMPLATE_RESULT_REQUEST)*/) {
+                if (result != null)
                     NotificationManager.notifyClients(WhereAreYouAppConstants.NOTIFICATION_CONTACTS_NEARBY, result);
-                } else {
+                else
                     Toast.makeText(activity, R.string.toast_location_is_not_available, Toast.LENGTH_SHORT).show();
-                }
+
 
                 WhereAreYouApplication.getInstance().setFriendLoadedInMap(true);
                 activity.hideProgressDialog();
 
             }
+
             @Override
             public void onError(Exception error) {
                 WhereAreYouApplication.getInstance().setFriendLoadedInMap(true);
@@ -363,15 +371,7 @@ public class MapFragment extends BaseMapFragment<MainActivity> implements Locati
     }
 
 
-    private void actionQueryNearbyContact() {
-        if ( !hasConnection(getActivity()) ) {
-            Toast.makeText(getActivity(), R.string.no_internet_connection, Toast.LENGTH_SHORT).show();
-        } else {
-            removeAllContactMarker(getLastKnownLocation());
-            queryNearbyContacts(getHostActivity());
-        }
 
-    }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -384,7 +384,7 @@ public class MapFragment extends BaseMapFragment<MainActivity> implements Locati
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.actionRefresh:
-                actionQueryNearbyContact();
+                queryNearbyContacts(getHostActivity());
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

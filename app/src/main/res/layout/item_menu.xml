@@ -4,24 +4,22 @@
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_vertical"
+    android:background="@drawable/activated_background"
     android:padding="@dimen/margin_widget_default_small">
 
     <ImageView
         android:id="@+id/ivIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:layout_marginLeft="@dimen/margin_widget_default_small"
-
-        android:src="@drawable/ic_map"/>
+        android:src="@drawable/ic_map" />
 
     <TextView
         android:id="@+id/tvItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/margin_widget_default_large"
-
         android:textSize="20sp"
-        android:text="Map"/>
+        android:text="Map" />
 
 </LinearLayout>

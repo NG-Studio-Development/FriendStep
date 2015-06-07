@@ -15,7 +15,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/orange_style"
+        style="@style/edit_text_style"
         android:id="@+id/etWriteMessage"
         android:layout_below="@+id/tvQuestionDialog"
         android:layout_alignParentLeft="true"

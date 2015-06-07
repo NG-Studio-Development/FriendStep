@@ -2,12 +2,9 @@ package com.ngstudio.friendstep.components.cache;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.text.TextUtils;
 
 import com.alexutils.helpers.BitmapUtils;
-import com.ngstudio.friendstep.R;
-import com.ngstudio.friendstep.WhereAreYouApplication;
 import com.ngstudio.friendstep.model.connectivity.HttpServer;
 import com.ngstudio.friendstep.model.connectivity.requests.stepserver.AvatarRequestStepServer;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
@@ -63,8 +60,8 @@ public class AvatarBase64ImageDownloader extends BaseImageDownloader {
                 //BaseAvatarRequest request = BaseAvatarRequest.getAvatarRequest(WhereAreYouApplication.getInstance().getUuid(), nameContact);
                 //String result = HttpServer.sendRequestToServer(request);
 
-                Bitmap bm = BitmapFactory.decodeResource(WhereAreYouApplication.getInstance().getResources(), R.drawable.debug_ava);
-                String base64Image = BitmapUtils.convertBitmapToBase64(bm, false);
+                //Bitmap bm = BitmapFactory.decodeResource(WhereAreYouApplication.getInstance().getResources(), R.drawable.debug_ava);
+                //String base64Image = BitmapUtils.convertBitmapToBase64(bm, false);
 
                 AvatarRequestStepServer request = AvatarRequestStepServer.requestGetAvatar(nameContact);
                 String result = HttpServer.sendRequestToServer(request);
@@ -77,8 +74,6 @@ public class AvatarBase64ImageDownloader extends BaseImageDownloader {
                 Bitmap bitmap = BitmapUtils.decodeBase64(avatarBase64, 0, 0, BitmapUtils.DecodeType.JUST_DECODE);
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(file.getAbsolutePath()));
                 bitmap.recycle();
-
-
 
                 return new FileInputStream(file);
             } catch (IllegalArgumentException | HttpException | JSONException | NullPointerException e) {

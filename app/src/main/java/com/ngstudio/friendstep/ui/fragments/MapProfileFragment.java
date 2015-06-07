@@ -44,7 +44,7 @@ public class MapProfileFragment  extends BaseMapFragment<ProfileActivity> implem
     }
 
     public void findChildViews(@NotNull View view) {
-        view.findViewById(R.id.ibButtonSendLocation).setVisibility(View.INVISIBLE);
+        //view.findViewById(R.id.ibButtonSendLocation).setVisibility(View.INVISIBLE);
         //ib.setVisibility(View.INVISIBLE);
     }
 

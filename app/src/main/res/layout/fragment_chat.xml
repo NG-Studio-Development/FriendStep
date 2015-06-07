@@ -42,10 +42,10 @@
             android:id="@+id/etWriteMessage"
             android:hint="@string/hint_message_chat"
             android:background="@drawable/drawable_bg_edit_chat"
-            style="@style/orange_style_ed_message"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/ibSendMessage"
             android:layout_marginRight="@dimen/margin_widget_default_normal"
+            style="@style/orange_style_ed_message"
             android:maxLines="4" />
 
         <ImageButton

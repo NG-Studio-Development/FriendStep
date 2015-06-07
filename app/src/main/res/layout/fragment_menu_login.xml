@@ -1,10 +1,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ngstudio.friendstep.ui.fragments.MenuLoginFragment">
+    tools:context="com.ngstudio.friendstep.ui.fragments.LoginFragment">
 
 
-    <Button
+    <!-- <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign in"
@@ -18,5 +18,80 @@
         android:text="Register"
         android:id="@+id/buttonRegister"
         android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" /> -->
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:src="@drawable/ic_logo"
+        android:layout_marginTop="@dimen/margin_widget_default_large"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="2dp"
+
+            android:id="@+id/view5"
+            android:background="@color/violet_additional_bright"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_widget_default_extra_large"
+            android:layout_marginRight="@dimen/margin_widget_default_extra_large" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="60dp"
+            android:paddingRight="60dp"
+            android:id="@+id/etLogin"
+            android:hint="@string/hint_login"
+            style="@style/edit_text_authorized_style"
+            android:background="#00000000"
+            android:layout_above="@+id/view5"
+            android:layout_centerHorizontal="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/etPass"
+            android:hint="@string/hint_pass"
+            android:background="#00000000"
+            android:layout_below="@+id/view5"
+            android:layout_centerHorizontal="true"
+            style="@style/edit_text_authorized_style" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_create_account"
+        android:id="@+id/tvCreateAccount"
+        android:clickable="true"
+        android:layout_margin="@dimen/margin_widget_default_large"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        style="@style/text_view_style" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/etPass"
+        android:layout_marginTop="60dp"
+        android:id="@+id/relativeLayout"
+        android:layout_above="@+id/tvCreateAccount">
+
+        <Button
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="@string/text_button_enter"
+           android:id="@+id/buttonEnter"
+            android:textColor="@color/white_a"
+           android:background="@drawable/bg_button_logining"
+
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
+
 </RelativeLayout>

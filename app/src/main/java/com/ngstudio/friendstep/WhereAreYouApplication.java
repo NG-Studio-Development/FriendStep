@@ -221,9 +221,9 @@ public class WhereAreYouApplication extends Application {
 
     private String currentName;
 
-    public String getCurrentName() {
+    /*public String getCurrentName() {
         return this.currentName;
-    }
+    }*/
 
     public void setCurrentName(String currentName) {
         this.currentName = currentName;

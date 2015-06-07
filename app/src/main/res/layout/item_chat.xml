@@ -9,7 +9,7 @@
         android:layout_height="@dimen/size_item_imageview"
         android:id="@+id/ivContactsPhoto"
         android:src="@drawable/ic_launcher"
-
+        android:hapticFeedbackEnabled="false"
         android:layout_marginLeft="@dimen/margin_widget_default_small"/>
 
     <View

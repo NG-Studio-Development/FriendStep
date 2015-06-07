@@ -4,7 +4,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_marginTop="@dimen/margin_widget_default_normal">
+    android:layout_marginTop="@dimen/margin_widget_default_normal"
+    android:background="@drawable/color_item_contact_bg">
 
     <ImageView
         android:layout_width="@dimen/size_item_imageview_default"
@@ -31,7 +32,7 @@
             android:text="New Text"
             android:id="@+id/tvContactsName"
             android:textStyle="bold"
-            android:textColor="@color/black"
+            android:textColor="@color/violet_additional_dark"
             android:textSize="@dimen/text_size_default_medium" />
 
         <TextView

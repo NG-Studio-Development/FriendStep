@@ -150,6 +150,7 @@ public abstract class BaseContactsFragment extends BaseFragment<MainActivity> im
 
     public void showDialogAddContacts(View view) {
 
+
         Button buttonSend = (Button) view.findViewById(R.id.buttonAdd);
         Button buttonCancel = (Button) view.findViewById(R.id.buttonCancel);
 
@@ -159,7 +160,7 @@ public abstract class BaseContactsFragment extends BaseFragment<MainActivity> im
 
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         lp.copyFrom(dialogSendLocation.getWindow().getAttributes());
-        lp.width = BitmapUtils.getDisplayWidth(getActivity()) - (int) (2* getResources().getDimension(R.dimen.margin_widget_default_tiny));
+        lp.width = BitmapUtils.getDisplayWidth(getActivity()) - (int) (2* getResources().getDimension(R.dimen.margin_widget_default_normal));
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
         lp.y = (int) getResources().getDimension(R.dimen.margin_widget_default_tiny);
 
