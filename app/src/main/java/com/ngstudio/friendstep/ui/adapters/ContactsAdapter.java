@@ -84,6 +84,7 @@ public class ContactsAdapter extends BaseArrayAdapter<ContactStep> implements Fi
     public Filter getFilter() {
         //return ContactsFilter.createContains(this, originalList);
         //return ContactsFilter.createContainsFilter(this,originalList);
+
         return filter;
     }
 
