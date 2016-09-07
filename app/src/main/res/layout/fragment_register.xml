@@ -101,7 +101,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/inscription_register"
                 android:id="@+id/buttonRegister"
-                android:textColor="@color/white_a"
+                android:textColor="@color/icons"
                 android:background="@drawable/bg_button_logining"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true" />

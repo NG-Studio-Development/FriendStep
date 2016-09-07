@@ -1,5 +1,7 @@
 package com.ngstudio.friendstep.ui.fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +10,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -148,7 +151,7 @@ public abstract class BaseContactsFragment extends BaseFragment<MainActivity> im
         });
     } */
 
-    public void showDialogAddContacts(View view) {
+   public void showDialogAddContacts(View view) {
 
 
         Button buttonSend = (Button) view.findViewById(R.id.buttonAdd);
@@ -189,6 +192,8 @@ public abstract class BaseContactsFragment extends BaseFragment<MainActivity> im
             }
         });
     }
+
+
 
     private void sendContactRequest(long id, String contactName) {
 

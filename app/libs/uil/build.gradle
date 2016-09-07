@@ -2,12 +2,12 @@ apply plugin: 'android-library'
 
 
 android {
-    compileSdkVersion 21
-    buildToolsVersion "21.1.2"
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
 
     defaultConfig {
-        minSdkVersion 5
-        targetSdkVersion 21
+        minSdkVersion 16
+        targetSdkVersion 23
         versionCode 35
         versionName "1.8.7"
     }
@@ -23,9 +23,13 @@ android {
             res.srcDirs = ['res']
         }
     }
+
+    useLibrary 'org.apache.http.legacy'
 }
 
 dependencies {
     //compile 'com.android.support:support-v4:19.0.1'
-    compile 'com.android.support:support-v4:21.0.3'
+    //compile 'com.android.support:support-v4:21.0.3'
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    //compile group: 'cz.msebera.android' , name: 'httpclient' , version: '4.4.1.2'
 }

@@ -19,6 +19,15 @@
     <dimen name="padding_dialog_textview">6dp</dimen>
     <dimen name="tab_highlight_size_default">10dp</dimen>
 
+    <dimen name="padding_dilog_around_content">24dp</dimen>
+    <dimen name="dialog_height_bottoms_area">52dp</dimen>
+
+
+    <dimen name="margin_contact_icon">16dp</dimen>
+
+
+
+
     <!-- TEXT DIMENS -->
     <dimen name="padding_edit_text_default">@dimen/margin_widget_default_tiny</dimen>
     <dimen name="padding_edit_text_default_sides">@dimen/margin_widget_default_small</dimen>
@@ -27,6 +36,7 @@
     <dimen name="text_size_action_bar_title">22sp</dimen>
     <dimen name="text_size_action_bar_subtitle">13sp</dimen>
     <dimen name="text_size_tab_label">12sp</dimen>
+
     <dimen name="text_size_default_tiny">12sp</dimen>
     <dimen name="text_size_default_small">14sp</dimen>
     <dimen name="text_size_default">15sp</dimen>
@@ -44,7 +54,7 @@
 
     <!-- IMAGEVIEW DIMENS -->
     <dimen name="size_imageview_default">80dp</dimen>
-    <dimen name="size_item_imageview_default">60dp</dimen>
+    <dimen name="size_item_imageview_default">40dp</dimen>
     <dimen name="size_mood_imageview_default">16dp</dimen>
     <dimen name="divider_horizontal_height_small">1dp</dimen>
     <dimen name="divider_horizontal_height_default">2.8dp</dimen>
@@ -103,7 +113,10 @@
 
     <!-- ACTIONBAR DIMENS -->
     <dimen name="height_actionbar_default">48dp</dimen>
-    
+
+    <!-- Per the design guidelines, navigation drawers should be between 240dp and 320dp:
+         https://developer.android.com/design/patterns/navigation-drawer.html -->
+    <dimen name="navigation_drawer_width">240dp</dimen>
 
 
 </resources>

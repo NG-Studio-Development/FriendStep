@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.ContactsFragmentFragment">
+    tools:context=".ui.fragments.ContactsFragment">
 
     <ListView
         android:id="@+id/listContacts"
@@ -40,10 +40,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
+        android:text="Empty"
+        style="@style/TextAppearance.AppCompat.Headline"
         android:id="@+id/tvEmptyList"
         android:visibility="invisible"
+        android:textColor="@color/secondary_text"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
-
+<!-- android:textSize="@dimen/margin_widget_default_normal" -->
 </RelativeLayout>

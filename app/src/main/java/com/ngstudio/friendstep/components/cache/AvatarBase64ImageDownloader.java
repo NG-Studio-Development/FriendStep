@@ -9,6 +9,7 @@ import com.ngstudio.friendstep.model.connectivity.HttpServer;
 import com.ngstudio.friendstep.model.connectivity.requests.stepserver.AvatarRequestStepServer;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 
+
 import org.apache.http.HttpException;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
@@ -20,6 +21,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.UUID;
+
+
 
 public class AvatarBase64ImageDownloader extends BaseImageDownloader {
 
@@ -64,7 +67,15 @@ public class AvatarBase64ImageDownloader extends BaseImageDownloader {
                 //String base64Image = BitmapUtils.convertBitmapToBase64(bm, false);
 
                 AvatarRequestStepServer request = AvatarRequestStepServer.requestGetAvatar(nameContact);
-                String result = HttpServer.sendRequestToServer(request);
+
+                String result;
+
+                        try {
+                            result = HttpServer.sendRequestToServer(request);
+                        } catch (HttpException ex) {
+                            ex.fillInStackTrace();
+                            result = new String();
+                        }
 
                 if(TextUtils.isEmpty(result) || result.contains("No Avatar"))
                     return null;
@@ -76,7 +87,7 @@ public class AvatarBase64ImageDownloader extends BaseImageDownloader {
                 bitmap.recycle();
 
                 return new FileInputStream(file);
-            } catch (IllegalArgumentException | HttpException | JSONException | NullPointerException e) {
+            } catch (IllegalArgumentException | /*HttpException |*/ JSONException | NullPointerException e) {
                 throw new IOException(e);
             }
         } // else if (imageUri.startsWith("scheme://")) {

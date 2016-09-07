@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
+//import android.support.multidex.MultiDex;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.telephony.TelephonyManager;
@@ -95,13 +96,19 @@ public class WhereAreYouApplication extends Application {
     }
 
     @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        //MultiDex.install(this);
+    }
+
+    @Override
     public void onCreate() {
         super.onCreate();
 
         synchronized (WhereAreYouApplication.class) {
             if (BuildConfig.DEBUG) {
                 if (instance != null)
-                    throw new RuntimeException("Something strange: there is another application instance.");
+                    throw new RuntimeException("Something strange: there is another application newInstance.");
             }
             instance = this;
 
@@ -302,7 +309,7 @@ public class WhereAreYouApplication extends Application {
                     if (BuildConfig.DEBUG) {
                         if (Thread.currentThread() == Looper.getMainLooper().getThread())
                             throw new UnsupportedOperationException(
-                                    "Current application's instance has not been initialized yet (wait for onCreate, please).");
+                                    "Current application's newInstance has not been initialized yet (wait for onCreate, please).");
                     }
                     try {
                         do {

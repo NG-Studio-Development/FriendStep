@@ -23,6 +23,7 @@ public class WhereAreYouAppConstants {
     public static final int NOTIFICATION_MESSAGES = 9;
     public static final int NOTIFICATION_MESSAGE_INCOMING = 10;
     public static final int NOTIFICATION_REQUEST_REPLY = 11;
+    public static final int NOTIFICATION_CONTACTS_FIND_BY_NAME = 12;
 
     public static final String SENDER_ID = "663182830836";
 

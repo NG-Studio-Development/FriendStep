@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/WhereAreYou.iml" filepath="$PROJECT_DIR$/WhereAreYou.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FriendStep.iml" filepath="$PROJECT_DIR$/FriendStep.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/libs/alexutilities/alexutilities.iml" filepath="$PROJECT_DIR$/app/libs/alexutilities/alexutilities.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/libs/libs.iml" filepath="$PROJECT_DIR$/app/libs/libs.iml" />

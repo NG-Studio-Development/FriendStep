@@ -39,6 +39,8 @@ import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+
+
 public class LoginActivity extends BaseActivity {
 
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;

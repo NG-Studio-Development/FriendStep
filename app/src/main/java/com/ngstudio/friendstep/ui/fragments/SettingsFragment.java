@@ -25,12 +25,11 @@ import com.ngstudio.friendstep.ui.activities.MainActivity;
 import com.ngstudio.friendstep.ui.activities.ProfileActivity;
 import com.ngstudio.friendstep.utils.SettingsHelper;
 
+
 import org.apache.http.HttpException;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
-
-
 
 public class SettingsFragment extends BaseFragment<MainActivity> {
 

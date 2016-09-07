@@ -16,7 +16,7 @@ import com.ngstudio.friendstep.R;
  * {@link BlankFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link BlankFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * create an newInstance of this fragment.
  */
 public class BlankFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -31,12 +31,12 @@ public class BlankFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     /**
-     * Use this factory method to create a new instance of
+     * Use this factory method to create a new newInstance of
      * this fragment using the provided parameters.
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment BlankFragment.
+     * @return A new newInstance of fragment BlankFragment.
      */
     // TODO: Rename and change types and number of parameters
     public static BlankFragment newInstance(String param1, String param2) {

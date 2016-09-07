@@ -3,7 +3,7 @@
 
      <item
         android:state_selected="true"
-        android:drawable="@color/white_a" />
+        android:drawable="@color/icons" />
 
 
 

@@ -34,7 +34,7 @@
             android:layout_height="2dp"
 
             android:id="@+id/view5"
-            android:background="@color/violet_additional_bright"
+            android:background="@color/accent"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/margin_widget_default_extra_large"
             android:layout_marginRight="@dimen/margin_widget_default_extra_large" />
@@ -85,7 +85,7 @@
            android:layout_height="wrap_content"
            android:text="@string/text_button_enter"
            android:id="@+id/buttonEnter"
-            android:textColor="@color/white_a"
+           android:textColor="@color/icons"
            android:background="@drawable/bg_button_logining"
 
             android:layout_centerVertical="true"

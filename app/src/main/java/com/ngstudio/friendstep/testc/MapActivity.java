@@ -44,7 +44,7 @@ public class MapActivity extends BaseActivity{
         mapWrapperLayout.init(map, getPixelsFromDp(this, 39 + 20));
 
         // We want to reuse the info window for all the markers,
-        // so let's create only one class member instance
+        // so let's create only one class member newInstance
         this.infoWindow = (ViewGroup)getLayoutInflater().inflate(R.layout.test_info_window, null);
         this.infoTitle = (TextView)infoWindow.findViewById(R.id.title);
         this.infoSnippet = (TextView)infoWindow.findViewById(R.id.snippet);

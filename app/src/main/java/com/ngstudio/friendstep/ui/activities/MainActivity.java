@@ -32,9 +32,6 @@ public class MainActivity extends BaseActivity implements NotificationManager.Cl
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle mDrawerToggle;
 
-    //String name = "Akash Bangad";
-    //String email = "akash.bangad@android4devs.com";
-
     public static final int REQUEST_CODE_ENABLE_GPS = 1;
 
     @Override
@@ -137,8 +134,8 @@ public class MainActivity extends BaseActivity implements NotificationManager.Cl
 
         switch(item.getIconId()) {
             case R.drawable.drawable_item_menu_map:
-                fragment = FragmentPool.getInstance().newObject(MapFragment.class);
-                break;
+                //fragment = FragmentPool.getInstance().newObject(MapFragment.class);
+                //break;
 
             case R.drawable.drawable_item_menu_contacts:
                 fragment = FragmentPool.getInstance().newObject(ContactsFragment.class);

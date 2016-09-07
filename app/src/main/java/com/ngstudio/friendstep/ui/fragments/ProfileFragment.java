@@ -60,13 +60,10 @@ public class ProfileFragment extends BaseFragment<ProfileActivity> implements No
     private static final int REQUEST_CODE_CAPTURE_IMAGE = 3;
     private static final String TEMPLATE_RESULT_REQUEST = "[{\"username\"";
 
-    //private static final String TEMP_PHOTO_NAME = "qaza.jpg";
-    //private static final String TEMP_MOBILE_NUMBER = "0998889988";
-
     ImageButton avatarMenu, delete, capture, gallery;
     AdapterLinearLayout photoControls;
     LinearLayout profileButtons;
-    RelativeLayout contactData;
+    LinearLayout contactData;
 
     ImageView avatar;
     TextView profileName;
@@ -122,9 +119,9 @@ public class ProfileFragment extends BaseFragment<ProfileActivity> implements No
         photoControls = (AdapterLinearLayout) view.findViewById(R.id.lnOptions);
         profileButtons = (LinearLayout) view.findViewById(R.id.lnProfileButtons);
         profileName = (TextView) view.findViewById(R.id.tvProfileName);
-        contactData = (RelativeLayout) view.findViewById(R.id.rlContactData);
-        contactName = (TextView) view.findViewById(R.id.tvContactName);
-        contactEmail = (TextView) view.findViewById(R.id.tvContactEmail);
+        contactData = (LinearLayout) view.findViewById(R.id.llContactData);
+        contactName = (TextView) view.findViewById(R.id.tvPerson);
+        contactEmail = (TextView) view.findViewById(R.id.tvEmail);
 
         contactName.setText(WhereAreYouApplication.getInstance().getUserName());
         contactEmail.setText(WhereAreYouApplication.getInstance().getUserEmail());
@@ -206,21 +203,6 @@ public class ProfileFragment extends BaseFragment<ProfileActivity> implements No
                     }
 
                     getHostActivity().showProgressDialog();
-                    //BaseContactRequest renameRequest = BaseContactRequest.createRenameContactRequest(WhereAreYouApplication.getInstance().getUuid(), currentContact.getMobilenumber(), query);
-                    /*HttpServer.submitToServer(renameRequest, new BaseResponseCallback<String>() {
-                        @Override
-                        public void onSuccess(String result) {
-                            getHostActivity().hideProgressDialog();
-                            if (!TextUtils.isEmpty(result) && result.contains("Contact renamed sucessfully")) {
-                                profileName.setText(query);
-                                getHostActivity().getActionBarHolder().collapseSearchField(getHostActivity().getActionBarHolder().findViewById(R.id.ivEdit));
-                            }
-                        }
-                        @Override
-                        public void onError(Exception error) {
-                            getHostActivity().hideProgressDialog();
-                        }
-                    }); */
                 }
 
                 @Override
@@ -232,12 +214,6 @@ public class ProfileFragment extends BaseFragment<ProfileActivity> implements No
             getHostActivity().getActionBarHolder().setSearchField(R.drawable.drawable_ic_edit, null);
 
         } else {
-            //adapter = new ItemsAdapter(getActivity(),R.layout.item_menu);
-            //ItemsAdapter.MenuItem[] items = {new ItemsAdapter.MenuItem(R.drawable.drawable_item_profile, WhereAreYouApplication.getPrefString(WhereAreYouAppConstants.PREF_KEY_NAME,"")),
-                    //new ItemsAdapter.MenuItem(R.drawable.drawable_item_phone, "+" + WhereAreYouApplication.getInstance().getCurrentMobile())};
-            //adapter.addAll(Arrays.asList(items));
-            //photoControls.setAdapter(adapter);
-
             avatarMenu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -252,8 +228,6 @@ public class ProfileFragment extends BaseFragment<ProfileActivity> implements No
             });
 
             avatarMenu.setImageResource(R.drawable.drawable_ic_camera);
-            profileName.setText(R.string.text_my_profile);
-            //contactData.setVisibility(View.GONE);
         }
 
         capture.setOnClickListener(new View.OnClickListener() {
@@ -417,9 +391,7 @@ public class ProfileFragment extends BaseFragment<ProfileActivity> implements No
             if (requestCode == REQUEST_CODE_CHOOSE_IMAGE) {
                 uri = data.getData();
             } else {
-                //file = new File(FileUtils.getFilesDir(), TEMP_PHOTO_NAME);
                 uri = Uri.fromFile(file);
-                //uri = data.getData();
             }
 
             if (uri == null)

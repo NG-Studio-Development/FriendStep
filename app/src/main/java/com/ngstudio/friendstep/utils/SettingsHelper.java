@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class SettingsHelper {
 
-    //private static SettingsHelper instance;
+    //private static SettingsHelper newInstance;
     private static Map<Integer,Integer> distentionsMap;
     public static SettingsHelper getInstance() {
         return SettingsHolder.HOLDER_INSTANCE;

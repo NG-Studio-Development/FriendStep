@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ngstudio.friendstep" >
+    package="com.ngstudio.friendstep">
 
     <permission
         android:name="com.ngstudio.friendstep.permission.MAPS_RECEIVE"
@@ -8,7 +8,6 @@
 
     <uses-permission android:name="com.ngstudio.friendstep.permission.MAPS_RECEIVE" />
     <uses-permission android:name="app.cloudstringers.permission.C2D_MESSAGE" />
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
@@ -21,7 +20,6 @@
     <permission
         android:name="com.ngstudio.friendstep.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
-
 
     <uses-permission android:name="com.ngstudio.friendstep.permission.C2D_MESSAGE" />
     <!-- This app has permission to register and receive data message. -->
@@ -36,10 +34,13 @@
     <!-- PERMISSIONS CONTACTS -->
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
-    <uses-feature android:name="android.hardware.telephony"
-        android:required="true"/>
-    <uses-permission android:name="android.permission.READ_SMS"/>
-    <uses-permission android:name="android.permission.WRITE_SMS"/>
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.WRITE_SMS" />
+
     <uses-library android:name="com.google.android.maps" />
 
     <uses-feature
@@ -47,61 +48,55 @@
         android:required="true" />
 
     <application
-        android:name="com.ngstudio.friendstep.WhereAreYouApplication"
+        android:name=".WhereAreYouApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
+        android:supportsRtl="true"
         android:theme="@style/ThemeAppGeneric" >
-
-
         <activity
-            android:name="com.ngstudio.friendstep.ui.activities.LoginActivity"
-            android:theme="@style/ThemeAppGeneric.NoActionBar"
+            android:name=".ui.activities.LoginActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait">
-
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-       </activity>
-
-        <activity android:name="com.ngstudio.friendstep.ui.activities.MapForPushActivity" >
         </activity>
-
-        <activity android:name="com.ngstudio.friendstep.ui.activities.AddContactsActivity" >
-        </activity>
+        <activity android:name=".ui.activities.MapForPushActivity" />
+        <activity android:name=".ui.activities.AddContactsActivity" />
 
         <activity
-            android:name="com.ngstudio.friendstep.ui.activities.ProfileActivity"
-            android:theme="@style/ThemeAppGeneric.ActionBarOverlay"
+            android:name=".ui.activities.ProfileActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
 
-        <activity android:name="com.ngstudio.friendstep.ui.activities.MainActivity"
+        <activity
+            android:name=".ui.activities.MainActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait" />
 
-        <activity android:name="com.ngstudio.friendstep.debug.MainActivity"
+        <activity
+            android:name=".debug.MainActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait" />
 
-        <service android:name="com.ngstudio.friendstep.components.GeoService" />
+        <service android:name=".components.GeoService" />
 
         <receiver
-            android:name="com.ngstudio.friendstep.components.GoogleCloudMessagingClient$PushNotificationsReceiver"
-            android:permission="com.google.android.c2dm.permission.SEND" >
+            android:name=".components.GoogleCloudMessagingClient$PushNotificationsReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
+
                 <!-- Receives the actual messages. -->
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
                 <category android:name="com.ngstudio.friendstep" />
             </intent-filter>
         </receiver>
 
-        <service android:name="com.ngstudio.friendstep.components.GCMIntentService" />
+        <service android:name=".components.GCMIntentService" />
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
@@ -111,11 +106,18 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name="com.ngstudio.friendstep.ui.activities.ChatActivity"
-            android:label="@string/title_activity_chat" >
+            android:name=".ui.activities.ChatActivity"
+            android:label="@string/title_activity_chat" />
+        <activity android:name=".ui.activities.SearchActivity">
+
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
 
         </activity>
-
     </application>
 
 </manifest>

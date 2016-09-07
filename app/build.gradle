@@ -4,17 +4,22 @@ android {
     /*compileSdkVersion 20
     buildToolsVersion '20.0.0'*/
 
-    compileSdkVersion 21
-    buildToolsVersion "21.1.2"
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
 
     defaultConfig {
-        //applicationId "com.geomobileltd.whereareyou"
         applicationId "com.ngstudio.friendstep"
-        minSdkVersion 9
-        targetSdkVersion 21
+        minSdkVersion 16
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
     }
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+
     buildTypes {
         release {
             //runProguard false
@@ -33,6 +38,7 @@ android {
         }
     }
 
+    useLibrary 'org.apache.http.legacy'
 }
 
 dependencies {
@@ -43,21 +49,18 @@ dependencies {
     compile project('libs:alexutilities')
     compile project('libs:uil')
     compile project(':app:libs:stickylistheaders')
-    // You must install or update the Google Repository through the SDK manager to use this dependency.
-    // You must install or update the Support Repository through the SDK manager to use this dependency.
-    //compile 'com.android.support:support-v4:19.+'
 
-
-    /*compile 'com.android.support:appcompat-v7:21.0.3'
-    compile "com.google.android.gms:play-services:3.1.+"
-    compile 'com.google.android.gms:play-services:6.5.87'*/
-    compile 'com.android.support:appcompat-v7:21.0.3'
+    compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.intellij:annotations:+@jar'
     compile 'com.googlecode.libphonenumber:libphonenumber:5.5'
-    compile 'com.google.android.gms:play-services:6.5.87'
-    compile 'com.android.support:support-v4:21.0.3'
-    compile 'com.android.support:recyclerview-v7:+'
+    compile 'com.google.android.gms:play-services:8.4.0'
+    compile 'com.android.support:support-v4:23.1.1'
+
+    compile 'com.android.support:recyclerview-v7:23.1.1'
+
+
 }
+
 
 
 

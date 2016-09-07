@@ -3,7 +3,7 @@
 
     <item>
         <shape>
-            <solid android:color="@color/violet_additional_bright" />
+            <solid android:color="@color/accent" />
         </shape>
     </item>
 

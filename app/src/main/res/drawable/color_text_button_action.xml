@@ -2,7 +2,7 @@
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_focused="true" android:state_pressed="false" android:color="#ffffff" />
-    <item android:state_focused="true" android:state_pressed="true" android:color="@color/violet_additional_dark" />
-    <item android:state_focused="false" android:state_pressed="true" android:color="@color/violet_additional_dark" />
+    <item android:state_focused="true" android:state_pressed="true" android:color="@color/primary_dark" />
+    <item android:state_focused="false" android:state_pressed="true" android:color="@color/primary_dark" />
     <item android:color="#ffffff" />
 </selector>

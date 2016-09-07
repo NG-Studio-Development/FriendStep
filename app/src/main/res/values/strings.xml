@@ -78,7 +78,7 @@
     <string name="text_empty_request_list">You not have request</string>>
 
     <!-- Hints -->
-    <string name="hint_name">Name</string>
+    <string name="hint_name">Username</string>
     <string name="hint_mobile">Mobile number</string>
     <string name="hint_email">Email</string>
     <string name="hint_pass">Pass</string>
@@ -110,6 +110,8 @@
     <string name="title_request">Request</string>
 
     <string name="title_create_account">Create account</string>
+    <string name="search_title">Search</string>
+    <string name="search_hint">search</string>
 
     <string name="title_activity_test_h">TestH</string>
     <string name="text_address_is_determined">address is determined…</string>
@@ -122,5 +124,15 @@
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+    <string name="title_activity_main2">Main2Activity</string>
+
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_example">Example action</string>
 
 </resources>

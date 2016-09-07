@@ -32,6 +32,11 @@ public class ContactsAdapter extends BaseArrayAdapter<ContactStep> implements Fi
         filter = new ContactsFilter();
     }
 
+    public ContactsAdapter(Context context, int style) {
+        super(context, style);
+        this.originalList = new ArrayList<>();
+        filter = new ContactsFilter();
+    }
 
     @Override
     public void addAll(Collection collection) {

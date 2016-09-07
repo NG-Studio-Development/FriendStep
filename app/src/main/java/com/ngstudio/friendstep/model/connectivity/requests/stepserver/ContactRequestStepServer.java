@@ -37,4 +37,9 @@ public class ContactRequestStepServer extends BaseRequest {
     private static ContactRequestStepServer addContact(long userId, String friendName, int action) {
         return new ContactRequestStepServer("add_contact.php?id="+userId+"&name="+friendName+"&action="+action+"&tempValue=x", userId, friendName);
     }
+
+    public static ContactRequestStepServer requestFindContactByName(String friendName) {
+        return new ContactRequestStepServer("get_list_all_contacts.php", 0,"");
+    }
+
 }
